@@ -1,0 +1,8 @@
+Layer,Key Protocols
+Physical,"Ethernet, Wi-Fi, Bluetooth, RS-232, DSL, SONET"
+Data Link,"Ethernet, Wi-Fi, PPP, HDLC, ARP, MPLS, Frame Relay, ATM"
+Network,"IP, ICMP, IGMP, RIP, OSPF, BGP, EIGRP, NAT, GRE"
+Transport,"TCP, UDP, SCTP, DCCP, RSVP, QUIC"
+Session,"NetBIOS, PPTP, RPC, SOCKS, TLS/SSL"
+Presentation,"JPEG, GIF, PNG, MPEG, MP3, ASCII, XML, JSON, HTML"
+Application,"HTTP/HTTPS, FTP, SMTP, IMAP, DNS, DHCP, SNMP, SSH, NTP, LDAP"
