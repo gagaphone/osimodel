@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="description"
+        content="A complete reference guide to the seven OSI model layers, their purposes, and network protocols.">
+
+  <meta name="theme-color" content="#173a70">
+
+  <title>OSI Model Layers and Protocols | Complete Guide</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="hero">
+    <div class="container">
+      <p class="eyebrow">NETWORKING REFERENCE GUIDE</p>
+
+      <h1>The Complete Guide to OSI Model Layers and Protocols</h1>
+
+      <p class="hero-description">
+        Explore the seven layers of the Open Systems Interconnection
+        (OSI) model, their purposes, and commonly associated protocols
+        and technologies.
+      </p>
+
+      <a href="#protocol-reference" class="hero-button">
+        Explore Protocols
+      </a>
+    </div>
+  </header>
+
+  <main id="main-content" class="container">
+    <section class="introduction">
+      <h2>Understanding the OSI Model</h2>
+
+      <p>
+        The OSI model is a conceptual framework for understanding how
+        data travels across networks. Each layer has a specific role
+        in communication between connected systems.
+      </p>
+
+      <div class="stats">
+        <article class="stat-card">
+          <span class="stat-number">7</span>
+          <span class="stat-label">OSI Layers</span>
+        </article>
+
+        <article class="stat-card">
+          <span class="stat-number" id="protocol-total">77</span>
+          <span class="stat-label">Protocol Entries</span>
+        </article>
+
+        <article class="stat-card">
+          <span class="stat-number">5</span>
+          <span class="stat-label">Reference Fields</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="layer-overview" aria-labelledby="layers-heading">
+      <h2 id="layers-heading">The Seven OSI Layers</h2>
+
+      <div class="layer-grid">
+        <article class="layer-card">
+          <span class="layer-badge">01</span>
+          <h3>Physical</h3>
+          <p>Transmits raw bits through physical media.</p>
+        </article>
+
+        <article class="layer-card">
+          <span class="layer-badge">02</span>
+          <h3>Data Link</h3>
+          <p>Handles frames and communication between adjacent nodes.</p>
+        </article>
+
+        <article class="layer-card">
+          <span class="layer-badge">03</span>
+          <h3>Network</h3>
+          <p>Handles logical addressing and routing.</p>
+        </article>
+
+        <article class="layer-card">
+          <span class="layer-badge">04</span>
+          <h3>Transport</h3>
+          <p>Supports end-to-end data transport.</p>
+        </article>
+
+        <article class="layer-card">
+          <span class="layer-badge">05</span>
+          <h3>Session</h3>
+          <p>Coordinates sessions between applications.</p>
+        </article>
+
+        <article class="layer-card">
+          <span class="layer-badge">06</span>
+          <h3>Presentation</h3>
+          <p>Represents, encodes, and transforms data.</p>
+        </article>
+
+        <article class="layer-card">
+          <span class="layer-badge">07</span>
+          <h3>Application</h3>
+          <p>Provides network services to applications.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="protocol-reference" class="protocol-section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow dark-eyebrow">QUICK REFERENCE</p>
+          <h2>Protocols and Technologies</h2>
+          <p>
+            Search the reference or filter by a specific OSI layer.
+          </p>
+        </div>
+
+        <button type="button" id="reset-filters" class="reset-button">
+          Reset filters
+        </button>
+      </div>
+
+      <div class="filters">
+        <label class="visually-hidden" for="search-input">
+          Search protocols
+        </label>
+
+        <input
+          type="search"
+          id="search-input"
+          placeholder="Search a protocol, layer, or description..."
+          autocomplete="off"
+        >
+
+        <label class="visually-hidden" for="layer-filter">
+          Filter by OSI layer
+        </label>
+
+        <select id="layer-filter">
+          <option value="">All OSI layers</option>
+          <option value="1">Layer 1 — Physical</option>
+          <option value="2">Layer 2 — Data Link</option>
+          <option value="3">Layer 3 — Network</option>
+          <option value="4">Layer 4 — Transport</option>
+          <option value="5">Layer 5 — Session</option>
+          <option value="6">Layer 6 — Presentation</option>
+          <option value="7">Layer 7 — Application</option>
+        </select>
+      </div>
+
+      <p id="result-count" class="result-count" aria-live="polite">
+        Showing 77 entries
+      </p>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Layer</th>
+              <th scope="col">OSI Layer</th>
+              <th scope="col">Purpose</th>
+              <th scope="col">Protocol / Technology</th>
+              <th scope="col">Description</th>
+            </tr>
+          </thead>
+
+          <tbody id="protocol-rows">
+            <!-- Rows are rendered by js/script.js -->
+          </tbody>
+        </table>
+
+        <p id="empty-state" class="empty-state" hidden>
+          No matching protocols found. Try another search or reset
+          your filters.
+        </p>
+      </div>
+    </section>
+
+    <section class="note-section">
+      <h2>Important Note</h2>
+      <p>
+        The OSI model is a conceptual framework. Some protocols and
+        technologies span multiple layers or may be classified
+        differently depending on context. This reference preserves
+        the supplied protocol associations.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <p>OSI Model Layers and Protocols</p>
+      <p>Built with HTML, CSS, and JavaScript.</p>
+    </div>
+  </footer>
+</body>
+</html>
