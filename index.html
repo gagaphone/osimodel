@@ -5,10 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <meta name="description"
-        content="A complete reference guide to the seven OSI model layers, their purposes, and network protocols.">
+    content="An interactive OSI model learning guide covering all seven layers, network protocols, encapsulation, TCP/IP, troubleshooting, and quizzes.">
 
   <meta name="theme-color" content="#173a70">
-
   <title>OSI Model Layers and Protocols | Complete Guide</title>
 
   <link rel="stylesheet" href="css/style.css">
@@ -21,29 +20,53 @@
   <header class="hero">
     <div class="container">
       <p class="eyebrow">NETWORKING REFERENCE GUIDE</p>
-
       <h1>The Complete Guide to OSI Model Layers and Protocols</h1>
-
       <p class="hero-description">
-        Explore the seven layers of the Open Systems Interconnection
-        (OSI) model, their purposes, and commonly associated protocols
-        and technologies.
+        Learn how networks communicate through seven layers, explore
+        common protocols, and practice troubleshooting real-world issues.
       </p>
-
-      <a href="#protocol-reference" class="hero-button">
-        Explore Protocols
-      </a>
+      <a href="#layer-overview" class="hero-button">Explore the 7 Layers</a>
     </div>
   </header>
 
+  <nav class="page-nav" aria-label="Main navigation">
+    <div class="container page-nav__inner">
+      <a href="#introduction">Overview</a>
+      <a href="#layer-overview">Seven Layers</a>
+      <a href="#protocol-reference">Protocols</a>
+      <a href="#encapsulation">Encapsulation</a>
+      <a href="#tcpip">TCP/IP</a>
+      <a href="#troubleshooting">Troubleshooting</a>
+      <a href="#quiz">Quiz</a>
+    </div>
+  </nav>
+
   <main id="main-content" class="container">
-    <section class="introduction">
-      <h2>Understanding the OSI Model</h2>
+
+    <!-- INTRODUCTION -->
+    <section id="introduction" class="introduction">
+      <p class="eyebrow dark-eyebrow">START HERE</p>
+      <h2>What Is the OSI Model?</h2>
 
       <p>
-        The OSI model is a conceptual framework for understanding how
-        data travels across networks. Each layer has a specific role
-        in communication between connected systems.
+        The Open Systems Interconnection (OSI) model is a conceptual
+        framework developed by the International Organization for
+        Standardization (ISO). Published in the 1980s, it organizes
+        network communication into seven layers, each with a distinct role.
+      </p>
+
+      <p>
+        As data travels through the model, each layer provides services
+        to the layer above it and uses services from the layer below it.
+        This layered approach helps explain network communication,
+        design, and troubleshooting.
+      </p>
+
+      <p>
+        The OSI model is a reference model rather than a protocol suite.
+        Real-world internet communication is primarily based on the
+        TCP/IP model, while the OSI model remains a useful framework
+        for learning and diagnosing network problems.
       </p>
 
       <div class="stats">
@@ -51,76 +74,379 @@
           <span class="stat-number">7</span>
           <span class="stat-label">OSI Layers</span>
         </article>
-
         <article class="stat-card">
           <span class="stat-number" id="protocol-total">77</span>
           <span class="stat-label">Protocol Entries</span>
         </article>
-
         <article class="stat-card">
           <span class="stat-number">5</span>
           <span class="stat-label">Reference Fields</span>
         </article>
       </div>
+
+      <div class="info-callout">
+        <h3>Why does the OSI model matter?</h3>
+        <ul>
+          <li>
+            <strong>Interoperability:</strong> Helps explain how systems
+            from different vendors communicate using common standards.
+          </li>
+          <li>
+            <strong>Troubleshooting:</strong> Helps narrow a fault down
+            to a likely layer, such as a cable, VLAN, route, or application.
+          </li>
+          <li>
+            <strong>Protocol design:</strong> Provides a structured way
+            to understand networking functions.
+          </li>
+          <li>
+            <strong>Learning:</strong> Gives networking students and
+            certification candidates a common reference framework.
+          </li>
+        </ul>
+      </div>
     </section>
 
-    <section class="layer-overview" aria-labelledby="layers-heading">
-      <h2 id="layers-heading">The Seven OSI Layers</h2>
+    <!-- SEVEN LAYERS -->
+    <section id="layer-overview" class="layer-overview">
+      <p class="eyebrow dark-eyebrow">THE MODEL</p>
+      <h2>The Seven OSI Layers</h2>
+      <p>
+        The cards are shown from Layer 7 at the top to Layer 1 at
+        the bottom, matching the way the model is commonly illustrated.
+      </p>
 
-  
-<div class="layer-grid">
-  <article class="layer-card">
-    <span class="layer-badge">07</span>
-    <h3>Application</h3>
-    <p>Provides network services to applications.</p>
-  </article>
+      <div class="layer-grid">
+        <article class="layer-card">
+          <span class="layer-badge">07</span>
+          <h3>Application</h3>
+          <p>Provides network services to applications.</p>
+          <p class="layer-example"><strong>PDU:</strong> Data</p>
+        </article>
 
-  <article class="layer-card">
-    <span class="layer-badge">06</span>
-    <h3>Presentation</h3>
-    <p>Represents, encodes, and transforms data.</p>
-  </article>
+        <article class="layer-card">
+          <span class="layer-badge">06</span>
+          <h3>Presentation</h3>
+          <p>Handles data formats, encoding, compression, and encryption.</p>
+          <p class="layer-example"><strong>PDU:</strong> Data</p>
+        </article>
 
-  <article class="layer-card">
-    <span class="layer-badge">05</span>
-    <h3>Session</h3>
-    <p>Coordinates sessions between applications.</p>
-  </article>
+        <article class="layer-card">
+          <span class="layer-badge">05</span>
+          <h3>Session</h3>
+          <p>Establishes, manages, and terminates communication sessions.</p>
+          <p class="layer-example"><strong>PDU:</strong> Data</p>
+        </article>
 
-  <article class="layer-card">
-    <span class="layer-badge">04</span>
-    <h3>Transport</h3>
-    <p>Supports end-to-end data transport.</p>
-  </article>
+        <article class="layer-card">
+          <span class="layer-badge">04</span>
+          <h3>Transport</h3>
+          <p>Supports end-to-end delivery, ports, and segmentation.</p>
+          <p class="layer-example"><strong>PDU:</strong> Segment / Datagram</p>
+        </article>
 
-  <article class="layer-card">
-    <span class="layer-badge">03</span>
-    <h3>Network</h3>
-    <p>Handles logical addressing and routing.</p>
-  </article>
+        <article class="layer-card">
+          <span class="layer-badge">03</span>
+          <h3>Network</h3>
+          <p>Handles logical addressing and routing between networks.</p>
+          <p class="layer-example"><strong>PDU:</strong> Packet</p>
+        </article>
 
-  <article class="layer-card">
-    <span class="layer-badge">02</span>
-    <h3>Data Link</h3>
-    <p>Handles frames and communication between adjacent nodes.</p>
-  </article>
+        <article class="layer-card">
+          <span class="layer-badge">02</span>
+          <h3>Data Link</h3>
+          <p>Handles frames and delivery across a local network link.</p>
+          <p class="layer-example"><strong>PDU:</strong> Frame</p>
+        </article>
 
-  <article class="layer-card">
-    <span class="layer-badge">01</span>
-    <h3>Physical</h3>
-    <p>Transmits raw bits through physical media.</p>
-  </article>
-</div>
+        <article class="layer-card">
+          <span class="layer-badge">01</span>
+          <h3>Physical</h3>
+          <p>Transmits raw bits as electrical, optical, or radio signals.</p>
+          <p class="layer-example"><strong>PDU:</strong> Bits</p>
+        </article>
+      </div>
+
+      <div class="mnemonic-box">
+        <h3>Easy ways to remember the layers</h3>
+        <p>
+          <strong>Top to bottom (7 → 1):</strong>
+          All People Seem To Need Data Processing.
+        </p>
+        <p>
+          <strong>Bottom to top (1 → 7):</strong>
+          Please Do Not Throw Sausage Pizza Away.
+        </p>
+      </div>
     </section>
 
+    <!-- QUICK REFERENCE -->
+    <section id="layer-reference" class="content-section">
+      <p class="eyebrow dark-eyebrow">QUICK REFERENCE</p>
+      <h2>Layer Functions, PDUs, Protocols, and Devices</h2>
+      <p>
+        This table summarizes the role of each layer and examples
+        commonly associated with it.
+      </p>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Layer</th>
+              <th scope="col">PDU</th>
+              <th scope="col">Key Functions</th>
+              <th scope="col">Example Protocols / Technologies</th>
+              <th scope="col">Common Devices</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>7 — Application</strong></td>
+              <td>Data</td>
+              <td>Network services for applications</td>
+              <td>HTTP, HTTPS, FTP, SMTP, DNS, DHCP, SSH</td>
+              <td>Servers, browsers, email clients</td>
+            </tr>
+            <tr>
+              <td><strong>6 — Presentation</strong></td>
+              <td>Data</td>
+              <td>Translation, encoding, encryption, compression</td>
+              <td>TLS, JPEG, MPEG, ASCII, Unicode, GIF</td>
+              <td>Software libraries and encoding components</td>
+            </tr>
+            <tr>
+              <td><strong>5 — Session</strong></td>
+              <td>Data</td>
+              <td>Session setup, management, and termination</td>
+              <td>NetBIOS, RPC, SMB, NFS</td>
+              <td>Applications and session-management software</td>
+            </tr>
+            <tr>
+              <td><strong>4 — Transport</strong></td>
+              <td>Segment / Datagram</td>
+              <td>End-to-end delivery, ports, flow control</td>
+              <td>TCP, UDP, SCTP</td>
+              <td>Stateful firewalls, load balancers</td>
+            </tr>
+            <tr>
+              <td><strong>3 — Network</strong></td>
+              <td>Packet</td>
+              <td>Logical addressing and routing</td>
+              <td>IPv4, IPv6, ICMP, OSPF, RIP, BGP</td>
+              <td>Routers, Layer 3 switches</td>
+            </tr>
+            <tr>
+              <td><strong>2 — Data Link</strong></td>
+              <td>Frame</td>
+              <td>MAC addressing and local-link delivery</td>
+              <td>Ethernet, Wi-Fi, PPP, VLAN, STP</td>
+              <td>Switches, bridges, network adapters, access points</td>
+            </tr>
+            <tr>
+              <td><strong>1 — Physical</strong></td>
+              <td>Bits</td>
+              <td>Signal transmission and physical media</td>
+              <td>Ethernet physical standards, DSL, USB, radio</td>
+              <td>Cables, connectors, repeaters, transceivers</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="small-note">
+        ARP is commonly described as operating at the boundary between
+        Layers 2 and 3 because it maps IP addresses to link-layer
+        addresses on a local network.
+      </p>
+    </section>
+
+    <!-- EXPANDED LAYER EXPLANATIONS -->
+    <section id="layer-details" class="content-section">
+      <p class="eyebrow dark-eyebrow">LEARN THE DETAILS</p>
+      <h2>Layer-by-Layer Deep Dive</h2>
+      <p>
+        Expand a layer to explore its responsibilities, example
+        technologies, and troubleshooting scenarios.
+      </p>
+
+      <div class="details-list">
+        <details class="layer-detail">
+          <summary>Layer 1 — Physical</summary>
+          <div class="detail-content">
+            <p>
+              The Physical Layer transmits raw binary data across a
+              physical medium. It deals with signals, timing, connectors,
+              physical topology, and the characteristics of cables or radio.
+            </p>
+            <dl class="attribute-list">
+              <dt>PDU</dt><dd>Bit (1s and 0s)</dd>
+              <dt>Responsibilities</dt><dd>Signal encoding, bit timing, physical media, duplex settings</dd>
+              <dt>Examples</dt><dd>Ethernet copper, fibre optic cable, Wi-Fi radio, DSL, coaxial cable</dd>
+              <dt>Devices</dt><dd>Cables, connectors, hubs, repeaters, transceivers</dd>
+              <dt>Typical fault</dt><dd>Damaged cable, disconnected port, bad transceiver, incorrect cable distance</dd>
+            </dl>
+            <div class="example-callout">
+              <strong>Real-world example:</strong> A user has no network
+              connection. Check that the cable is connected and the
+              switch-port link light is on, then test with a known-good cable.
+            </div>
+          </div>
+        </details>
+
+        <details class="layer-detail">
+          <summary>Layer 2 — Data Link</summary>
+          <div class="detail-content">
+            <p>
+              The Data Link Layer organizes bits into frames and supports
+              delivery across a local network link. Ethernet and Wi-Fi
+              use link-layer addressing and media-access mechanisms.
+            </p>
+            <dl class="attribute-list">
+              <dt>PDU</dt><dd>Frame</dd>
+              <dt>Sub-layers</dt><dd>LLC (Logical Link Control) and MAC (Media Access Control)</dd>
+              <dt>Addressing</dt><dd>MAC addresses, commonly represented as six hexadecimal octets</dd>
+              <dt>Protocols</dt><dd>Ethernet, Wi-Fi, PPP, VLAN tagging, STP, LACP</dd>
+              <dt>Devices</dt><dd>Switches, bridges, wireless access points, network adapters</dd>
+              <dt>Typical fault</dt><dd>VLAN mismatch, switching loop, MAC-learning issue, frame errors</dd>
+            </dl>
+            <div class="example-callout">
+              <strong>Real-world example:</strong> A switch learns source
+              MAC addresses and uses its MAC address table to forward
+              frames toward the correct port.
+            </div>
+          </div>
+        </details>
+
+        <details class="layer-detail">
+          <summary>Layer 3 — Network</summary>
+          <div class="detail-content">
+            <p>
+              The Network Layer provides logical addressing and routes
+              packets between different IP networks. Routers inspect
+              destination IP addresses and consult their routing tables.
+            </p>
+            <dl class="attribute-list">
+              <dt>PDU</dt><dd>Packet</dd>
+              <dt>Addressing</dt><dd>IPv4 (32-bit) and IPv6 (128-bit)</dd>
+              <dt>Protocols</dt><dd>IP, ICMP, OSPF, EIGRP, RIP, BGP</dd>
+              <dt>Devices</dt><dd>Routers, Layer 3 switches, packet-filtering firewalls</dd>
+              <dt>Typical fault</dt><dd>Missing route, wrong subnet mask, incorrect default gateway</dd>
+            </dl>
+            <div class="example-callout">
+              <strong>Real-world example:</strong> A host sends a packet
+              to a server on another network. A router checks its routing
+              table and forwards the packet toward the destination network.
+            </div>
+          </div>
+        </details>
+
+        <details class="layer-detail">
+          <summary>Layer 4 — Transport</summary>
+          <div class="detail-content">
+            <p>
+              The Transport Layer supports communication between
+              application processes on different hosts. Transport ports
+              identify the source and destination application endpoints.
+            </p>
+            <dl class="attribute-list">
+              <dt>PDU</dt><dd>TCP segment or UDP datagram</dd>
+              <dt>Protocols</dt><dd>TCP, UDP, SCTP</dd>
+              <dt>TCP</dt><dd>Connection-oriented transport with sequencing, acknowledgements, retransmission, and flow control</dd>
+              <dt>UDP</dt><dd>Connectionless transport with lower overhead and no built-in retransmission</dd>
+              <dt>Typical fault</dt><dd>Blocked port, failed TCP handshake, wrong port configuration</dd>
+            </dl>
+            <div class="example-callout">
+              <strong>TCP vs. UDP:</strong> A conventional web connection
+              using HTTP/1.1 or HTTP/2 typically uses TCP. Many real-time
+              applications use UDP where reducing delay is important.
+              HTTP/3 uses QUIC over UDP.
+            </div>
+          </div>
+        </details>
+
+        <details class="layer-detail">
+          <summary>Layer 5 — Session</summary>
+          <div class="detail-content">
+            <p>
+              The Session Layer describes functions for establishing,
+              maintaining, coordinating, and terminating conversations
+              between applications. Session functions may include
+              dialogue control and checkpoints.
+            </p>
+            <dl class="attribute-list">
+              <dt>PDU</dt><dd>Data</dd>
+              <dt>Examples</dt><dd>NetBIOS session services, RPC, SMB, NFS, and session-related functions in applications</dd>
+              <dt>Functions</dt><dd>Session establishment, maintenance, graceful termination, checkpoints</dd>
+              <dt>Typical fault</dt><dd>Session timeout, authentication failure, session limits</dd>
+            </dl>
+            <div class="example-callout">
+              <strong>Real-world note:</strong> In modern TCP/IP systems,
+              session functionality is often implemented by application
+              protocols and software rather than a separate visible layer.
+            </div>
+          </div>
+        </details>
+
+        <details class="layer-detail">
+          <summary>Layer 6 — Presentation</summary>
+          <div class="detail-content">
+            <p>
+              The Presentation Layer describes how data is represented
+              so that different systems can interpret it consistently.
+              Related functions include encoding, serialization,
+              encryption, and compression.
+            </p>
+            <dl class="attribute-list">
+              <dt>PDU</dt><dd>Data</dd>
+              <dt>Encoding</dt><dd>ASCII, Unicode, EBCDIC</dd>
+              <dt>Data formats</dt><dd>JSON, XML, JPEG, GIF, MPEG, MP3</dd>
+              <dt>Security</dt><dd>TLS provides encryption in modern network stacks; its placement in OSI is a conceptual simplification</dd>
+              <dt>Typical fault</dt><dd>Encoding mismatch, certificate problem, incompatible data format</dd>
+            </dl>
+            <div class="example-callout">
+              <strong>Real-world example:</strong> Applications encode
+              text as UTF-8 and may compress content before transmitting it.
+              Secure connections use TLS to protect data in transit.
+            </div>
+          </div>
+        </details>
+
+        <details class="layer-detail">
+          <summary>Layer 7 — Application</summary>
+          <div class="detail-content">
+            <p>
+              The Application Layer provides network protocols and
+              services used by software such as browsers, mail clients,
+              file-transfer tools, and management applications. It
+              describes the protocol interface, not the application
+              program itself.
+            </p>
+            <dl class="attribute-list">
+              <dt>PDU</dt><dd>Data</dd>
+              <dt>Web</dt><dd>HTTP and HTTPS</dd>
+              <dt>Email</dt><dd>SMTP, IMAP, POP3</dd>
+              <dt>Other protocols</dt><dd>FTP, SFTP, DNS, DHCP, SNMP, SSH, Telnet</dd>
+              <dt>Typical fault</dt><dd>Incorrect URL, application configuration, unavailable service, DNS lookup issue</dd>
+            </dl>
+            <div class="example-callout">
+              <strong>Real-world example:</strong> A browser requests
+              a page using HTTP or HTTPS. DNS may first resolve the
+              domain name to an IP address so the browser can connect
+              to the destination.
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- PROTOCOL TABLE -->
     <section id="protocol-reference" class="protocol-section">
       <div class="section-heading">
         <div>
-          <p class="eyebrow dark-eyebrow">QUICK REFERENCE</p>
+          <p class="eyebrow dark-eyebrow">SEARCHABLE REFERENCE</p>
           <h2>Protocols and Technologies</h2>
-          <p>
-            Search the reference or filter by a specific OSI layer.
-          </p>
+          <p>Search by protocol, layer, purpose, or description.</p>
         </div>
 
         <button type="button" id="reset-filters" class="reset-button">
@@ -132,7 +458,6 @@
         <label class="visually-hidden" for="search-input">
           Search protocols
         </label>
-
         <input
           type="search"
           id="search-input"
@@ -143,7 +468,6 @@
         <label class="visually-hidden" for="layer-filter">
           Filter by OSI layer
         </label>
-
         <select id="layer-filter">
           <option value="">All OSI layers</option>
           <option value="1">Layer 1 — Physical</option>
@@ -171,26 +495,335 @@
               <th scope="col">Description</th>
             </tr>
           </thead>
-
           <tbody id="protocol-rows">
             <!-- Rows are rendered by js/script.js -->
           </tbody>
         </table>
 
         <p id="empty-state" class="empty-state" hidden>
-          No matching protocols found. Try another search or reset
+          No matching protocols found. Try a different search or reset
           your filters.
         </p>
       </div>
     </section>
 
-    <section class="note-section">
-      <h2>Important Note</h2>
+    <!-- ENCAPSULATION -->
+    <section id="encapsulation" class="content-section">
+      <p class="eyebrow dark-eyebrow">HOW DATA MOVES</p>
+      <h2>Encapsulation and Decapsulation</h2>
+
       <p>
-        The OSI model is a conceptual framework. Some protocols and
-        technologies span multiple layers or may be classified
-        differently depending on context. This reference preserves
-        the supplied protocol associations.
+        <strong>Encapsulation</strong> occurs as data moves down the
+        sender's stack: each layer adds information needed for delivery.
+        <strong>Decapsulation</strong> occurs at the receiver, where
+        the appropriate headers and trailers are examined and removed.
+      </p>
+
+      <div class="encapsulation-layout">
+        <article class="encapsulation-endpoint">
+          <h3>Sender: Encapsulation ↓</h3>
+
+          <div class="encapsulation-step">
+            <span class="step-label">Layer 7 · Application</span>
+            <code>HTTP data</code>
+          </div>
+          <div class="encapsulation-step">
+            <span class="step-label">Layer 4 · Transport</span>
+            <code>TCP header | HTTP data</code>
+          </div>
+          <div class="encapsulation-step">
+            <span class="step-label">Layer 3 · Network</span>
+            <code>IP header | TCP segment</code>
+          </div>
+          <div class="encapsulation-step">
+            <span class="step-label">Layer 2 · Data Link</span>
+            <code>Ethernet header | IP packet | FCS</code>
+          </div>
+          <div class="encapsulation-step physical-step">
+            <span class="step-label">Layer 1 · Physical</span>
+            <code>Bits: 10101001 01101101 ...</code>
+          </div>
+        </article>
+
+        <div class="physical-arrow" aria-label="Physical transmission">
+          <span>Across the physical medium</span>
+          <span class="arrow-symbol" aria-hidden="true">⇄</span>
+          <small>Electrical, optical, or radio signals</small>
+        </div>
+
+        <article class="encapsulation-endpoint">
+          <h3>Receiver: Decapsulation ↑</h3>
+
+          <div class="encapsulation-step physical-step">
+            <span class="step-label">Layer 1 · Physical</span>
+            <code>Signals become bits</code>
+          </div>
+          <div class="encapsulation-step">
+            <span class="step-label">Layer 2 · Data Link</span>
+            <code>Check frame and remove link header</code>
+          </div>
+          <div class="encapsulation-step">
+            <span class="step-label">Layer 3 · Network</span>
+            <code>Inspect IP packet and destination</code>
+          </div>
+          <div class="encapsulation-step">
+            <span class="step-label">Layer 4 · Transport</span>
+            <code>Process transport ports and data</code>
+          </div>
+          <div class="encapsulation-step">
+            <span class="step-label">Layer 7 · Application</span>
+            <code>Deliver HTTP data to the service</code>
+          </div>
+        </article>
+      </div>
+
+      <div class="info-callout">
+        <h3>Physical travel vs. logical communication</h3>
+        <p>
+          Bits physically travel over the medium. Other layers communicate
+          logically with their corresponding peer layers through protocol
+          rules and headers. This is why a Layer 4 protocol can define
+          end-to-end behavior even though the transmitted bits pass
+          through Layer 1.
+        </p>
+      </div>
+
+      <h3>PDU names at each layer</h3>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Layer</th>
+              <th scope="col">PDU</th>
+              <th scope="col">Information commonly associated with it</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>7 — Application</td><td>Data</td><td>Application payload, such as an HTTP request or DNS query</td></tr>
+            <tr><td>6 — Presentation</td><td>Data</td><td>Data representation, encoding, or encryption</td></tr>
+            <tr><td>5 — Session</td><td>Data</td><td>Session and dialogue context</td></tr>
+            <tr><td>4 — Transport</td><td>Segment / Datagram</td><td>Port numbers and, for TCP, sequencing and acknowledgement information</td></tr>
+            <tr><td>3 — Network</td><td>Packet</td><td>Source and destination IP addresses</td></tr>
+            <tr><td>2 — Data Link</td><td>Frame</td><td>Link-layer addresses and frame-check information</td></tr>
+            <tr><td>1 — Physical</td><td>Bits</td><td>Signals represented as binary data</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TCP/IP COMPARISON -->
+    <section id="tcpip" class="content-section">
+      <p class="eyebrow dark-eyebrow">RELATED NETWORK MODEL</p>
+      <h2>OSI Model vs. TCP/IP Model</h2>
+
+      <p>
+        The TCP/IP model describes the protocol architecture commonly
+        used for internet communication. In its four-layer version,
+        several OSI layers are grouped together.
+      </p>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">OSI Layer</th>
+              <th scope="col">TCP/IP Four-Layer Model</th>
+              <th scope="col">Examples</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>7 — Application</td>
+              <td>Application</td>
+              <td>HTTP, HTTPS, DNS, DHCP, SMTP, SSH</td>
+            </tr>
+            <tr>
+              <td>6 — Presentation</td>
+              <td>Application</td>
+              <td>Data formats, encoding, encryption functions</td>
+            </tr>
+            <tr>
+              <td>5 — Session</td>
+              <td>Application</td>
+              <td>Session and dialogue functions</td>
+            </tr>
+            <tr>
+              <td>4 — Transport</td>
+              <td>Transport</td>
+              <td>TCP, UDP</td>
+            </tr>
+            <tr>
+              <td>3 — Network</td>
+              <td>Internet</td>
+              <td>IPv4, IPv6, ICMP, routing</td>
+            </tr>
+            <tr>
+              <td>2 — Data Link</td>
+              <td>Network Access / Link</td>
+              <td>Ethernet, Wi-Fi, PPP, VLAN</td>
+            </tr>
+            <tr>
+              <td>1 — Physical</td>
+              <td>Network Access / Link</td>
+              <td>Cables, optical signals, radio signals</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-callout">
+        <h3>Key difference</h3>
+        <p>
+          The four-layer TCP/IP model groups the OSI Session,
+          Presentation, and Application functions into its Application
+          layer, and groups the Physical and Data Link functions into
+          Network Access. Five-layer TCP/IP diagrams often separate
+          the link and physical functions for teaching.
+        </p>
+      </div>
+    </section>
+
+    <!-- TROUBLESHOOTING -->
+    <section id="troubleshooting" class="content-section">
+      <p class="eyebrow dark-eyebrow">PRACTICAL NETWORKING</p>
+      <h2>Troubleshooting by OSI Layer</h2>
+
+      <p>
+        The OSI model helps organize troubleshooting. Start at the
+        physical connection and work upward, or use symptoms to begin
+        with the most likely layer.
+      </p>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Layer</th>
+              <th scope="col">Common Problems</th>
+              <th scope="col">Diagnostic Ideas and Commands</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>L1 — Physical</strong></td>
+              <td>Unplugged or damaged cable, failed transceiver, no link</td>
+              <td>Check link LEDs, inspect cables, test with a known-good cable</td>
+            </tr>
+            <tr>
+              <td><strong>L2 — Data Link</strong></td>
+              <td>VLAN mismatch, switching loop, frame errors</td>
+              <td>Inspect VLAN configuration, MAC address table, spanning tree and interface errors</td>
+            </tr>
+            <tr>
+              <td><strong>L3 — Network</strong></td>
+              <td>Missing route, incorrect subnet mask, wrong gateway</td>
+              <td><code>ping</code>, <code>traceroute</code>, route-table inspection</td>
+            </tr>
+            <tr>
+              <td><strong>L4 — Transport</strong></td>
+              <td>Blocked port, TCP handshake failure, incorrect port</td>
+              <td>Test TCP connectivity, inspect firewall rules, capture packets</td>
+            </tr>
+            <tr>
+              <td><strong>L5 — Session</strong></td>
+              <td>Session timeout, session limit, authentication failure</td>
+              <td>Review application logs and session-management settings</td>
+            </tr>
+            <tr>
+              <td><strong>L6 — Presentation</strong></td>
+              <td>Certificate issue, encoding mismatch, data-format error</td>
+              <td>Review browser security warnings, TLS configuration and application logs</td>
+            </tr>
+            <tr>
+              <td><strong>L7 — Application</strong></td>
+              <td>Unavailable service, wrong URL, DNS or application error</td>
+              <td>Try <code>nslookup</code>, <code>dig</code>, <code>curl -v</code> or browser developer tools</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="example-callout">
+        <h3>Example: A user cannot open a secure website</h3>
+        <ol>
+          <li>Check physical connectivity and the local network.</li>
+          <li>Check whether the destination can be reached by IP address.</li>
+          <li>Test whether the TCP service port is reachable.</li>
+          <li>If a certificate warning appears, investigate TLS and certificate configuration.</li>
+          <li>If the server responds with an HTTP error, investigate the URL, server, and application configuration.</li>
+        </ol>
+        <p class="small-note">
+          These checks narrow the possibilities but do not prove that
+          every lower layer is fault-free. Interpret results in context.
+        </p>
+      </div>
+    </section>
+
+    <!-- EMAIL JOURNEY -->
+    <section id="email-journey" class="content-section">
+      <p class="eyebrow dark-eyebrow">END-TO-END EXAMPLE</p>
+      <h2>What Happens When You Send an Email?</h2>
+
+      <p>
+        An email passes through multiple networking functions. The table
+        shows the conceptual role associated with each OSI layer.
+      </p>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Layer</th>
+              <th scope="col">What Happens</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>7 — Application</strong></td><td>The email client uses an email protocol, such as SMTP, to submit the message to a mail server.</td></tr>
+            <tr><td><strong>6 — Presentation</strong></td><td>Text and attachments are represented in defined formats; TLS may protect the connection.</td></tr>
+            <tr><td><strong>5 — Session</strong></td><td>The application maintains the conversation and command/response context with the mail service.</td></tr>
+            <tr><td><strong>4 — Transport</strong></td><td>TCP carries application data and uses port numbers to identify endpoints.</td></tr>
+            <tr><td><strong>3 — Network</strong></td><td>IP addresses identify the source and destination; routers forward packets between networks.</td></tr>
+            <tr><td><strong>2 — Data Link</strong></td><td>Frames carry packets across a local link, such as Ethernet or Wi-Fi.</td></tr>
+            <tr><td><strong>1 — Physical</strong></td><td>Bits are transmitted through the physical medium as electrical, optical, or radio signals.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="quiz" class="content-section quiz-section">
+      <p class="eyebrow dark-eyebrow">CHECK YOUR KNOWLEDGE</p>
+      <h2>OSI Model Quiz</h2>
+      <p>
+        Answer the questions, check your score, and review the explanations.
+      </p>
+
+      <form id="quiz-form">
+        <div id="quiz-questions"></div>
+
+        <div class="quiz-actions">
+          <button type="submit" class="quiz-button">Check Answers</button>
+          <button type="button" id="show-answers" class="reset-button">
+            Show Answers
+          </button>
+          <button type="button" id="retake-quiz" class="reset-button">
+            Re-take Quiz
+          </button>
+        </div>
+
+        <p id="quiz-result" class="quiz-result" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <!-- CAVEAT -->
+    <section class="note-section">
+      <h2>Important Note About Layer Mappings</h2>
+      <p>
+        The OSI model is a conceptual reference, and real-world networking
+        implementations do not always align perfectly with a single layer.
+        Some protocols and technologies span several layers, while the
+        Session and Presentation functions are often handled by application
+        software and protocols in modern TCP/IP networks.
       </p>
     </section>
   </main>
@@ -199,6 +832,7 @@
     <div class="container footer-content">
       <p>OSI Model Layers and Protocols</p>
       <p>Built with HTML, CSS, and JavaScript.</p>
+      <p><a href="LICENSE">MIT License</a></p>
     </div>
   </footer>
 </body>
