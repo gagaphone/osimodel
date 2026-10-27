@@ -1,267 +1,282 @@
-"use strict";
+/* ==========================================
+   OSI MODEL QUIZ
+   ========================================== */
 
-/*
- * OSI Model Layers and Protocols
- * Update the data below to maintain the protocol reference.
- */
-
-const layers = [
+const quizQuestions = [
   {
-    number: 1,
-    name: "Physical",
-    purpose:
-      "Responsible for transmitting raw bits over a physical medium (like cables or wireless).",
-    protocols: [
-      ["Ethernet", "Physical layer standards, e.g., IEEE 802.3"],
-      ["Wi-Fi", "Physical aspects of IEEE 802.11"],
-      ["Bluetooth", ""],
-      ["DSL", "Digital Subscriber Line"],
-      ["ISDN", "Integrated Services Digital Network"],
-      ["Optical Fiber", ""],
-      ["Coaxial Cable", ""],
-      ["Infrared Communication", ""],
-      ["RS-232", "Serial Communication Standard"],
-      ["SONET", "Synchronous Optical Network"],
-      ["PON", "Passive Optical Network"]
-    ]
+    question: "What is encapsulation in the OSI model?",
+    options: [
+      "Removing all headers before transmission",
+      "Adding layer-specific information as data moves down the stack",
+      "Converting every packet into an IP address",
+      "Encrypting all data at Layer 1"
+    ],
+    answer: 1,
+    explanation:
+      "Encapsulation adds headers and, where applicable, trailers as data travels down the sender's stack."
   },
   {
-    number: 2,
-    name: "Data Link",
-    purpose:
-      "Handles reliable transmission of data frames between nodes.",
-    protocols: [
-      ["Ethernet", "IEEE 802.3"],
-      ["Wi-Fi", "Data Link layer aspects of IEEE 802.11"],
-      ["PPP", "Point-to-Point Protocol"],
-      ["HDLC", "High-Level Data Link Control"],
-      ["ARP", "Address Resolution Protocol"],
-      ["RARP", "Reverse Address Resolution Protocol"],
-      ["MPLS", "Multiprotocol Label Switching"],
-      ["Frame Relay", ""],
-      ["ATM", "Asynchronous Transfer Mode"],
-      ["Token Ring", ""],
-      ["FDDI", "Fiber Distributed Data Interface"],
-      ["LLDP", "Link Layer Discovery Protocol"],
-      ["VLAN", "Virtual Local Area Network, IEEE 802.1Q"]
-    ]
+    question:
+      "Which is a responsibility associated with the Presentation Layer?",
+    options: [
+      "Routing packets between networks",
+      "Learning MAC addresses on a switch",
+      "Data encoding, translation, compression, and encryption functions",
+      "Transmitting electrical signals over a cable"
+    ],
+    answer: 2,
+    explanation:
+      "Layer 6 describes data representation and transformation functions. In modern networks, these may be handled by application software and protocols."
   },
   {
-    number: 3,
-    name: "Network",
-    purpose:
-      "Manages routing, addressing, and packet forwarding.",
-    protocols: [
-      ["IP", "Internet Protocol - IPv4 and IPv6"],
-      ["ICMP", "Internet Control Message Protocol"],
-      ["IGMP", "Internet Group Management Protocol"],
-      ["IPsec", "Internet Protocol Security"],
-      ["RIP", "Routing Information Protocol"],
-      ["OSPF", "Open Shortest Path First"],
-      ["BGP", "Border Gateway Protocol"],
-      ["EIGRP", "Enhanced Interior Gateway Routing Protocol"],
-      ["IS-IS", "Intermediate System to Intermediate System"],
-      ["GRE", "Generic Routing Encapsulation"],
-      ["NAT", "Network Address Translation"]
-    ]
+    question:
+      "A remote server responds to ping, but its TCP service on port 443 cannot be reached. Which layer is a useful place to investigate?",
+    options: [
+      "Layer 1 — Physical",
+      "Layer 2 — Data Link",
+      "Layer 4 — Transport",
+      "Layer 6 — Presentation"
+    ],
+    answer: 2,
+    explanation:
+      "A blocked port or failed TCP connection suggests investigating transport connectivity and firewall rules. A successful ping alone does not prove that every lower-layer function is working correctly."
   },
   {
-    number: 4,
-    name: "Transport",
-    purpose:
-      "Ensures reliable or best-effort transmission between hosts.",
-    protocols: [
-      ["TCP", "Transmission Control Protocol"],
-      ["UDP", "User Datagram Protocol"],
-      ["SCTP", "Stream Control Transmission Protocol"],
-      ["DCCP", "Datagram Congestion Control Protocol"],
-      ["RSVP", "Resource Reservation Protocol"],
-      ["QUIC", "Quick UDP Internet Connections"],
-      ["RTP", "Real-time Transport Protocol"]
-    ]
+    question: "How does the four-layer TCP/IP model differ from the OSI model?",
+    options: [
+      "It has seven layers with different names",
+      "It groups OSI Session, Presentation, and Application functions into Application, and Physical and Data Link functions into Network Access",
+      "It does not use IP addresses",
+      "It replaces TCP and UDP with Ethernet"
+    ],
+    answer: 1,
+    explanation:
+      "The four-layer TCP/IP model groups functions that the OSI model describes in separate layers."
   },
   {
-    number: 5,
-    name: "Session",
-    purpose:
-      "Manages sessions and connections between applications.",
-    protocols: [
-      ["NetBIOS", "Network Basic Input/Output System"],
-      ["PPTP", "Point-to-Point Tunneling Protocol"],
-      ["RPC", "Remote Procedure Call"],
-      ["SOCKS", "Socket Secure"],
-      ["TLS/SSL", "Transport Layer Security/Secure Sockets Layer"],
-      ["AppleTalk Session Protocols", ""]
-    ]
+    question:
+      "Which devices are primarily associated with the Data Link Layer?",
+    options: [
+      "Routers only",
+      "DNS servers and browsers",
+      "Switches and bridges",
+      "Web applications"
+    ],
+    answer: 2,
+    explanation:
+      "Switches and bridges commonly forward frames using Layer 2 addressing information."
   },
   {
-    number: 6,
-    name: "Presentation",
-    purpose:
-      "Ensures data is in a usable format and handles encryption, compression, and translation.",
-    protocols: [
-      ["TLS/SSL", "Transport Layer Security/Secure Sockets Layer"],
-      ["JPEG", "Image Compression"],
-      ["GIF", "Image Format"],
-      ["PNG", "Image Format"],
-      ["MPEG", "Media Format"],
-      ["MP3", "Media Format"],
-      ["ASCII", "Character Encoding"],
-      ["EBCDIC", "Character Encoding"],
-      ["XML", "Data Serialization Format"],
-      ["JSON", "Data Serialization Format"],
-      ["XDR", "External Data Representation"],
-      ["HTML", "Presentation Format"],
-      ["CSS", "Presentation Format"]
-    ]
+    question:
+      "Which OSI layer provides network protocol services directly to applications?",
+    options: [
+      "Layer 1 — Physical",
+      "Layer 3 — Network",
+      "Layer 4 — Transport",
+      "Layer 7 — Application"
+    ],
+    answer: 3,
+    explanation:
+      "The Application Layer includes network protocols such as HTTP, DNS, SMTP, and DHCP."
   },
   {
-    number: 7,
-    name: "Application",
-    purpose:
-      "Provides services for end-user applications and network access.",
-    protocols: [
-      ["HTTP/HTTPS", "Hypertext Transfer Protocol"],
-      ["FTP", "File Transfer Protocol"],
-      ["SFTP", "Secure File Transfer Protocol"],
-      ["SMTP", "Simple Mail Transfer Protocol"],
-      ["IMAP", "Internet Message Access Protocol"],
-      ["POP3", "Post Office Protocol v3"],
-      ["DNS", "Domain Name System"],
-      ["DHCP", "Dynamic Host Configuration Protocol"],
-      ["SNMP", "Simple Network Management Protocol"],
-      ["Telnet", ""],
-      ["SSH", "Secure Shell"],
-      ["LDAP", "Lightweight Directory Access Protocol"],
-      ["NTP", "Network Time Protocol"],
-      ["TFTP", "Trivial File Transfer Protocol"],
-      ["WHOIS", ""],
-      ["IRC", "Internet Relay Chat"]
-    ]
+    question: "What is the main role of the Session Layer?",
+    options: [
+      "Establishing, managing, and terminating communication sessions",
+      "Forwarding Ethernet frames between switch ports",
+      "Choosing the best IP route",
+      "Converting bits into radio signals"
+    ],
+    answer: 0,
+    explanation:
+      "The Session Layer describes session establishment, maintenance, dialogue coordination, and termination."
+  },
+  {
+    question: "Which statement correctly compares TCP and UDP?",
+    options: [
+      "TCP is connectionless, while UDP guarantees delivery",
+      "TCP provides reliable, connection-oriented transport; UDP is connectionless with lower protocol overhead",
+      "Both operate only at the Physical Layer",
+      "UDP always retransmits lost datagrams"
+    ],
+    answer: 1,
+    explanation:
+      "TCP provides sequencing, acknowledgements, and retransmission. UDP does not provide those delivery guarantees itself."
+  },
+  {
+    question: "What is the primary function of the Physical Layer?",
+    options: [
+      "Resolving domain names",
+      "Managing application sessions",
+      "Transmitting raw bits through a physical medium",
+      "Selecting routes based on IP addresses"
+    ],
+    answer: 2,
+    explanation:
+      "Layer 1 concerns physical media, signals, connectors, and bit transmission."
+  },
+  {
+    question: "What is the primary function of the Network Layer?",
+    options: [
+      "Rendering web pages",
+      "Managing keyboard input",
+      "Compressing image files",
+      "Logical addressing and routing packets between networks"
+    ],
+    answer: 3,
+    explanation:
+      "Layer 3 uses logical addresses such as IP addresses and supports packet routing between networks."
   }
 ];
 
-/* Flatten the layer data for easier searching and filtering. */
-const entries = layers.flatMap((layer) =>
-  layer.protocols.map(([protocol, description]) => ({
-    number: layer.number,
-    name: layer.name,
-    purpose: layer.purpose,
-    protocol,
-    description
-  }))
-);
+const quizForm = document.getElementById("quiz-form");
+const quizContainer = document.getElementById("quiz-questions");
+const quizResult = document.getElementById("quiz-result");
+const showAnswersButton = document.getElementById("show-answers");
+const retakeQuizButton = document.getElementById("retake-quiz");
 
-/* Page controls */
-const tableBody = document.getElementById("protocol-rows");
-const searchInput = document.getElementById("search-input");
-const layerFilter = document.getElementById("layer-filter");
-const resultCount = document.getElementById("result-count");
-const emptyState = document.getElementById("empty-state");
-const resetButton = document.getElementById("reset-filters");
-const protocolTotal = document.getElementById("protocol-total");
-
-/* Display the number of entries automatically. */
-protocolTotal.textContent = String(entries.length);
-
-/* Safely create a regular table cell. */
-function createCell(value, className = "") {
-  const cell = document.createElement("td");
-
-  if (className) {
-    cell.className = className;
+/* Render questions and choices safely into the page. */
+function renderQuiz() {
+  if (!quizForm || !quizContainer) {
+    return;
   }
-
-  cell.textContent = value || "—";
-  return cell;
-}
-
-/* Build a single row from an entry. */
-function createRow(entry) {
-  const row = document.createElement("tr");
-
-  const numberCell = document.createElement("td");
-  const badge = document.createElement("span");
-
-  badge.className = "layer-number";
-  badge.textContent = String(entry.number);
-  numberCell.appendChild(badge);
-
-  const layerCell = createCell(entry.name, "layer-name");
-  const purposeCell = createCell(entry.purpose);
-  const protocolCell = document.createElement("td");
-  const protocolName = document.createElement("strong");
-
-  protocolName.textContent = entry.protocol;
-  protocolCell.appendChild(protocolName);
-
-  const descriptionCell = createCell(entry.description);
-
-  row.append(
-    numberCell,
-    layerCell,
-    purposeCell,
-    protocolCell,
-    descriptionCell
-  );
-
-  return row;
-}
-
-/* Apply the search phrase and selected-layer filter. */
-function renderTable() {
-  const query = searchInput.value.trim().toLowerCase();
-  const selectedLayer = layerFilter.value;
-
-  const filteredEntries = entries.filter((entry) => {
-    const searchableText = [
-      entry.number,
-      entry.name,
-      entry.purpose,
-      entry.protocol,
-      entry.description
-    ]
-      .join(" ")
-      .toLowerCase();
-
-    const matchesSearch =
-      query === "" || searchableText.includes(query);
-
-    const matchesLayer =
-      selectedLayer === "" ||
-      String(entry.number) === selectedLayer;
-
-    return matchesSearch && matchesLayer;
-  });
 
   const fragment = document.createDocumentFragment();
 
-  filteredEntries.forEach((entry) => {
-    fragment.appendChild(createRow(entry));
+  quizQuestions.forEach((item, questionIndex) => {
+    const fieldset = document.createElement("fieldset");
+    fieldset.className = "quiz-question";
+
+    const legend = document.createElement("legend");
+    legend.textContent = `${questionIndex + 1}. ${item.question}`;
+    fieldset.appendChild(legend);
+
+    const optionsContainer = document.createElement("div");
+    optionsContainer.className = "quiz-options";
+
+    item.options.forEach((option, optionIndex) => {
+      const label = document.createElement("label");
+      label.className = "quiz-option";
+
+      const input = document.createElement("input");
+      input.type = "radio";
+      input.name = `question-${questionIndex}`;
+      input.value = String(optionIndex);
+      input.id = `quiz-${questionIndex}-option-${optionIndex}`;
+
+      const text = document.createElement("span");
+      text.textContent = option;
+
+      label.append(input, text);
+      optionsContainer.appendChild(label);
+    });
+
+    const feedback = document.createElement("p");
+    feedback.id = `quiz-feedback-${questionIndex}`;
+    feedback.className = "quiz-feedback";
+    feedback.hidden = true;
+
+    fieldset.append(optionsContainer, feedback);
+    fragment.appendChild(fieldset);
   });
 
-  tableBody.replaceChildren(fragment);
-
-  resultCount.textContent =
-    `Showing ${filteredEntries.length} of ${entries.length} entries`;
-
-  emptyState.hidden = filteredEntries.length !== 0;
+  quizContainer.replaceChildren(fragment);
 }
 
-/* Search as the user types. */
-searchInput.addEventListener("input", renderTable);
+/* Display feedback for each question. */
+function displayQuizFeedback(revealAll = false) {
+  let score = 0;
+  let answered = 0;
 
-/* Refilter when a layer is selected. */
-layerFilter.addEventListener("change", renderTable);
+  quizQuestions.forEach((item, questionIndex) => {
+    const selected = quizForm.querySelector(
+      `input[name="question-${questionIndex}"]:checked`
+    );
 
-/* Reset every filter. */
-resetButton.addEventListener("click", () => {
-  searchInput.value = "";
-  layerFilter.value = "";
+    const feedback = document.getElementById(
+      `quiz-feedback-${questionIndex}`
+    );
 
-  renderTable();
-  searchInput.focus();
-});
+    if (!feedback) {
+      return;
+    }
 
-/* Render all entries on page load. */
-renderTable();
+    feedback.hidden = true;
+    feedback.classList.remove("is-correct", "is-incorrect");
+
+    if (!revealAll && !selected) {
+      feedback.textContent = "Choose an answer to complete this question.";
+      feedback.hidden = false;
+      feedback.classList.add("is-incorrect");
+      return;
+    }
+
+    const isCorrect =
+      selected && Number(selected.value) === item.answer;
+
+    if (selected) {
+      answered++;
+
+      if (isCorrect) {
+        score++;
+      }
+    }
+
+    feedback.textContent = selected && isCorrect
+      ? `Correct! ${item.explanation}`
+      : `Correct answer: ${item.options[item.answer]}. ${item.explanation}`;
+
+    feedback.classList.add(
+      selected && !isCorrect ? "is-incorrect" : "is-correct"
+    );
+    feedback.hidden = false;
+  });
+
+  if (revealAll) {
+    quizResult.textContent =
+      "Answer key displayed. Review the explanations and try again.";
+  } else {
+    quizResult.textContent =
+      `Your score: ${score} out of ${quizQuestions.length}. ` +
+      `${answered} of ${quizQuestions.length} questions answered.`;
+  }
+}
+
+/* Check the submitted answers. */
+if (quizForm) {
+  quizForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    displayQuizFeedback(false);
+  });
+}
+
+/* Reveal correct answers and explanations. */
+if (showAnswersButton) {
+  showAnswersButton.addEventListener("click", () => {
+    displayQuizFeedback(true);
+  });
+}
+
+/* Clear responses to allow another attempt. */
+if (retakeQuizButton && quizForm) {
+  retakeQuizButton.addEventListener("click", () => {
+    quizForm.reset();
+
+    quizQuestions.forEach((_, questionIndex) => {
+      const feedback = document.getElementById(
+        `quiz-feedback-${questionIndex}`
+      );
+
+      if (feedback) {
+        feedback.hidden = true;
+        feedback.textContent = "";
+        feedback.classList.remove("is-correct", "is-incorrect");
+      }
+    });
+
+    quizResult.textContent = "";
+  });
+}
+
+/* Initialize the quiz. */
+renderQuiz();
