@@ -280,3 +280,115 @@ if (retakeQuizButton && quizForm) {
 
 /* Initialize the quiz. */
 renderQuiz();
+
+/* troubleshooting section for all 7 OSI layers */
+document.addEventListener("DOMContentLoaded", () => {
+  const tabContainer = document.querySelector(".troubleshooting-tabs");
+
+  if (!tabContainer) return;
+
+  const tabs = Array.from(
+    tabContainer.querySelectorAll('[role="tab"]')
+  );
+
+  const panels = Array.from(
+    tabContainer.querySelectorAll('[role="tabpanel"]')
+  );
+
+  const previousButton = tabContainer.querySelector(
+    ".troubleshooting-tabs__prev"
+  );
+
+  const nextButton = tabContainer.querySelector(
+    ".troubleshooting-tabs__next"
+  );
+
+  const progress = tabContainer.querySelector(
+    ".troubleshooting-tabs__progress"
+  );
+
+  let activeIndex = 0;
+
+  function activateTab(index, moveFocus = false) {
+    activeIndex = Math.max(
+      0,
+      Math.min(index, tabs.length - 1)
+    );
+
+    tabs.forEach((tab, i) => {
+      const isActive = i === activeIndex;
+
+      tab.classList.toggle("is-active", isActive);
+      tab.setAttribute(
+        "aria-selected",
+        String(isActive)
+      );
+      tab.setAttribute(
+        "tabindex",
+        isActive ? "0" : "-1"
+      );
+
+      panels[i].classList.toggle(
+        "is-active",
+        isActive
+      );
+
+      panels[i].hidden = !isActive;
+    });
+
+    previousButton.disabled = activeIndex === 0;
+    nextButton.disabled = activeIndex === tabs.length - 1;
+
+    progress.textContent =
+      `Layer ${activeIndex + 1} of ${tabs.length}`;
+
+    if (moveFocus) {
+      tabs[activeIndex].focus();
+    }
+  }
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => {
+      activateTab(index);
+    });
+
+    tab.addEventListener("keydown", event => {
+      let nextIndex = activeIndex;
+
+      switch (event.key) {
+        case "ArrowRight":
+          nextIndex = (activeIndex + 1) % tabs.length;
+          break;
+
+        case "ArrowLeft":
+          nextIndex =
+            (activeIndex - 1 + tabs.length) % tabs.length;
+          break;
+
+        case "Home":
+          nextIndex = 0;
+          break;
+
+        case "End":
+          nextIndex = tabs.length - 1;
+          break;
+
+        default:
+          return;
+      }
+
+      event.preventDefault();
+      activateTab(nextIndex, true);
+    });
+  });
+
+  previousButton.addEventListener("click", () => {
+    activateTab(activeIndex - 1, true);
+  });
+
+  nextButton.addEventListener("click", () => {
+    activateTab(activeIndex + 1, true);
+  });
+
+  activateTab(0);
+});

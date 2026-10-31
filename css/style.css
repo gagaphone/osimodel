@@ -969,6 +969,336 @@ code {
   text-underline-offset: 0.2em;
 }
 
+
+
+/* =========================================================
+   OSI TROUBLESHOOTING TABS
+   ========================================================= */
+
+.troubleshooting-tabs {
+  margin-top: 1.5rem;
+  min-width: 0;
+}
+
+/* Tab navigation */
+.troubleshooting-tabs__nav {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.4rem;
+  padding: 0.5rem;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: thin;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-subtle);
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Individual tabs */
+.troubleshooting-tabs__button {
+  display: inline-flex;
+  flex: 1 0 auto;
+  min-width: 76px;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--text-soft);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 750;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.troubleshooting-tabs__button:hover {
+  background: var(--primary-light);
+  color: var(--primary-dark);
+}
+
+.troubleshooting-tabs__button[aria-selected="true"] {
+  border-color: #b9cbed;
+  background: var(--surface);
+  color: var(--primary-dark);
+  box-shadow: var(--shadow-soft);
+}
+
+.troubleshooting-tabs__button:focus-visible {
+  outline: 3px solid #80aaff;
+  outline-offset: 2px;
+}
+
+/* Layer number inside tabs */
+.troubleshooting-tabs__number {
+  display: inline-grid;
+  width: 1.65rem;
+  height: 1.65rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 6px;
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  font-size: 0.75rem;
+  font-weight: 850;
+  font-variant-numeric: tabular-nums;
+}
+
+.troubleshooting-tabs__button[aria-selected="true"]
+.troubleshooting-tabs__number {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* Tab content */
+.troubleshooting-tabs__panel {
+  min-width: 0;
+  margin-top: 1.25rem;
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.troubleshooting-tabs__panel[hidden] {
+  display: none !important;
+}
+
+.troubleshooting-tabs__heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.troubleshooting-tabs__heading h3 {
+  margin: 0;
+}
+
+.troubleshooting-tabs__pdu {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid #d5e3ff;
+  border-radius: 999px;
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  font-size: 0.78rem;
+  font-weight: 750;
+}
+
+/* Command blocks */
+.troubleshooting-command {
+  margin-block: 1rem;
+}
+
+.troubleshooting-command h4 {
+  margin: 0 0 0.65rem;
+  font-size: 0.95rem;
+}
+
+.troubleshooting-command pre {
+  margin: 0.5rem 0;
+  padding: 1rem;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: #f4f6fa;
+  color: #253d61;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  tab-size: 2;
+}
+
+.troubleshooting-command pre code {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  white-space: pre;
+  overflow-wrap: normal;
+}
+
+/* OS command groups */
+.troubleshooting-os-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-top: 1.25rem;
+}
+
+.troubleshooting-os-card {
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-subtle);
+}
+
+.troubleshooting-os-card h4 {
+  margin: 0 0 0.75rem;
+  color: var(--primary-dark);
+  font-size: 0.95rem;
+}
+
+.troubleshooting-os-card pre {
+  margin: 0;
+  padding: 0.75rem;
+  overflow-x: auto;
+  border-radius: 7px;
+  background: #eef2f8;
+  font-size: 0.78rem;
+  line-height: 1.65;
+}
+
+.troubleshooting-os-card code {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  white-space: pre;
+}
+
+/* Common problems */
+.troubleshooting-problems {
+  margin-top: 1.75rem;
+}
+
+.troubleshooting-problems h4 {
+  margin-bottom: 0.75rem;
+}
+
+.troubleshooting-problems .table-container {
+  margin-top: 0.75rem;
+}
+
+/* Notes */
+.troubleshooting-note {
+  margin-top: 1.25rem;
+  padding: 1rem;
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius-sm);
+  background: var(--surface-blue);
+}
+
+.troubleshooting-note p:last-child {
+  margin-bottom: 0;
+}
+
+/* Previous and next controls */
+.troubleshooting-tabs__controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.troubleshooting-tabs__controls button {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 9px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.troubleshooting-tabs__controls button:hover:not(:disabled) {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  color: var(--primary-dark);
+}
+
+.troubleshooting-tabs__controls button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .troubleshooting-os-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .troubleshooting-tabs__button {
+    flex: 0 0 auto;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .troubleshooting-tabs__nav {
+    margin-inline: -0.15rem;
+    padding: 0.35rem;
+  }
+
+  .troubleshooting-tabs__button {
+    min-width: 68px;
+    min-height: 46px;
+    padding: 0.55rem 0.7rem;
+    font-size: 0.8rem;
+  }
+
+  .troubleshooting-tabs__panel {
+    padding: 0.9rem;
+  }
+
+  .troubleshooting-tabs__heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .troubleshooting-tabs__controls button {
+    flex: 1;
+  }
+}
+
+/* Print all tabs */
+@media print {
+  .troubleshooting-tabs__nav,
+  .troubleshooting-tabs__controls {
+    display: none !important;
+  }
+
+  .troubleshooting-tabs__panel,
+  .troubleshooting-tabs__panel[hidden] {
+    display: block !important;
+    margin-block: 1rem;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+    break-inside: auto;
+  }
+
+  .troubleshooting-tabs__panel + .troubleshooting-tabs__panel {
+    break-before: page;
+  }
+
+  .troubleshooting-os-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
 /* Tablet */
 @media (max-width: 900px) {
   :root {
