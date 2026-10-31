@@ -683,81 +683,1375 @@
       </div>
     </section>
 
-    <!-- TROUBLESHOOTING -->
-    <section id="troubleshooting" class="content-section">
-      <p class="eyebrow dark-eyebrow">PRACTICAL NETWORKING</p>
-      <h2>Troubleshooting by OSI Layer</h2>
+   
+<!-- TROUBLESHOOTING -->
+<section id="troubleshooting" class="content-section">
 
-      <p>
-        The OSI model helps organize troubleshooting. Start at the
-        physical connection and work upward, or use symptoms to begin
-        with the most likely layer.
-      </p>
+  <p class="eyebrow dark-eyebrow">PRACTICAL NETWORKING</p>
+  <h2>Troubleshooting by OSI Layer</h2>
 
-      <div class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th scope="col">Layer</th>
-              <th scope="col">Common Problems</th>
-              <th scope="col">Diagnostic Ideas and Commands</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>L1 — Physical</strong></td>
-              <td>Unplugged or damaged cable, failed transceiver, no link</td>
-              <td>Check link LEDs, inspect cables, test with a known-good cable</td>
-            </tr>
-            <tr>
-              <td><strong>L2 — Data Link</strong></td>
-              <td>VLAN mismatch, switching loop, frame errors</td>
-              <td>Inspect VLAN configuration, MAC address table, spanning tree and interface errors</td>
-            </tr>
-            <tr>
-              <td><strong>L3 — Network</strong></td>
-              <td>Missing route, incorrect subnet mask, wrong gateway</td>
-              <td><code>ping</code>, <code>traceroute</code>, route-table inspection</td>
-            </tr>
-            <tr>
-              <td><strong>L4 — Transport</strong></td>
-              <td>Blocked port, TCP handshake failure, incorrect port</td>
-              <td>Test TCP connectivity, inspect firewall rules, capture packets</td>
-            </tr>
-            <tr>
-              <td><strong>L5 — Session</strong></td>
-              <td>Session timeout, session limit, authentication failure</td>
-              <td>Review application logs and session-management settings</td>
-            </tr>
-            <tr>
-              <td><strong>L6 — Presentation</strong></td>
-              <td>Certificate issue, encoding mismatch, data-format error</td>
-              <td>Review browser security warnings, TLS configuration and application logs</td>
-            </tr>
-            <tr>
-              <td><strong>L7 — Application</strong></td>
-              <td>Unavailable service, wrong URL, DNS or application error</td>
-              <td>Try <code>nslookup</code>, <code>dig</code>, <code>curl -v</code> or browser developer tools</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  <p>
+    The OSI model provides a structured approach to network troubleshooting.
+    Start at Layer 1 (Physical) and work upward toward Layer 7 (Application).
+    This approach helps identify problems systematically instead of randomly
+    changing network settings.
+  </p>
 
-      <div class="example-callout">
-        <h3>Example: A user cannot open a secure website</h3>
-        <ol>
-          <li>Check physical connectivity and the local network.</li>
-          <li>Check whether the destination can be reached by IP address.</li>
-          <li>Test whether the TCP service port is reachable.</li>
-          <li>If a certificate warning appears, investigate TLS and certificate configuration.</li>
-          <li>If the server responds with an HTTP error, investigate the URL, server, and application configuration.</li>
-        </ol>
-        <p class="small-note">
-          These checks narrow the possibilities but do not prove that
-          every lower layer is fault-free. Interpret results in context.
-        </p>
-      </div>
-    </section>
+  <p>
+    This reference includes practical troubleshooting commands for Linux,
+    Windows, and macOS, together with common network problems and diagnostic
+    techniques.
+  </p>
+
+  <div class="example-callout">
+    <h3>Important troubleshooting principle</h3>
+    <p>
+      Always verify lower network layers before investigating higher layers.
+      If a network cable is disconnected or a Wi-Fi adapter is disabled,
+      testing DNS or HTTP will not resolve the underlying connectivity problem.
+    </p>
+    <p class="small-note">
+      Some commands require administrator or root privileges. Replace example
+      interface names, hostnames, and IP addresses with your actual values.
+    </p>
+  </div>
+
+  <!-- LAYER 1 -->
+  <h3>1. Layer 1 — Physical Layer</h3>
+
+  <p>
+    <strong>PDU:</strong> Bits<br>
+    <strong>Focus:</strong> Physical connectivity
+  </p>
+
+  <p>
+    The Physical Layer is responsible for transmitting raw bits through
+    physical media such as Ethernet cables, fiber-optic connections,
+    and wireless signals.
+  </p>
+
+  <p><strong>Purpose:</strong> Check cables, network interfaces, Wi-Fi
+    signal strength, link status, and physical connectivity.</p>
+
+  <h4>Diagnostic commands</h4>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Linux</th>
+          <th scope="col">Windows</th>
+          <th scope="col">macOS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>ip link</code></td>
+          <td><code>Get-NetAdapter</code></td>
+          <td><code>ifconfig</code></td>
+        </tr>
+        <tr>
+          <td><code>ethtool eth0</code></td>
+          <td><code>Get-NetAdapterStatistics</code></td>
+          <td><code>networksetup -listallhardwareports</code></td>
+        </tr>
+        <tr>
+          <td><code>nmcli device status</code></td>
+          <td><code>Get-NetAdapter -Physical</code></td>
+          <td><code>ifconfig en0</code></td>
+        </tr>
+        <tr>
+          <td><code>iw dev</code></td>
+          <td><code>netsh wlan show interfaces</code></td>
+          <td><code>wdutil info</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Common problems and what to check</h4>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Problem</th>
+          <th scope="col">Possible cause</th>
+          <th scope="col">What to check</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Network cable disconnected</td>
+          <td>Loose or damaged connection</td>
+          <td>Inspect cable, connector, and switch port.</td>
+        </tr>
+        <tr>
+          <td>Network interface disabled</td>
+          <td>Adapter administratively disabled</td>
+          <td>Check adapter status and enable the interface if appropriate.</td>
+        </tr>
+        <tr>
+          <td>No link detected</td>
+          <td>Failed NIC, cable, or switch port</td>
+          <td>Test with a known-good cable and switch port.</td>
+        </tr>
+        <tr>
+          <td>Wi-Fi disconnected</td>
+          <td>Incorrect credentials or disconnected adapter</td>
+          <td>Check SSID, password, and wireless adapter status.</td>
+        </tr>
+        <tr>
+          <td>Weak Wi-Fi signal</td>
+          <td>Distance or wireless interference</td>
+          <td>Check signal strength and access point placement.</td>
+        </tr>
+        <tr>
+          <td>Incorrect link speed</td>
+          <td>Speed or duplex negotiation issue</td>
+          <td>Inspect interface speed and duplex settings.</td>
+        </tr>
+        <tr>
+          <td>Hardware failure</td>
+          <td>Faulty network adapter</td>
+          <td>Inspect adapter status and system logs.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Useful indicators</h4>
+
+  <ul>
+    <li><strong>Linux:</strong> Look for <code>LOWER_UP</code> in <code>ip link</code>.</li>
+    <li><strong>Windows:</strong> Look for <code>Status = Up</code> in <code>Get-NetAdapter</code>.</li>
+    <li><strong>macOS:</strong> Look for <code>status: active</code> in <code>ifconfig</code>.</li>
+  </ul>
+
+  <p class="small-note">
+    Note: Replace eth0 with your actual interface name. The ethtool utility
+    may need to be installed on Linux.
+  </p>
+
+  <!-- LAYER 2 -->
+  <h3>2. Layer 2 — Data Link Layer</h3>
+
+  <p>
+    <strong>PDU:</strong> Frame<br>
+    <strong>Focus:</strong> MAC addressing and local network communication
+  </p>
+
+  <p>
+    The Data Link Layer handles Ethernet frames, MAC addresses, ARP,
+    VLANs, and communication between devices on the same local network.
+  </p>
+
+  <p><strong>Purpose:</strong> Diagnose switching problems, MAC address
+    resolution, VLAN configuration, and local network communication.</p>
+
+  <h4>Diagnostic commands</h4>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Linux</th>
+          <th scope="col">Windows</th>
+          <th scope="col">macOS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>ip neigh</code></td>
+          <td><code>arp -a</code></td>
+          <td><code>arp -a</code></td>
+        </tr>
+        <tr>
+          <td><code>ip link show</code></td>
+          <td><code>getmac /v</code></td>
+          <td><code>ifconfig</code></td>
+        </tr>
+        <tr>
+          <td><code>bridge link</code></td>
+          <td><code>Get-NetAdapter</code></td>
+          <td><code>networksetup -listallhardwareports</code></td>
+        </tr>
+        <tr>
+          <td><code>bridge vlan show</code></td>
+          <td><code>Get-NetNeighbor</code></td>
+          <td><code>arp -an</code></td>
+        </tr>
+        <tr>
+          <td><code>sudo tcpdump -i eth0 -e</code></td>
+          <td><code>pktmon start --etw</code></td>
+          <td><code>sudo tcpdump -i en0 -e</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Common problems and troubleshooting</h4>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Problem</th>
+          <th scope="col">Possible cause</th>
+          <th scope="col">Troubleshooting</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Duplicate IP address</td>
+          <td>Two devices using the same IP</td>
+          <td>Inspect ARP and neighbor tables.</td>
+        </tr>
+        <tr>
+          <td>Incorrect MAC mapping</td>
+          <td>Incorrect or stale ARP entry</td>
+          <td>Inspect the neighbor table and ARP responses.</td>
+        </tr>
+        <tr>
+          <td>Local communication failure</td>
+          <td>VLAN mismatch</td>
+          <td>Verify VLAN membership on switch ports.</td>
+        </tr>
+        <tr>
+          <td>Switch port not forwarding</td>
+          <td>STP blocking or port security</td>
+          <td>Inspect switch port status and spanning tree.</td>
+        </tr>
+        <tr>
+          <td>ARP resolution failure</td>
+          <td>VLAN, connectivity, or ARP filtering issue</td>
+          <td>Capture and inspect ARP traffic.</td>
+        </tr>
+        <tr>
+          <td>MAC address flapping</td>
+          <td>Multiple paths or switching loop</td>
+          <td>Check switch logs and MAC address tables.</td>
+        </tr>
+        <tr>
+          <td>Incorrect VLAN assignment</td>
+          <td>Wrong access port configuration</td>
+          <td>Verify switch VLAN configuration.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Useful command examples</h4>
+
+  <p><strong>Linux</strong></p>
+  <pre><code>ip neigh show
+sudo tcpdump -i eth0 arp</code></pre>
+
+  <p><strong>Windows</strong></p>
+  <pre><code>arp -a
+Get-NetNeighbor</code></pre>
+
+  <p><strong>macOS</strong></p>
+  <pre><code>arp -an
+sudo tcpdump -i en0 arp</code></pre>
+
+  <!-- LAYER 3 -->
+  <h3>3. Layer 3 — Network Layer</h3>
+
+  <p>
+    <strong>PDU:</strong> Packet<br>
+    <strong>Focus:</strong> IP addressing and routing
+  </p>
+
+  <p>
+    The Network Layer handles logical addressing, subnetting,
+    routing, and packet forwarding between different networks.
+  </p>
+
+  <p><strong>Purpose:</strong> Check IP addresses, subnet masks,
+    default gateways, routing tables, and packet reachability.</p>
+
+  <h4>Diagnostic commands</h4>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Linux</th>
+          <th scope="col">Windows</th>
+          <th scope="col">macOS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>ip addr</code></td>
+          <td><code>ipconfig /all</code></td>
+          <td><code>ifconfig</code></td>
+        </tr>
+        <tr>
+          <td><code>ip route</code></td>
+          <td><code>route print</code></td>
+          <td><code>netstat -rn</code></td>
+        </tr>
+        <tr>
+          <td><code>ping -c 4 8.8.8.8</code></td>
+          <td><code>ping 8.8.8.8</code></td>
+          <td><code>ping -c 4 8.8.8.8</code></td>
+        </tr>
+        <tr>
+          <td><code>traceroute 8.8.8.8</code></td>
+          <td><code>tracert 8.8.8.8</code></td>
+          <td><code>traceroute 8.8.8.8</code></td>
+        </tr>
+        <tr>
+          <td><code>tracepath 8.8.8.8</code></td>
+          <td><code>pathping 8.8.8.8</code></td>
+          <td><code>route get default</code></td>
+        </tr>
+        <tr>
+          <td><code>ip route get 8.8.8.8</code></td>
+          <td><code>Get-NetRoute</code></td>
+          <td><code>netstat -rn</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Common problems and troubleshooting</h4>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Problem</th>
+          <th scope="col">Possible cause</th>
+          <th scope="col">Troubleshooting</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>APIPA address (169.254.x.x)</td>
+          <td>DHCP failure</td>
+          <td>Check DHCP server and client configuration.</td>
+        </tr>
+        <tr>
+          <td>Incorrect IP address</td>
+          <td>Manual configuration error</td>
+          <td>Inspect interface IP configuration.</td>
+        </tr>
+        <tr>
+          <td>Incorrect subnet mask</td>
+          <td>Wrong subnet configuration</td>
+          <td>Verify subnet mask and network prefix.</td>
+        </tr>
+        <tr>
+          <td>Default gateway missing</td>
+          <td>DHCP or manual configuration error</td>
+          <td>Inspect the routing table.</td>
+        </tr>
+        <tr>
+          <td>Cannot reach remote network</td>
+          <td>Routing issue</td>
+          <td>Use traceroute or tracert.</td>
+        </tr>
+        <tr>
+          <td>Destination unreachable</td>
+          <td>Missing route or filtering</td>
+          <td>Check routes and ICMP filtering.</td>
+        </tr>
+        <tr>
+          <td>Intermittent connectivity</td>
+          <td>Packet loss or routing instability</td>
+          <td>Use ping and pathping.</td>
+        </tr>
+        <tr>
+          <td>IP address conflict</td>
+          <td>Duplicate IP address</td>
+          <td>Inspect ARP and neighbor tables.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Practical troubleshooting sequence</h4>
+
+  <p><strong>Linux</strong></p>
+  <pre><code>ip addr
+ip route
+ping -c 4 &lt;gateway-ip&gt;
+ping -c 4 8.8.8.8
+traceroute 8.8.8.8</code></pre>
+
+  <p><strong>Windows</strong></p>
+  <pre><code>ipconfig /all
+route print
+ping &lt;gateway-ip&gt;
+ping 8.8.8.8
+tracert 8.8.8.8</code></pre>
+
+  <p><strong>macOS</strong></p>
+  <pre><code>ifconfig
+netstat -rn
+ping -c 4 &lt;gateway-ip&gt;
+ping -c 4 8.8.8.8
+traceroute 8.8.8.8</code></pre>
+
+  <!-- LAYER 4 -->
+  <h3>4. Layer 4 — Transport Layer</h3>
+
+  <p>
+    <strong>PDU:</strong> Segment (TCP) / Datagram (UDP)<br>
+    <strong>Focus:</strong> Ports and connections
+  </p>
+
+  <p>
+    The Transport Layer provides end-to-end communication using TCP
+    and UDP. It handles port addressing, connection establishment,
+    reliability, and flow control.
+  </p>
+
+  <p><strong>Purpose:</strong> Troubleshoot TCP and UDP communication,
+    port availability, connection establishment, and firewall filtering.</p>
+
+  <h4>Diagnostic commands</h4>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Linux</th>
+          <th scope="col">Windows</th>
+          <th scope="col">macOS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>ss -tulnp</code></td>
+          <td><code>netstat -ano</code></td>
+          <td><code>netstat -an</code></td>
+        </tr>
+        <tr>
+          <td><code>ss -ant</code></td>
+          <td><code>Get-NetTCPConnection</code></td>
+          <td><code>lsof -i -P</code></td>
+        </tr>
+        <tr>
+          <td><code>nc -vz host 443</code></td>
+          <td><code>Test-NetConnection host -Port 443</code></td>
+          <td><code>nc -vz host 443</code></td>
+        </tr>
+        <tr>
+          <td><code>sudo tcpdump -i eth0 tcp</code></td>
+          <td><code>pktmon</code></td>
+          <td><code>sudo tcpdump -i en0 tcp</code></td>
+        </tr>
+        <tr>
+          <td><code>nmap -sT host</code></td>
+          <td><code>nmap -sT host</code></td>
+          <td><code>nmap -sT host</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Common problems and troubleshooting</h4>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Problem</th>
+          <th scope="col">Possible cause</th>
+          <th scope="col">Troubleshooting</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Connection refused</td>
+          <td>No service listening on the port</td>
+          <td>Check listening ports and application services.</td>
+        </tr>
+        <tr>
+          <td>Connection timeout</td>
+          <td>Firewall filtering or unreachable host</td>
+          <td>Test connectivity and firewall rules.</td>
+        </tr>
+        <tr>
+          <td>Port already in use</td>
+          <td>Another process occupies the port</td>
+          <td>Identify the process using the port.</td>
+        </tr>
+        <tr>
+          <td>TCP handshake failure</td>
+          <td>SYN packets not answered</td>
+          <td>Capture and inspect TCP traffic.</td>
+        </tr>
+        <tr>
+          <td>TCP connection reset</td>
+          <td>Server, firewall, or application reset</td>
+          <td>Inspect TCP RST packets.</td>
+        </tr>
+        <tr>
+          <td>UDP application not responding</td>
+          <td>UDP filtering or service issue</td>
+          <td>Check UDP service and capture traffic.</td>
+        </tr>
+        <tr>
+          <td>Too many connections</td>
+          <td>Connection exhaustion</td>
+          <td>Inspect active connections and limits.</td>
+        </tr>
+        <tr>
+          <td>Firewall blocking port</td>
+          <td>Inbound or outbound filtering</td>
+          <td>Review firewall rules and policies.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Useful command examples</h4>
+
+  <p><strong>Linux</strong></p>
+  <pre><code>ss -tulnp
+ss -ant
+nc -vz example.com 443</code></pre>
+
+  <p><strong>Windows</strong></p>
+  <pre><code>netstat -ano
+Get-NetTCPConnection
+Test-NetConnection example.com -Port 443</code></pre>
+
+  <p><strong>macOS</strong></p>
+  <pre><code>netstat -an
+lsof -i -P
+nc -vz example.com 443</code></pre>
+
+  <div class="example-callout">
+    <h4>Windows tip</h4>
+    <p>
+      <code>Test-NetConnection</code> is particularly useful for checking
+      TCP connectivity to a specific port. It reports whether the remote
+      TCP connection succeeded.
+    </p>
+  </div>
+
+  <p class="small-note">
+    Nmap must be installed separately. Packet capture and some connection
+    inspection commands may require administrator privileges.
+    A successful TCP test does not prove that the application itself works.
+  </p>
+
+  <!-- LAYER 5 -->
+  <h3>5. Layer 5 — Session Layer</h3>
+
+  <p>
+    <strong>PDU:</strong> Data<br>
+    <strong>Focus:</strong> Session management
+  </p>
+
+  <p>
+    The Session Layer manages communication sessions between applications.
+    It is associated with session establishment, maintenance, authentication,
+    and termination.
+  </p>
+
+  <p>
+    In modern TCP/IP networking, session-layer functions are often implemented
+    by application protocols and libraries rather than a separate OSI layer.
+  </p>
+
+  <h4>Diagnostic commands</h4>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Linux</th>
+          <th scope="col">Windows</th>
+          <th scope="col">macOS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>who</code></td>
+          <td><code>query session</code></td>
+          <td><code>who</code></td>
+        </tr>
+        <tr>
+          <td><code>w</code></td>
+          <td><code>qwinsta</code></td>
+          <td><code>w</code></td>
+        </tr>
+        <tr>
+          <td><code>loginctl list-sessions</code></td>
+          <td><code>query user</code></td>
+          <td><code>last</code></td>
+        </tr>
+        <tr>
+          <td><code>smbstatus</code></td>
+          <td><code>Get-SmbConnection</code></td>
+          <td><code>smbutil statshares -a</code></td>
+        </tr>
+        <tr>
+          <td><code>rpcinfo -p host</code></td>
+          <td><code>Get-Service RpcSs</code></td>
+          <td><code>rpcinfo -p host</code></td>
+        </tr>
+        <tr>
+          <td><code>ss -ant</code></td>
+          <td><code>Get-NetTCPConnection</code></td>
+          <td><code>netstat -an</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Common problems and troubleshooting</h4>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Problem</th>
+          <th scope="col">Possible cause</th>
+          <th scope="col">Troubleshooting</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Remote session disconnects</td>
+          <td>Network interruption or timeout</td>
+          <td>Inspect session and network logs.</td>
+        </tr>
+        <tr>
+          <td>Cannot establish remote session</td>
+          <td>Authentication or service failure</td>
+          <td>Check session service and credentials.</td>
+        </tr>
+        <tr>
+          <td>SMB session fails</td>
+          <td>SMB configuration or credentials</td>
+          <td>Inspect SMB connections and logs.</td>
+        </tr>
+        <tr>
+          <td>RPC communication fails</td>
+          <td>RPC service unavailable or blocked</td>
+          <td>Check RPC services and required ports.</td>
+        </tr>
+        <tr>
+          <td>Session expires unexpectedly</td>
+          <td>Idle timeout</td>
+          <td>Review session timeout policies.</td>
+        </tr>
+        <tr>
+          <td>Multiple stale sessions</td>
+          <td>Improper session termination</td>
+          <td>Inspect active sessions.</td>
+        </tr>
+        <tr>
+          <td>Remote Desktop unavailable</td>
+          <td>RDP service or firewall issue</td>
+          <td>Check RDP service and TCP connectivity.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Useful command examples</h4>
+
+  <p><strong>Linux</strong></p>
+  <pre><code>who
+w
+loginctl list-sessions
+smbstatus</code></pre>
+
+  <p><strong>Windows</strong></p>
+  <pre><code>query session
+qwinsta
+Get-SmbConnection
+Get-Service RpcSs</code></pre>
+
+  <p><strong>macOS</strong></p>
+  <pre><code>who
+last
+smbutil statshares -a</code></pre>
+
+  <!-- LAYER 6 -->
+  <h3>6. Layer 6 — Presentation Layer</h3>
+
+  <p>
+    <strong>PDU:</strong> Data<br>
+    <strong>Focus:</strong> Encryption, encoding, and data formats
+  </p>
+
+  <p>
+    The Presentation Layer handles data representation, encoding,
+    encryption, decryption, and data-format translation.
+  </p>
+
+  <p><strong>Purpose:</strong> Troubleshoot TLS negotiation, certificates,
+    encryption, and encoding problems.</p>
+
+  <h4>Diagnostic commands</h4>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Linux</th>
+          <th scope="col">Windows</th>
+          <th scope="col">macOS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>openssl version</code></td>
+          <td><code>certutil -store My</code></td>
+          <td><code>openssl version</code></td>
+        </tr>
+        <tr>
+          <td><code>openssl s_client -connect host:443 -servername host</code></td>
+          <td><code>certutil -verify certificate.cer</code></td>
+          <td><code>openssl s_client -connect host:443 -servername host</code></td>
+        </tr>
+        <tr>
+          <td><code>openssl x509 -in cert.pem -text -noout</code></td>
+          <td><code>Get-ChildItem Cert:\CurrentUser\My</code></td>
+          <td><code>security find-identity -v</code></td>
+        </tr>
+        <tr>
+          <td><code>file filename</code></td>
+          <td><code>Format-Hex filename</code></td>
+          <td><code>file filename</code></td>
+        </tr>
+        <tr>
+          <td><code>iconv -f UTF-8 -t ASCII file</code></td>
+          <td><code>Get-Content file</code></td>
+          <td><code>iconv -f UTF-8 -t ASCII file</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Common problems and troubleshooting</h4>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Problem</th>
+          <th scope="col">Possible cause</th>
+          <th scope="col">Troubleshooting</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Expired TLS certificate</td>
+          <td>Certificate validity period ended</td>
+          <td>Inspect certificate expiration dates.</td>
+        </tr>
+        <tr>
+          <td>Certificate not trusted</td>
+          <td>Missing or untrusted CA certificate</td>
+          <td>Verify the certificate chain.</td>
+        </tr>
+        <tr>
+          <td>Hostname mismatch</td>
+          <td>Incorrect certificate SAN or hostname</td>
+          <td>Verify the requested hostname.</td>
+        </tr>
+        <tr>
+          <td>TLS handshake failure</td>
+          <td>Unsupported TLS version or cipher</td>
+          <td>Test TLS negotiation.</td>
+        </tr>
+        <tr>
+          <td>Encryption errors</td>
+          <td>Incorrect certificate or key</td>
+          <td>Inspect certificate and key configuration.</td>
+        </tr>
+        <tr>
+          <td>Encoding problems</td>
+          <td>UTF-8 and ASCII mismatch</td>
+          <td>Check file encoding.</td>
+        </tr>
+        <tr>
+          <td>Corrupted data</td>
+          <td>Compression or format issue</td>
+          <td>Inspect file format and application logs.</td>
+        </tr>
+        <tr>
+          <td>Client certificate rejected</td>
+          <td>Missing or invalid client certificate</td>
+          <td>Check client authentication settings.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Useful TLS troubleshooting commands</h4>
+
+  <p><strong>Linux and macOS</strong></p>
+  <pre><code>openssl s_client -connect example.com:443 -servername example.com
+
+openssl s_client -connect example.com:443 -tls1_2 -servername example.com
+
+openssl x509 -in certificate.pem -noout -dates</code></pre>
+
+  <p><strong>Windows</strong></p>
+  <pre><code>certutil -store My
+certutil -verify certificate.cer</code></pre>
+
+  <p class="small-note">
+    OpenSSL may need to be installed separately on some systems.
+    Windows certutil is included with Windows.
+  </p>
+
+  <!-- LAYER 7 -->
+  <h3>7. Layer 7 — Application Layer</h3>
+
+  <p>
+    <strong>PDU:</strong> Data<br>
+    <strong>Focus:</strong> Application services
+  </p>
+
+  <p>
+    The Application Layer provides network services to user applications.
+    Common examples include DNS, HTTP, HTTPS, DHCP, SSH, FTP, and email.
+  </p>
+
+  <p><strong>Purpose:</strong> Diagnose application availability, DNS resolution,
+    HTTP responses, remote access, and network service problems.</p>
+
+  <h4>Diagnostic commands</h4>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Linux</th>
+          <th scope="col">Windows</th>
+          <th scope="col">macOS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>curl -I https://example.com</code></td>
+          <td><code>curl.exe -I https://example.com</code></td>
+          <td><code>curl -I https://example.com</code></td>
+        </tr>
+        <tr>
+          <td><code>dig example.com</code></td>
+          <td><code>nslookup example.com</code></td>
+          <td><code>dig example.com</code></td>
+        </tr>
+        <tr>
+          <td><code>nslookup example.com</code></td>
+          <td><code>Resolve-DnsName example.com</code></td>
+          <td><code>nslookup example.com</code></td>
+        </tr>
+        <tr>
+          <td><code>ssh user@host</code></td>
+          <td><code>ssh user@host</code></td>
+          <td><code>ssh user@host</code></td>
+        </tr>
+        <tr>
+          <td><code>ftp host</code></td>
+          <td><code>ftp host</code></td>
+          <td><code>ftp host</code></td>
+        </tr>
+        <tr>
+          <td><code>dhclient -v eth0</code></td>
+          <td><code>ipconfig /release</code></td>
+          <td><code>ipconfig getpacket en0</code></td>
+        </tr>
+        <tr>
+          <td><code>dhclient -v eth0</code></td>
+          <td><code>ipconfig /renew</code></td>
+          <td><code>ipconfig set en0 DHCP</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Common problems and troubleshooting</h4>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Problem</th>
+          <th scope="col">Possible cause</th>
+          <th scope="col">Troubleshooting</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Website unavailable</td>
+          <td>Web server or application issue</td>
+          <td>Test with curl.</td>
+        </tr>
+        <tr>
+          <td>DNS resolution fails</td>
+          <td>DNS server unavailable or incorrect</td>
+          <td>Use dig or nslookup.</td>
+        </tr>
+        <tr>
+          <td>DHCP address not assigned</td>
+          <td>DHCP server failure</td>
+          <td>Check DHCP service and renew the lease.</td>
+        </tr>
+        <tr>
+          <td>SSH connection fails</td>
+          <td>SSH service or authentication issue</td>
+          <td>Test SSH connectivity and authentication.</td>
+        </tr>
+        <tr>
+          <td>Email cannot be sent</td>
+          <td>SMTP server or authentication issue</td>
+          <td>Check SMTP service and authentication.</td>
+        </tr>
+        <tr>
+          <td>HTTP 403 Forbidden</td>
+          <td>Access permissions</td>
+          <td>Check application permissions.</td>
+        </tr>
+        <tr>
+          <td>HTTP 404 Not Found</td>
+          <td>Requested resource does not exist</td>
+          <td>Verify URL and application routes.</td>
+        </tr>
+        <tr>
+          <td>HTTP 500 Internal Server Error</td>
+          <td>Server-side application failure</td>
+          <td>Inspect server-side application logs.</td>
+        </tr>
+        <tr>
+          <td>HTTPS error</td>
+          <td>Certificate or TLS problem</td>
+          <td>Inspect TLS handshake and certificates.</td>
+        </tr>
+        <tr>
+          <td>FTP connection fails</td>
+          <td>FTP service or firewall issue</td>
+          <td>Check FTP service and required ports.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Useful command examples</h4>
+
+  <p><strong>Linux and macOS</strong></p>
+  <pre><code>curl -v https://example.com
+dig example.com
+nslookup example.com
+ssh -v user@host</code></pre>
+
+  <p><strong>Windows</strong></p>
+  <pre><code>curl.exe -v https://example.com
+nslookup example.com
+Resolve-DnsName example.com
+ssh -v user@host
+ipconfig /renew</code></pre>
+
+  <div class="example-callout">
+    <h4>Important DHCP note</h4>
+    <p>
+      Linux DHCP client commands depend on the distribution and network
+      manager. Do not run dhclient blindly on NetworkManager-managed systems.
+      Windows and macOS DHCP commands also depend on the interface and
+      network configuration.
+    </p>
+  </div>
+
+  <!-- PRACTICAL WORKFLOW -->
+  <h3>8. Practical Troubleshooting Workflow</h3>
+
+  <p>
+    When a user reports that they cannot access the internet, follow
+    a structured troubleshooting sequence from Layer 1 to Layer 7.
+  </p>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Layer</th>
+          <th scope="col">What to investigate</th>
+          <th scope="col">Useful commands</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>L1 — Physical</strong></td>
+          <td>Is the cable connected? Is Wi-Fi enabled?</td>
+          <td><code>ip link</code> / <code>Get-NetAdapter</code> / <code>ifconfig</code></td>
+        </tr>
+        <tr>
+          <td><strong>L2 — Data Link</strong></td>
+          <td>Is local network communication working? Is ARP resolving?</td>
+          <td><code>ip neigh</code> / <code>arp -a</code></td>
+        </tr>
+        <tr>
+          <td><strong>L3 — Network</strong></td>
+          <td>Is the IP configuration and default gateway correct?</td>
+          <td><code>ip route</code> / <code>ipconfig /all</code> / <code>ping</code></td>
+        </tr>
+        <tr>
+          <td><strong>L4 — Transport</strong></td>
+          <td>Is the required TCP or UDP port reachable?</td>
+          <td><code>nc -vz host 443</code> / <code>Test-NetConnection</code></td>
+        </tr>
+        <tr>
+          <td><strong>L5 — Session</strong></td>
+          <td>Can remote sessions be established and maintained?</td>
+          <td><code>smbstatus</code> / <code>query session</code></td>
+        </tr>
+        <tr>
+          <td><strong>L6 — Presentation</strong></td>
+          <td>Is TLS negotiation successful? Is the certificate valid?</td>
+          <td><code>openssl s_client</code></td>
+        </tr>
+        <tr>
+          <td><strong>L7 — Application</strong></td>
+          <td>Does DNS resolve? Does the application respond?</td>
+          <td><code>dig</code> / <code>nslookup</code> / <code>curl</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- MOST USEFUL COMMANDS -->
+  <h3>9. Most Useful Network Troubleshooting Commands</h3>
+
+  <p>
+    These are particularly useful commands to memorize for network
+    administrators, help desk technicians, and IT support engineers.
+  </p>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Task</th>
+          <th scope="col">Linux</th>
+          <th scope="col">Windows</th>
+          <th scope="col">macOS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Network configuration</td>
+          <td><code>ip addr</code></td>
+          <td><code>ipconfig /all</code></td>
+          <td><code>ifconfig</code></td>
+        </tr>
+        <tr>
+          <td>Routing table</td>
+          <td><code>ip route</code></td>
+          <td><code>route print</code></td>
+          <td><code>netstat -rn</code></td>
+        </tr>
+        <tr>
+          <td>Test connectivity</td>
+          <td><code>ping</code></td>
+          <td><code>ping</code></td>
+          <td><code>ping</code></td>
+        </tr>
+        <tr>
+          <td>Trace network path</td>
+          <td><code>traceroute</code></td>
+          <td><code>tracert</code></td>
+          <td><code>traceroute</code></td>
+        </tr>
+        <tr>
+          <td>DNS lookup</td>
+          <td><code>dig</code></td>
+          <td><code>nslookup</code></td>
+          <td><code>dig</code></td>
+        </tr>
+        <tr>
+          <td>ARP table</td>
+          <td><code>ip neigh</code></td>
+          <td><code>arp -a</code></td>
+          <td><code>arp -a</code></td>
+        </tr>
+        <tr>
+          <td>Open ports</td>
+          <td><code>ss -tulnp</code></td>
+          <td><code>netstat -ano</code></td>
+          <td><code>lsof -i -P</code></td>
+        </tr>
+        <tr>
+          <td>Test TCP port</td>
+          <td><code>nc -vz</code></td>
+          <td><code>Test-NetConnection</code></td>
+          <td><code>nc -vz</code></td>
+        </tr>
+        <tr>
+          <td>HTTP troubleshooting</td>
+          <td><code>curl -v</code></td>
+          <td><code>curl.exe -v</code></td>
+          <td><code>curl -v</code></td>
+        </tr>
+        <tr>
+          <td>Packet capture</td>
+          <td><code>tcpdump</code></td>
+          <td><code>pktmon</code></td>
+          <td><code>tcpdump</code></td>
+        </tr>
+        <tr>
+          <td>TLS troubleshooting</td>
+          <td><code>openssl s_client</code></td>
+          <td><code>openssl s_client</code></td>
+          <td><code>openssl s_client</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- WEBSITE EXAMPLE -->
+  <h3>10. Example: Troubleshooting a Website That Does Not Open</h3>
+
+  <p>
+    Imagine a user reports:
+    <strong>"I cannot access https://www.example.com."</strong>
+  </p>
+
+  <p>
+    Follow these steps to identify where the problem occurs.
+  </p>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Step</th>
+          <th scope="col">Command (Windows example)</th>
+          <th scope="col">What you are testing</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><code>ipconfig /all</code></td>
+          <td>IP configuration and default gateway.</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><code>ping &lt;gateway-ip&gt;</code></td>
+          <td>Local gateway connectivity.</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><code>ping 8.8.8.8</code></td>
+          <td>External IP connectivity.</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><code>nslookup example.com</code></td>
+          <td>DNS name resolution.</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><code>Test-NetConnection example.com -Port 443</code></td>
+          <td>TCP connectivity to HTTPS port 443.</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><code>curl.exe -v https://example.com</code></td>
+          <td>HTTPS and application response.</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><code>openssl s_client -connect example.com:443 -servername example.com</code></td>
+          <td>TLS handshake and certificate details.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>How to interpret the results</h4>
+
+  <ul>
+    <li><strong>Step 1 fails or shows invalid configuration:</strong> Investigate interface configuration, DHCP, and Layers 1–3.</li>
+    <li><strong>Step 2 fails:</strong> Investigate local connectivity, VLAN configuration, and gateway reachability.</li>
+    <li><strong>Step 3 fails:</strong> Investigate routing, firewall rules, and upstream connectivity. Also remember that ICMP may be blocked.</li>
+    <li><strong>Step 4 fails:</strong> Investigate DNS configuration and name resolution.</li>
+    <li><strong>Step 5 fails:</strong> Investigate TCP connectivity, port availability, and firewall filtering.</li>
+    <li><strong>Step 6 fails:</strong> Investigate HTTP/HTTPS responses, TLS, and application behavior.</li>
+    <li><strong>Step 7 fails:</strong> Investigate TLS configuration, certificates, and encryption.</li>
+  </ul>
+
+  <div class="example-callout">
+    <h4>Important troubleshooting note</h4>
+    <p>
+      A failed ping does not automatically mean the destination is unavailable.
+      Firewalls and network devices may block ICMP while allowing normal TCP
+      application traffic.
+    </p>
+    <p class="small-note">
+      Likewise, a successful ping does not prove that DNS, HTTPS, or the
+      application is working correctly.
+    </p>
+  </div>
+
+  <p>
+    For Linux and macOS, substitute the corresponding commands from the
+    diagnostic tables above.
+  </p>
+
+  <!-- PACKET ANALYSIS -->
+  <h3>11. Additional Recommendation: Packet Analysis</h3>
+
+  <p>
+    If you want to become proficient in network troubleshooting,
+    learn to use Wireshark and tcpdump. Packet analysis allows you to
+    inspect network traffic and identify problems that ordinary
+    connectivity commands cannot explain.
+  </p>
+
+  <div class="example-callout">
+    <h4>Wireshark</h4>
+    <p>
+      Wireshark is a graphical network protocol analyzer. It is useful
+      for inspecting packets across multiple OSI layers, investigating
+      protocol errors, and analyzing communication between devices.
+    </p>
+    <p>
+      <a href="https://www.wireshark.org/" target="_blank"
+         rel="noopener noreferrer">Visit the official Wireshark website</a>
+    </p>
+  </div>
+
+  <div class="example-callout">
+    <h4>tcpdump</h4>
+    <p>
+      tcpdump is a command-line packet analyzer commonly used on Linux
+      and macOS. It captures and filters packets directly from network
+      interfaces.
+    </p>
+    <p>
+      <a href="https://www.tcpdump.org/" target="_blank"
+         rel="noopener noreferrer">Visit the official tcpdump website</a>
+    </p>
+  </div>
+
+  <h4>Useful Wireshark display filters</h4>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Display filter</th>
+          <th scope="col">Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>arp</code></td>
+          <td>ARP requests and responses.</td>
+        </tr>
+        <tr>
+          <td><code>icmp</code></td>
+          <td>Ping and ICMP traffic.</td>
+        </tr>
+        <tr>
+          <td><code>dns</code></td>
+          <td>DNS requests and responses.</td>
+        </tr>
+        <tr>
+          <td><code>tcp</code></td>
+          <td>TCP traffic.</td>
+        </tr>
+        <tr>
+          <td><code>udp</code></td>
+          <td>UDP traffic.</td>
+        </tr>
+        <tr>
+          <td><code>http</code></td>
+          <td>HTTP traffic.</td>
+        </tr>
+        <tr>
+          <td><code>tls</code></td>
+          <td>TLS traffic.</td>
+        </tr>
+        <tr>
+          <td><code>tcp.port == 443</code></td>
+          <td>TCP traffic involving port 443.</td>
+        </tr>
+        <tr>
+          <td><code>ip.addr == 192.168.1.10</code></td>
+          <td>Traffic involving a specific IPv4 address.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Useful tcpdump examples</h4>
+
+  <pre><code># Capture DNS traffic
+sudo tcpdump -i eth0 port 53
+
+# Capture ICMP traffic
+sudo tcpdump -i eth0 icmp
+
+# Capture TCP traffic on port 443
+sudo tcpdump -i eth0 tcp port 443
+
+# Capture traffic involving a specific host
+sudo tcpdump -i eth0 host 192.168.1.10
+
+# Capture and save packets to a file
+sudo tcpdump -i eth0 -w capture.pcap</code></pre>
+
+  <p class="small-note">
+    Replace eth0 with your actual network interface. Capturing traffic may
+    require administrator privileges. Follow organizational policies and
+    obtain authorization before capturing network traffic.
+  </p>
+
+  <!-- FINAL SUMMARY -->
+  <h3>12. Final Troubleshooting Recommendations</h3>
+
+  <p>
+    The most effective way to troubleshoot network problems is to
+    understand what each OSI layer does and learn the commands used
+    to investigate it.
+  </p>
+
+  <ul>
+    <li>Start with Layer 1 and verify physical connectivity.</li>
+    <li>Check Layer 2 for MAC addressing, ARP, and VLAN problems.</li>
+    <li>Verify Layer 3 IP configuration, gateways, and routing.</li>
+    <li>Test Layer 4 TCP/UDP ports and firewall rules.</li>
+    <li>Investigate Layer 5 session establishment and persistence.</li>
+    <li>Check Layer 6 TLS, certificates, and data encoding.</li>
+    <li>Finish with Layer 7 DNS, HTTP, and application services.</li>
+    <li>Use Wireshark and tcpdump when command-line tests are insufficient.</li>
+  </ul>
+
+  <div class="example-callout">
+    <h3>Key takeaway</h3>
+    <p>
+      The OSI model is a troubleshooting framework, not a strict boundary
+      between operating-system commands. Many commands inspect multiple
+      layers. Layers 5 and 6 are particularly conceptual in modern TCP/IP
+      networks, where session and presentation functions are often integrated
+      into application protocols and libraries.
+    </p>
+    <p>
+      Learn the commands layer by layer, then practice diagnosing real-world
+      scenarios such as DHCP failures, DNS problems, incorrect VLAN
+      configuration, routing issues, blocked ports, and TLS certificate errors.
+    </p>
+  </div>
+
+</section>
+<!-- END TROUBLESHOOTING -->
+
 
     <!-- EMAIL JOURNEY -->
     <section id="email-journey" class="content-section">
