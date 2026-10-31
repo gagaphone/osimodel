@@ -1,3 +1,4 @@
+
 /* ==========================================
    OSI MODEL QUIZ
    ========================================== */
@@ -129,14 +130,36 @@ const quizQuestions = [
   }
 ];
 
-const quizForm = document.getElementById("quiz-form");
-const quizContainer = document.getElementById("quiz-questions");
-const quizResult = document.getElementById("quiz-result");
-const showAnswersButton = document.getElementById("show-answers");
-const retakeQuizButton = document.getElementById("retake-quiz");
 
-/* Render questions and choices safely into the page. */
+/* ==========================================
+   QUIZ ELEMENT REFERENCES
+   ========================================== */
+
+const quizForm = document.getElementById("quiz-form");
+
+const quizContainer = document.getElementById(
+  "quiz-questions"
+);
+
+const quizResult = document.getElementById(
+  "quiz-result"
+);
+
+const showAnswersButton = document.getElementById(
+  "show-answers"
+);
+
+const retakeQuizButton = document.getElementById(
+  "retake-quiz"
+);
+
+
+/* ==========================================
+   RENDER QUIZ QUESTIONS
+   ========================================== */
+
 function renderQuiz() {
+
   if (!quizForm || !quizContainer) {
     return;
   }
@@ -144,51 +167,83 @@ function renderQuiz() {
   const fragment = document.createDocumentFragment();
 
   quizQuestions.forEach((item, questionIndex) => {
+
     const fieldset = document.createElement("fieldset");
+
     fieldset.className = "quiz-question";
 
     const legend = document.createElement("legend");
-    legend.textContent = `${questionIndex + 1}. ${item.question}`;
+
+    legend.textContent =
+      `${questionIndex + 1}. ${item.question}`;
+
     fieldset.appendChild(legend);
 
     const optionsContainer = document.createElement("div");
+
     optionsContainer.className = "quiz-options";
 
     item.options.forEach((option, optionIndex) => {
+
       const label = document.createElement("label");
+
       label.className = "quiz-option";
 
       const input = document.createElement("input");
+
       input.type = "radio";
+
       input.name = `question-${questionIndex}`;
+
       input.value = String(optionIndex);
-      input.id = `quiz-${questionIndex}-option-${optionIndex}`;
+
+      input.id =
+        `quiz-${questionIndex}-option-${optionIndex}`;
 
       const text = document.createElement("span");
+
       text.textContent = option;
 
       label.append(input, text);
+
       optionsContainer.appendChild(label);
+
     });
 
     const feedback = document.createElement("p");
+
     feedback.id = `quiz-feedback-${questionIndex}`;
+
     feedback.className = "quiz-feedback";
+
     feedback.hidden = true;
 
+    feedback.setAttribute("aria-live", "polite");
+
     fieldset.append(optionsContainer, feedback);
+
     fragment.appendChild(fieldset);
+
   });
 
   quizContainer.replaceChildren(fragment);
 }
 
-/* Display feedback for each question. */
+
+/* ==========================================
+   DISPLAY QUIZ FEEDBACK
+   ========================================== */
+
 function displayQuizFeedback(revealAll = false) {
+
+  if (!quizForm) return;
+
   let score = 0;
+
   let answered = 0;
 
   quizQuestions.forEach((item, questionIndex) => {
+
     const selected = quizForm.querySelector(
       `input[name="question-${questionIndex}"]:checked`
     );
@@ -197,208 +252,167 @@ function displayQuizFeedback(revealAll = false) {
       `quiz-feedback-${questionIndex}`
     );
 
-    if (!feedback) {
-      return;
-    }
+    if (!feedback) return;
 
     feedback.hidden = true;
-    feedback.classList.remove("is-correct", "is-incorrect");
 
-    if (!revealAll && !selected) {
-      feedback.textContent = "Choose an answer to complete this question.";
-      feedback.hidden = false;
+    feedback.classList.remove(
+      "is-correct",
+      "is-incorrect"
+    );
+
+    // Handle unanswered questions.
+    if (!selected && !revealAll) {
+
+      feedback.textContent =
+        "Choose an answer to complete this question.";
+
       feedback.classList.add("is-incorrect");
+
+      feedback.hidden = false;
+
       return;
     }
 
     const isCorrect =
-      selected && Number(selected.value) === item.answer;
+      selected &&
+      Number(selected.value) === item.answer;
 
     if (selected) {
+
       answered++;
 
       if (isCorrect) {
         score++;
       }
+
     }
 
-    feedback.textContent = selected && isCorrect
-      ? `Correct! ${item.explanation}`
-      : `Correct answer: ${item.options[item.answer]}. ${item.explanation}`;
+    // Display correct answer and explanation.
+    if (isCorrect) {
 
-    feedback.classList.add(
-      selected && !isCorrect ? "is-incorrect" : "is-correct"
-    );
+      feedback.textContent =
+        `Correct! ${item.explanation}`;
+
+      feedback.classList.add("is-correct");
+
+    } else {
+
+      feedback.textContent =
+        `Correct answer: ${item.options[item.answer]}. ${item.explanation}`;
+
+      feedback.classList.add("is-incorrect");
+
+    }
+
     feedback.hidden = false;
+
   });
 
+
+  // Display final quiz result.
+  if (!quizResult) return;
+
   if (revealAll) {
+
     quizResult.textContent =
       "Answer key displayed. Review the explanations and try again.";
+
   } else {
+
     quizResult.textContent =
       `Your score: ${score} out of ${quizQuestions.length}. ` +
       `${answered} of ${quizQuestions.length} questions answered.`;
+
   }
+
 }
 
-/* Check the submitted answers. */
+
+/* ==========================================
+   QUIZ SUBMISSION
+   ========================================== */
+
 if (quizForm) {
-  quizForm.addEventListener("submit", (event) => {
+
+  quizForm.addEventListener("submit", event => {
+
     event.preventDefault();
+
     displayQuizFeedback(false);
+
   });
+
 }
 
-/* Reveal correct answers and explanations. */
+
+/* ==========================================
+   SHOW CORRECT ANSWERS
+   ========================================== */
+
 if (showAnswersButton) {
+
   showAnswersButton.addEventListener("click", () => {
+
     displayQuizFeedback(true);
+
   });
+
 }
 
-/* Clear responses to allow another attempt. */
+
+/* ==========================================
+   RETAKE QUIZ
+   ========================================== */
+
 if (retakeQuizButton && quizForm) {
+
   retakeQuizButton.addEventListener("click", () => {
+
+    // Reset selected answers.
     quizForm.reset();
 
+    // Clear all feedback.
     quizQuestions.forEach((_, questionIndex) => {
+
       const feedback = document.getElementById(
         `quiz-feedback-${questionIndex}`
       );
 
       if (feedback) {
+
         feedback.hidden = true;
+
         feedback.textContent = "";
-        feedback.classList.remove("is-correct", "is-incorrect");
+
+        feedback.classList.remove(
+          "is-correct",
+          "is-incorrect"
+        );
+
       }
+
     });
 
-    quizResult.textContent = "";
+    // Clear score.
+    if (quizResult) {
+      quizResult.textContent = "";
+    }
+
   });
+
 }
 
-/* Initialize the quiz. */
-renderQuiz();
 
-/* troubleshooting section for all 7 OSI layers */
-document.addEventListener("DOMContentLoaded", () => {
-  const tabContainer = document.querySelector(".troubleshooting-tabs");
+/* ==========================================
+   OSI TROUBLESHOOTING TABS
+   ========================================== */
 
-  if (!tabContainer) return;
+function initializeTroubleshootingTabs() {
 
-  const tabs = Array.from(
-    tabContainer.querySelectorAll('[role="tab"]')
+  const container = document.querySelector(
+    ".troubleshooting-tabs"
   );
-
-  const panels = Array.from(
-    tabContainer.querySelectorAll('[role="tabpanel"]')
-  );
-
-  const previousButton = tabContainer.querySelector(
-    ".troubleshooting-tabs__prev"
-  );
-
-  const nextButton = tabContainer.querySelector(
-    ".troubleshooting-tabs__next"
-  );
-
-  const progress = tabContainer.querySelector(
-    ".troubleshooting-tabs__progress"
-  );
-
-  let activeIndex = 0;
-
-  function activateTab(index, moveFocus = false) {
-    activeIndex = Math.max(
-      0,
-      Math.min(index, tabs.length - 1)
-    );
-
-    tabs.forEach((tab, i) => {
-      const isActive = i === activeIndex;
-
-      tab.classList.toggle("is-active", isActive);
-      tab.setAttribute(
-        "aria-selected",
-        String(isActive)
-      );
-      tab.setAttribute(
-        "tabindex",
-        isActive ? "0" : "-1"
-      );
-
-      panels[i].classList.toggle(
-        "is-active",
-        isActive
-      );
-
-      panels[i].hidden = !isActive;
-    });
-
-    previousButton.disabled = activeIndex === 0;
-    nextButton.disabled = activeIndex === tabs.length - 1;
-
-    progress.textContent =
-      `Layer ${activeIndex + 1} of ${tabs.length}`;
-
-    if (moveFocus) {
-      tabs[activeIndex].focus();
-    }
-  }
-
-  tabs.forEach((tab, index) => {
-    tab.addEventListener("click", () => {
-      activateTab(index);
-    });
-
-    tab.addEventListener("keydown", event => {
-      let nextIndex = activeIndex;
-
-      switch (event.key) {
-        case "ArrowRight":
-          nextIndex = (activeIndex + 1) % tabs.length;
-          break;
-
-        case "ArrowLeft":
-          nextIndex =
-            (activeIndex - 1 + tabs.length) % tabs.length;
-          break;
-
-        case "Home":
-          nextIndex = 0;
-          break;
-
-        case "End":
-          nextIndex = tabs.length - 1;
-          break;
-
-        default:
-          return;
-      }
-
-      event.preventDefault();
-      activateTab(nextIndex, true);
-    });
-  });
-
-  previousButton.addEventListener("click", () => {
-    activateTab(activeIndex - 1, true);
-  });
-
-  nextButton.addEventListener("click", () => {
-    activateTab(activeIndex + 1, true);
-  });
-
-  activateTab(0);
-});
-
-<!-- TAB JAVASCRIPT -->
-
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  const container = document.querySelector(".troubleshooting-tabs");
 
   if (!container) return;
 
@@ -422,7 +436,68 @@ document.addEventListener("DOMContentLoaded", () => {
     ".troubleshooting-tabs__progress"
   );
 
+
+  /* ==========================================
+     VALIDATE REQUIRED ELEMENTS
+     ========================================== */
+
+  if (
+    !tabs.length ||
+    tabs.length !== panels.length ||
+    !previousButton ||
+    !nextButton ||
+    !progress
+  ) {
+
+    console.warn(
+      "Troubleshooting tabs: Required HTML elements are missing or mismatched."
+    );
+
+    return;
+
+  }
+
+
+  /* ==========================================
+     VALIDATE TAB-PANEL ASSOCIATIONS
+     ========================================== */
+
+  const associationsValid = tabs.every((tab, index) => {
+
+    const panelId = tab.getAttribute("aria-controls");
+
+    const tabId = tab.id;
+
+    return (
+      tabId &&
+      panelId &&
+      panels[index].id === panelId &&
+      panels[index].getAttribute("aria-labelledby") === tabId
+    );
+
+  });
+
+  if (!associationsValid) {
+
+    console.warn(
+      "Troubleshooting tabs: Check tab IDs, aria-controls, and aria-labelledby."
+    );
+
+    return;
+
+  }
+
+
+  /* ==========================================
+     ACTIVE TAB STATE
+     ========================================== */
+
   let activeIndex = 0;
+
+
+  /* ==========================================
+     ACTIVATE TAB
+     ========================================== */
 
   function activateTab(index, moveFocus = false) {
 
@@ -435,8 +510,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const isActive = i === activeIndex;
 
-      tab.classList.toggle("is-active", isActive);
+      // Update active tab styling.
+      tab.classList.toggle(
+        "is-active",
+        isActive
+      );
 
+      // Update accessibility attributes.
       tab.setAttribute(
         "aria-selected",
         String(isActive)
@@ -447,6 +527,7 @@ document.addEventListener("DOMContentLoaded", () => {
         isActive ? "0" : "-1"
       );
 
+      // Update corresponding panel.
       panels[i].classList.toggle(
         "is-active",
         isActive
@@ -456,23 +537,54 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-    previousButton.disabled = activeIndex === 0;
-    nextButton.disabled = activeIndex === tabs.length - 1;
+
+    /* ==========================================
+       UPDATE NAVIGATION BUTTONS
+       ========================================== */
+
+    previousButton.disabled =
+      activeIndex === 0;
+
+    nextButton.disabled =
+      activeIndex === tabs.length - 1;
+
+
+    /* ==========================================
+       UPDATE PROGRESS INDICATOR
+       ========================================== */
 
     progress.textContent =
       `Layer ${activeIndex + 1} of ${tabs.length}`;
 
+
+    /* ==========================================
+       MOVE KEYBOARD FOCUS
+       ========================================== */
+
     if (moveFocus) {
+
       tabs[activeIndex].focus();
+
     }
+
   }
+
+
+  /* ==========================================
+     TAB CLICK AND KEYBOARD EVENTS
+     ========================================== */
 
   tabs.forEach((tab, index) => {
 
+    // Mouse or touch interaction.
     tab.addEventListener("click", () => {
+
       activateTab(index);
+
     });
 
+
+    // Keyboard navigation.
     tab.addEventListener("keydown", event => {
 
       let nextIndex = activeIndex;
@@ -480,41 +592,90 @@ document.addEventListener("DOMContentLoaded", () => {
       switch (event.key) {
 
         case "ArrowRight":
-          nextIndex = (activeIndex + 1) % tabs.length;
+
+          nextIndex =
+            (activeIndex + 1) % tabs.length;
+
           break;
+
 
         case "ArrowLeft":
+
           nextIndex =
-            (activeIndex - 1 + tabs.length) % tabs.length;
+            (activeIndex - 1 + tabs.length) %
+            tabs.length;
+
           break;
+
 
         case "Home":
+
           nextIndex = 0;
+
           break;
+
 
         case "End":
+
           nextIndex = tabs.length - 1;
+
           break;
 
+
         default:
+
           return;
+
       }
 
       event.preventDefault();
+
       activateTab(nextIndex, true);
 
     });
 
   });
 
+
+  /* ==========================================
+     PREVIOUS BUTTON
+     ========================================== */
+
   previousButton.addEventListener("click", () => {
+
     activateTab(activeIndex - 1, true);
+
   });
+
+
+  /* ==========================================
+     NEXT BUTTON
+     ========================================== */
 
   nextButton.addEventListener("click", () => {
+
     activateTab(activeIndex + 1, true);
+
   });
 
+
+  /* ==========================================
+     INITIALIZE FIRST TAB
+     ========================================== */
+
   activateTab(0);
+
+}
+
+
+/* ==========================================
+   INITIALIZE APPLICATION
+   ========================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  renderQuiz();
+
+  initializeTroubleshootingTabs();
 
 });
