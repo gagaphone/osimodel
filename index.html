@@ -108,99 +108,130 @@
     </section>
 
     <!-- SEVEN LAYERS -->
-<section id="layer-overview" class="layer-overview">
-  <p class="eyebrow dark-eyebrow">THE MODEL</p>
-  <h2>The Seven OSI Layers</h2>
-  <p>
-    Select a layer, then choose a topic to view its details.
-  </p>
+<section class="layer-overview">
+  <div class="layer-layout">
 
-  <div class="layer-grid">
+    <!-- Left side: vertical layer cards -->
+    <nav class="layer-grid" aria-label="OSI layers">
 
-    <article class="layer-card is-active">
-      <span class="layer-badge">07</span>
-      <h3>Application</h3>
-      <nav class="layer-links" aria-label="Application layer topics">
-        <a href="#layer-7-key-function">Key Function</a>
-        <a href="#layer-7-pdu">PDU</a>
-        <a href="#layer-7-protocols">Protocols</a>
-        <a href="#layer-7-devices">Devices</a>
-        <a href="#layer-7-troubleshooting">Troubleshooting</a>
-      </nav>
-    </article>
+      <a class="layer-card" href="#layer-7">
+        <span class="layer-badge">07</span>
+        <h3>Application</h3>
+        <div class="layer-links">
+          <span>Overview</span>
+          <span>Protocols</span>
+        </div>
+      </a>
 
-    <article class="layer-card">
-      <span class="layer-badge">06</span>
-      <h3>Presentation</h3>
-      <nav class="layer-links" aria-label="Presentation layer topics">
-        <a href="#layer-6-key-function">Key Function</a>
-        <a href="#layer-6-pdu">PDU</a>
-        <a href="#layer-6-protocols">Protocols</a>
-        <a href="#layer-6-devices">Devices</a>
-        <a href="#layer-6-troubleshooting">Troubleshooting</a>
-      </nav>
-    </article>
+      <a class="layer-card" href="#layer-6">
+        <span class="layer-badge">06</span>
+        <h3>Presentation</h3>
+        <div class="layer-links">
+          <span>Overview</span>
+          <span>Functions</span>
+        </div>
+      </a>
 
-    <article class="layer-card">
-      <span class="layer-badge">05</span>
-      <h3>Session</h3>
-      <nav class="layer-links" aria-label="Session layer topics">
-        <a href="#layer-5-key-function">Key Function</a>
-        <a href="#layer-5-pdu">PDU</a>
-        <a href="#layer-5-protocols">Protocols</a>
-        <a href="#layer-5-devices">Devices</a>
-        <a href="#layer-5-troubleshooting">Troubleshooting</a>
-      </nav>
-    </article>
+      <a class="layer-card" href="#layer-5">
+        <span class="layer-badge">05</span>
+        <h3>Session</h3>
+        <div class="layer-links">
+          <span>Overview</span>
+          <span>Functions</span>
+        </div>
+      </a>
 
-    <article class="layer-card">
-      <span class="layer-badge">04</span>
-      <h3>Transport</h3>
-      <nav class="layer-links" aria-label="Transport layer topics">
-        <a href="#layer-4-key-function">Key Function</a>
-        <a href="#layer-4-pdu">PDU</a>
-        <a href="#layer-4-protocols">Protocols</a>
-        <a href="#layer-4-devices">Devices</a>
-        <a href="#layer-4-troubleshooting">Troubleshooting</a>
-      </nav>
-    </article>
+      <a class="layer-card" href="#layer-4">
+        <span class="layer-badge">04</span>
+        <h3>Transport</h3>
+        <div class="layer-links">
+          <span>Overview</span>
+          <span>Protocols</span>
+        </div>
+      </a>
 
-    <article class="layer-card">
-      <span class="layer-badge">03</span>
-      <h3>Network</h3>
-      <nav class="layer-links" aria-label="Network layer topics">
-        <a href="#layer-3-key-function">Key Function</a>
-        <a href="#layer-3-pdu">PDU</a>
-        <a href="#layer-3-protocols">Protocols</a>
-        <a href="#layer-3-devices">Devices</a>
-        <a href="#layer-3-troubleshooting">Troubleshooting</a>
-      </nav>
-    </article>
+      <a class="layer-card" href="#layer-3">
+        <span class="layer-badge">03</span>
+        <h3>Network</h3>
+        <div class="layer-links">
+          <span>Overview</span>
+          <span>Protocols</span>
+        </div>
+      </a>
 
-    <article class="layer-card">
-      <span class="layer-badge">02</span>
-      <h3>Data Link</h3>
-      <nav class="layer-links" aria-label="Data Link layer topics">
-        <a href="#layer-2-key-function">Key Function</a>
-        <a href="#layer-2-pdu">PDU</a>
-        <a href="#layer-2-protocols">Protocols</a>
-        <a href="#layer-2-devices">Devices</a>
-        <a href="#layer-2-troubleshooting">Troubleshooting</a>
-      </nav>
-    </article>
+      <a class="layer-card" href="#layer-2">
+        <span class="layer-badge">02</span>
+        <h3>Data Link</h3>
+        <div class="layer-links">
+          <span>Overview</span>
+          <span>Functions</span>
+        </div>
+      </a>
 
-    <article class="layer-card">
-      <span class="layer-badge">01</span>
-      <h3>Physical</h3>
-      <nav class="layer-links" aria-label="Physical layer topics">
-        <a href="#layer-1-key-function">Key Function</a>
-        <a href="#layer-1-pdu">PDU</a>
-        <a href="#layer-1-protocols">Protocols</a>
-        <a href="#layer-1-devices">Devices</a>
-        <a href="#layer-1-troubleshooting">Troubleshooting</a>
-      </nav>
-    </article>
+      <a class="layer-card" href="#layer-1">
+        <span class="layer-badge">01</span>
+        <h3>Physical</h3>
+        <div class="layer-links">
+          <span>Overview</span>
+          <span>Functions</span>
+        </div>
+      </a>
 
+    </nav>
+
+    <!-- Right side: content body -->
+    <div class="layer-content">
+
+      <article id="layer-7" class="layer-panel">
+        <h2>Layer 7 – Application</h2>
+        <p>
+          Provides network services directly to applications and users.
+        </p>
+      </article>
+
+      <article id="layer-6" class="layer-panel">
+        <h2>Layer 6 – Presentation</h2>
+        <p>
+          Handles data formatting, encryption, and compression.
+        </p>
+      </article>
+
+      <article id="layer-5" class="layer-panel">
+        <h2>Layer 5 – Session</h2>
+        <p>
+          Establishes, manages, and terminates communication sessions.
+        </p>
+      </article>
+
+      <article id="layer-4" class="layer-panel">
+        <h2>Layer 4 – Transport</h2>
+        <p>
+          Provides end-to-end data delivery and transport reliability.
+        </p>
+      </article>
+
+      <article id="layer-3" class="layer-panel">
+        <h2>Layer 3 – Network</h2>
+        <p>
+          Handles logical addressing and routing between networks.
+        </p>
+      </article>
+
+      <article id="layer-2" class="layer-panel">
+        <h2>Layer 2 – Data Link</h2>
+        <p>
+          Handles framing, MAC addressing, and local network delivery.
+        </p>
+      </article>
+
+      <article id="layer-1" class="layer-panel">
+        <h2>Layer 1 – Physical</h2>
+        <p>
+          Transmits raw bits through physical network media.
+        </p>
+      </article>
+
+    </div>
   </div>
 </section>
 
