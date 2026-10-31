@@ -17,8 +17,7 @@ const quizQuestions = [
       "Encapsulation adds headers and, where applicable, trailers as data travels down the sender's stack."
   },
   {
-    question:
-      "Which is a responsibility associated with the Presentation Layer?",
+    question: "Which is a responsibility associated with the Presentation Layer?",
     options: [
       "Routing packets between networks",
       "Learning MAC addresses on a switch",
@@ -136,22 +135,10 @@ const quizQuestions = [
    ========================================== */
 
 const quizForm = document.getElementById("quiz-form");
-
-const quizContainer = document.getElementById(
-  "quiz-questions"
-);
-
-const quizResult = document.getElementById(
-  "quiz-result"
-);
-
-const showAnswersButton = document.getElementById(
-  "show-answers"
-);
-
-const retakeQuizButton = document.getElementById(
-  "retake-quiz"
-);
+const quizContainer = document.getElementById("quiz-questions");
+const quizResult = document.getElementById("quiz-result");
+const showAnswersButton = document.getElementById("show-answers");
+const retakeQuizButton = document.getElementById("retake-quiz");
 
 
 /* ==========================================
@@ -159,71 +146,45 @@ const retakeQuizButton = document.getElementById(
    ========================================== */
 
 function renderQuiz() {
-
-  if (!quizForm || !quizContainer) {
-    return;
-  }
+  if (!quizForm || !quizContainer) return;
 
   const fragment = document.createDocumentFragment();
 
   quizQuestions.forEach((item, questionIndex) => {
-
     const fieldset = document.createElement("fieldset");
-
     fieldset.className = "quiz-question";
 
     const legend = document.createElement("legend");
-
-    legend.textContent =
-      `${questionIndex + 1}. ${item.question}`;
-
-    fieldset.appendChild(legend);
+    legend.textContent = `${questionIndex + 1}. ${item.question}`;
 
     const optionsContainer = document.createElement("div");
-
     optionsContainer.className = "quiz-options";
 
     item.options.forEach((option, optionIndex) => {
-
       const label = document.createElement("label");
-
       label.className = "quiz-option";
 
       const input = document.createElement("input");
-
       input.type = "radio";
-
       input.name = `question-${questionIndex}`;
-
       input.value = String(optionIndex);
-
-      input.id =
-        `quiz-${questionIndex}-option-${optionIndex}`;
+      input.id = `quiz-${questionIndex}-option-${optionIndex}`;
 
       const text = document.createElement("span");
-
       text.textContent = option;
 
       label.append(input, text);
-
       optionsContainer.appendChild(label);
-
     });
 
     const feedback = document.createElement("p");
-
     feedback.id = `quiz-feedback-${questionIndex}`;
-
     feedback.className = "quiz-feedback";
-
     feedback.hidden = true;
-
     feedback.setAttribute("aria-live", "polite");
 
-    fieldset.append(optionsContainer, feedback);
-
+    fieldset.append(legend, optionsContainer, feedback);
     fragment.appendChild(fieldset);
-
   });
 
   quizContainer.replaceChildren(fragment);
@@ -235,15 +196,12 @@ function renderQuiz() {
    ========================================== */
 
 function displayQuizFeedback(revealAll = false) {
-
   if (!quizForm) return;
 
   let score = 0;
-
   let answered = 0;
 
   quizQuestions.forEach((item, questionIndex) => {
-
     const selected = quizForm.querySelector(
       `input[name="question-${questionIndex}"]:checked`
     );
@@ -255,164 +213,307 @@ function displayQuizFeedback(revealAll = false) {
     if (!feedback) return;
 
     feedback.hidden = true;
+    feedback.classList.remove("is-correct", "is-incorrect");
 
-    feedback.classList.remove(
-      "is-correct",
-      "is-incorrect"
-    );
-
-    // Handle unanswered questions.
     if (!selected && !revealAll) {
-
       feedback.textContent =
         "Choose an answer to complete this question.";
 
       feedback.classList.add("is-incorrect");
-
       feedback.hidden = false;
-
       return;
     }
 
     const isCorrect =
-      selected &&
+      selected !== null &&
       Number(selected.value) === item.answer;
 
     if (selected) {
-
       answered++;
-
-      if (isCorrect) {
-        score++;
-      }
-
+      if (isCorrect) score++;
     }
 
-    // Display correct answer and explanation.
     if (isCorrect) {
-
-      feedback.textContent =
-        `Correct! ${item.explanation}`;
-
+      feedback.textContent = `Correct! ${item.explanation}`;
       feedback.classList.add("is-correct");
-
     } else {
-
       feedback.textContent =
         `Correct answer: ${item.options[item.answer]}. ${item.explanation}`;
 
       feedback.classList.add("is-incorrect");
-
     }
 
     feedback.hidden = false;
-
   });
 
-
-  // Display final quiz result.
   if (!quizResult) return;
 
   if (revealAll) {
-
     quizResult.textContent =
       "Answer key displayed. Review the explanations and try again.";
-
   } else {
-
     quizResult.textContent =
       `Your score: ${score} out of ${quizQuestions.length}. ` +
       `${answered} of ${quizQuestions.length} questions answered.`;
+  }
+}
 
+
+/* ==========================================
+   QUIZ EVENT LISTENERS
+   ========================================== */
+
+function initializeQuiz() {
+  if (quizForm) {
+    quizForm.addEventListener("submit", event => {
+      event.preventDefault();
+      displayQuizFeedback(false);
+    });
   }
 
-}
+  if (showAnswersButton) {
+    showAnswersButton.addEventListener("click", () => {
+      displayQuizFeedback(true);
+    });
+  }
 
+  if (retakeQuizButton && quizForm) {
+    retakeQuizButton.addEventListener("click", () => {
+      quizForm.reset();
 
-/* ==========================================
-   QUIZ SUBMISSION
-   ========================================== */
-
-if (quizForm) {
-
-  quizForm.addEventListener("submit", event => {
-
-    event.preventDefault();
-
-    displayQuizFeedback(false);
-
-  });
-
-}
-
-
-/* ==========================================
-   SHOW CORRECT ANSWERS
-   ========================================== */
-
-if (showAnswersButton) {
-
-  showAnswersButton.addEventListener("click", () => {
-
-    displayQuizFeedback(true);
-
-  });
-
-}
-
-
-/* ==========================================
-   RETAKE QUIZ
-   ========================================== */
-
-if (retakeQuizButton && quizForm) {
-
-  retakeQuizButton.addEventListener("click", () => {
-
-    // Reset selected answers.
-    quizForm.reset();
-
-    // Clear all feedback.
-    quizQuestions.forEach((_, questionIndex) => {
-
-      const feedback = document.getElementById(
-        `quiz-feedback-${questionIndex}`
-      );
-
-      if (feedback) {
-
-        feedback.hidden = true;
-
-        feedback.textContent = "";
-
-        feedback.classList.remove(
-          "is-correct",
-          "is-incorrect"
+      quizQuestions.forEach((_, questionIndex) => {
+        const feedback = document.getElementById(
+          `quiz-feedback-${questionIndex}`
         );
 
+        if (!feedback) return;
+
+        feedback.hidden = true;
+        feedback.textContent = "";
+        feedback.classList.remove("is-correct", "is-incorrect");
+      });
+
+      if (quizResult) {
+        quizResult.textContent = "";
       }
-
     });
-
-    // Clear score.
-    if (quizResult) {
-      quizResult.textContent = "";
-    }
-
-  });
-
+  }
 }
 
 
 /* ==========================================
-   OSI TROUBLESHOOTING TABS
+   OSI LAYER INFORMATION
+   ========================================== */
+
+const layerData = {
+  7: {
+    name: "Application Layer",
+    description:
+      "Provides network services and protocols used by applications to communicate over a network.",
+    pdu: "Data",
+    functions:
+      "Provides network services for applications, including web browsing, email, file transfer, and name resolution.",
+    protocols: "HTTP, HTTPS, FTP, SMTP, DNS, DHCP, SSH",
+    devices:
+      "Servers, browsers, email clients, application gateways"
+  },
+
+  6: {
+    name: "Presentation Layer",
+    description:
+      "Ensures that data is represented in a format that different systems can understand.",
+    pdu: "Data",
+    functions:
+      "Data translation, character encoding, serialization, encryption, decryption, and compression.",
+    protocols: "TLS, JPEG, MPEG, ASCII, Unicode, GIF, JSON, XML",
+    devices:
+      "Software libraries, encryption components, encoding and compression software"
+  },
+
+  5: {
+    name: "Session Layer",
+    description:
+      "Establishes, manages, coordinates, and terminates communication sessions between applications.",
+    pdu: "Data",
+    functions:
+      "Session establishment, session maintenance, dialogue control, synchronization, and session termination.",
+    protocols: "NetBIOS, RPC, SMB, NFS",
+    devices: "Applications and session-management software"
+  },
+
+  4: {
+    name: "Transport Layer",
+    description:
+      "Provides end-to-end communication between application processes running on different hosts.",
+    pdu: "Segment / Datagram",
+    functions:
+      "Port addressing, segmentation, reassembly, connection management, reliability, flow control, and error recovery.",
+    protocols: "TCP, UDP, SCTP, QUIC",
+    devices: "Stateful firewalls, Layer 4 load balancers"
+  },
+
+  3: {
+    name: "Network Layer",
+    description:
+      "Provides logical addressing and determines how packets travel between different networks.",
+    pdu: "Packet",
+    functions:
+      "Logical IP addressing, routing, path selection, packet forwarding, and fragmentation where supported.",
+    protocols: "IPv4, IPv6, ICMP, OSPF, RIP, BGP",
+    devices:
+      "Routers, Layer 3 switches, packet-filtering firewalls"
+  },
+
+  2: {
+    name: "Data Link Layer",
+    description:
+      "Transfers data across a local network link by organizing bits into frames.",
+    pdu: "Frame",
+    functions:
+      "Framing, MAC addressing, media access control, link-level error detection, and VLAN handling.",
+    protocols: "Ethernet, Wi-Fi, PPP, VLAN, STP, LACP",
+    devices:
+      "Switches, bridges, network adapters, wireless access points"
+  },
+
+  1: {
+    name: "Physical Layer",
+    description:
+      "Transmits raw binary data as electrical, optical, or radio signals over a physical medium.",
+    pdu: "Bits",
+    functions:
+      "Signal transmission, bit timing, physical connections, media characteristics, and transmission rates.",
+    protocols:
+      "Ethernet physical standards, DSL, USB, fibre-optic standards, radio",
+    devices: "Cables, connectors, hubs, repeaters, transceivers"
+  }
+};
+
+
+/* ==========================================
+   OSI LAYER BUTTONS
+   ========================================== */
+
+function initializeLayerButtons() {
+  const layerGrid = document.querySelector(".layer-grid");
+
+  if (!layerGrid) {
+    console.warn("OSI layers: .layer-grid was not found.");
+    return;
+  }
+
+  const layerCards = Array.from(
+    layerGrid.querySelectorAll(".layer-card")
+  );
+
+  const elements = {
+    number: document.getElementById("layer-number"),
+    name: document.getElementById("layer-name"),
+    description: document.getElementById("layer-description"),
+    pdu: document.getElementById("layer-pdu"),
+    functions: document.getElementById("layer-functions"),
+    protocols: document.getElementById("layer-protocols"),
+    devices: document.getElementById("layer-devices")
+  };
+
+  function updateText(element, value) {
+    if (element) {
+      element.textContent = value;
+    }
+  }
+
+  function selectLayer(layerId) {
+    const id = Number(layerId);
+    const layer = layerData[id];
+
+    if (!layer) {
+      console.warn(`OSI layers: Invalid layer number "${layerId}".`);
+      return;
+    }
+
+    // Update selected button appearance and accessibility.
+    layerCards.forEach(card => {
+      const isSelected = Number(card.dataset.layer) === id;
+
+      card.classList.toggle("is-active", isSelected);
+      card.classList.toggle("active", isSelected);
+      card.setAttribute("aria-pressed", String(isSelected));
+    });
+
+    // Update the right-side content.
+    updateText(elements.number, `OSI MODEL — LAYER ${id}`);
+    updateText(elements.name, layer.name);
+    updateText(elements.description, layer.description);
+    updateText(elements.pdu, layer.pdu);
+    updateText(elements.functions, layer.functions);
+    updateText(elements.protocols, layer.protocols);
+    updateText(elements.devices, layer.devices);
+  }
+
+  // Event delegation: clicks on any layer card are handled here.
+  layerGrid.addEventListener("click", event => {
+    const card = event.target.closest(".layer-card");
+
+    if (!card || !layerGrid.contains(card)) return;
+
+    selectLayer(card.dataset.layer);
+  });
+
+  // Keyboard support for the layer buttons.
+  layerCards.forEach((card, index) => {
+    card.addEventListener("keydown", event => {
+      let nextIndex = index;
+
+      switch (event.key) {
+        case "ArrowDown":
+        case "ArrowRight":
+          nextIndex = (index + 1) % layerCards.length;
+          break;
+
+        case "ArrowUp":
+        case "ArrowLeft":
+          nextIndex = (index - 1 + layerCards.length) % layerCards.length;
+          break;
+
+        case "Home":
+          nextIndex = 0;
+          break;
+
+        case "End":
+          nextIndex = layerCards.length - 1;
+          break;
+
+        default:
+          return;
+      }
+
+      event.preventDefault();
+
+      const nextCard = layerCards[nextIndex];
+      selectLayer(nextCard.dataset.layer);
+      nextCard.focus();
+    });
+  });
+
+  // Select the initially active card, or Layer 7 by default.
+  const initialCard =
+    layerCards.find(card => card.classList.contains("active")) ||
+    layerCards.find(card => card.classList.contains("is-active")) ||
+    layerCards.find(card => card.dataset.layer === "7") ||
+    layerCards[0];
+
+  if (initialCard) {
+    selectLayer(initialCard.dataset.layer);
+  }
+}
+
+
+/* ==========================================
+   TROUBLESHOOTING TABS
    ========================================== */
 
 function initializeTroubleshootingTabs() {
-
-  const container = document.querySelector(
-    ".troubleshooting-tabs"
-  );
+  const container = document.querySelector(".troubleshooting-tabs");
 
   if (!container) return;
 
@@ -436,11 +537,6 @@ function initializeTroubleshootingTabs() {
     ".troubleshooting-tabs__progress"
   );
 
-
-  /* ==========================================
-     VALIDATE REQUIRED ELEMENTS
-     ========================================== */
-
   if (
     !tabs.length ||
     tabs.length !== panels.length ||
@@ -448,24 +544,14 @@ function initializeTroubleshootingTabs() {
     !nextButton ||
     !progress
   ) {
-
     console.warn(
       "Troubleshooting tabs: Required HTML elements are missing or mismatched."
     );
-
     return;
-
   }
 
-
-  /* ==========================================
-     VALIDATE TAB-PANEL ASSOCIATIONS
-     ========================================== */
-
   const associationsValid = tabs.every((tab, index) => {
-
     const panelId = tab.getAttribute("aria-controls");
-
     const tabId = tab.id;
 
     return (
@@ -474,197 +560,85 @@ function initializeTroubleshootingTabs() {
       panels[index].id === panelId &&
       panels[index].getAttribute("aria-labelledby") === tabId
     );
-
   });
 
   if (!associationsValid) {
-
     console.warn(
       "Troubleshooting tabs: Check tab IDs, aria-controls, and aria-labelledby."
     );
-
     return;
-
   }
-
-
-  /* ==========================================
-     ACTIVE TAB STATE
-     ========================================== */
 
   let activeIndex = 0;
 
-
-  /* ==========================================
-     ACTIVATE TAB
-     ========================================== */
-
   function activateTab(index, moveFocus = false) {
-
-    activeIndex = Math.max(
-      0,
-      Math.min(index, tabs.length - 1)
-    );
+    activeIndex = Math.max(0, Math.min(index, tabs.length - 1));
 
     tabs.forEach((tab, i) => {
-
       const isActive = i === activeIndex;
 
-      // Update active tab styling.
-      tab.classList.toggle(
-        "is-active",
-        isActive
-      );
+      tab.classList.toggle("is-active", isActive);
+      tab.setAttribute("aria-selected", String(isActive));
+      tab.setAttribute("tabindex", isActive ? "0" : "-1");
 
-      // Update accessibility attributes.
-      tab.setAttribute(
-        "aria-selected",
-        String(isActive)
-      );
-
-      tab.setAttribute(
-        "tabindex",
-        isActive ? "0" : "-1"
-      );
-
-      // Update corresponding panel.
-      panels[i].classList.toggle(
-        "is-active",
-        isActive
-      );
-
+      panels[i].classList.toggle("is-active", isActive);
       panels[i].hidden = !isActive;
-
     });
 
-
-    /* ==========================================
-       UPDATE NAVIGATION BUTTONS
-       ========================================== */
-
-    previousButton.disabled =
-      activeIndex === 0;
-
-    nextButton.disabled =
-      activeIndex === tabs.length - 1;
-
-
-    /* ==========================================
-       UPDATE PROGRESS INDICATOR
-       ========================================== */
+    previousButton.disabled = activeIndex === 0;
+    nextButton.disabled = activeIndex === tabs.length - 1;
 
     progress.textContent =
       `Layer ${activeIndex + 1} of ${tabs.length}`;
 
-
-    /* ==========================================
-       MOVE KEYBOARD FOCUS
-       ========================================== */
-
     if (moveFocus) {
-
       tabs[activeIndex].focus();
-
     }
-
   }
 
-
-  /* ==========================================
-     TAB CLICK AND KEYBOARD EVENTS
-     ========================================== */
-
   tabs.forEach((tab, index) => {
-
-    // Mouse or touch interaction.
     tab.addEventListener("click", () => {
-
       activateTab(index);
-
     });
 
-
-    // Keyboard navigation.
     tab.addEventListener("keydown", event => {
-
       let nextIndex = activeIndex;
 
       switch (event.key) {
-
         case "ArrowRight":
-
-          nextIndex =
-            (activeIndex + 1) % tabs.length;
-
+          nextIndex = (activeIndex + 1) % tabs.length;
           break;
-
 
         case "ArrowLeft":
-
-          nextIndex =
-            (activeIndex - 1 + tabs.length) %
-            tabs.length;
-
+          nextIndex = (activeIndex - 1 + tabs.length) % tabs.length;
           break;
-
 
         case "Home":
-
           nextIndex = 0;
-
           break;
-
 
         case "End":
-
           nextIndex = tabs.length - 1;
-
           break;
 
-
         default:
-
           return;
-
       }
 
       event.preventDefault();
-
       activateTab(nextIndex, true);
-
     });
-
   });
-
-
-  /* ==========================================
-     PREVIOUS BUTTON
-     ========================================== */
 
   previousButton.addEventListener("click", () => {
-
     activateTab(activeIndex - 1, true);
-
   });
-
-
-  /* ==========================================
-     NEXT BUTTON
-     ========================================== */
 
   nextButton.addEventListener("click", () => {
-
     activateTab(activeIndex + 1, true);
-
   });
 
-
-  /* ==========================================
-     INITIALIZE FIRST TAB
-     ========================================== */
-
   activateTab(0);
-
 }
 
 
@@ -672,181 +646,16 @@ function initializeTroubleshootingTabs() {
    INITIALIZE APPLICATION
    ========================================== */
 
-document.addEventListener("DOMContentLoaded", () => {
-
+function initializeApp() {
   renderQuiz();
-
+  initializeQuiz();
+  initializeLayerButtons();
   initializeTroubleshootingTabs();
+}
 
-});
-
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  const layerCards = document.querySelectorAll(".layer-card");
-
-  const layerNumber = document.getElementById("layer-number");
-  const layerName = document.getElementById("layer-name");
-  const layerDescription = document.getElementById("layer-description");
-  const layerPdu = document.getElementById("layer-pdu");
-  const layerFunctions = document.getElementById("layer-functions");
-  const layerProtocols = document.getElementById("layer-protocols");
-  const layerDevices = document.getElementById("layer-devices");
-
-
-  // Information for all seven OSI layers
-
-  const layerData = {
-
-    7: {
-      name: "Application Layer",
-      description:
-        "Provides network services and protocols used by applications to communicate over a network.",
-      pdu: "Data",
-      functions:
-        "Provides network services for applications, including web browsing, email, file transfer, and name resolution.",
-      protocols:
-        "HTTP, HTTPS, FTP, SMTP, DNS, DHCP, SSH",
-      devices:
-        "Servers, browsers, email clients, application gateways"
-    },
-
-    6: {
-      name: "Presentation Layer",
-      description:
-        "Ensures that data is represented in a format that different systems can understand.",
-      pdu: "Data",
-      functions:
-        "Data translation, character encoding, serialization, encryption, decryption, and compression.",
-      protocols:
-        "TLS, JPEG, MPEG, ASCII, Unicode, GIF, JSON, XML",
-      devices:
-        "Software libraries, encryption components, encoding and compression software"
-    },
-
-    5: {
-      name: "Session Layer",
-      description:
-        "Establishes, manages, coordinates, and terminates communication sessions between applications.",
-      pdu: "Data",
-      functions:
-        "Session establishment, session maintenance, dialogue control, synchronization, and session termination.",
-      protocols:
-        "NetBIOS, RPC, SMB, NFS",
-      devices:
-        "Applications and session-management software"
-    },
-
-    4: {
-      name: "Transport Layer",
-      description:
-        "Provides end-to-end communication between application processes running on different hosts.",
-      pdu: "Segment / Datagram",
-      functions:
-        "Port addressing, segmentation, reassembly, connection management, reliability, flow control, and error recovery.",
-      protocols:
-        "TCP, UDP, SCTP, QUIC",
-      devices:
-        "Stateful firewalls, Layer 4 load balancers"
-    },
-
-    3: {
-      name: "Network Layer",
-      description:
-        "Provides logical addressing and determines how packets travel between different networks.",
-      pdu: "Packet",
-      functions:
-        "Logical IP addressing, routing, path selection, packet forwarding, and fragmentation where supported.",
-      protocols:
-        "IPv4, IPv6, ICMP, OSPF, RIP, BGP",
-      devices:
-        "Routers, Layer 3 switches, packet-filtering firewalls"
-    },
-
-    2: {
-      name: "Data Link Layer",
-      description:
-        "Transfers data across a local network link by organizing bits into frames.",
-      pdu: "Frame",
-      functions:
-        "Framing, MAC addressing, media access control, link-level error detection, and VLAN handling.",
-      protocols:
-        "Ethernet, Wi-Fi, PPP, VLAN, STP, LACP",
-      devices:
-        "Switches, bridges, network adapters, wireless access points"
-    },
-
-    1: {
-      name: "Physical Layer",
-      description:
-        "Transmits raw binary data as electrical, optical, or radio signals over a physical medium.",
-      pdu: "Bits",
-      functions:
-        "Signal transmission, bit timing, physical connections, media characteristics, and transmission rates.",
-      protocols:
-        "Ethernet physical standards, DSL, USB, fibre-optic standards, radio",
-      devices:
-        "Cables, connectors, hubs, repeaters, transceivers"
-    }
-
-  };
-
-
-  // Update the right-side content
-
-  function selectLayer(layerId) {
-
-    const layer = layerData[layerId];
-
-    if (!layer) return;
-
-    // Update selected card appearance and accessibility state
-
-    layerCards.forEach(card => {
-
-      const isSelected = card.dataset.layer === String(layerId);
-
-      card.classList.toggle("active", isSelected);
-
-      card.setAttribute("aria-pressed", String(isSelected));
-
-    });
-
-
-    // Update right-side information
-
-    layerNumber.textContent = `OSI MODEL — LAYER ${layerId}`;
-
-    layerName.textContent = layer.name;
-
-    layerDescription.textContent = layer.description;
-
-    layerPdu.textContent = layer.pdu;
-
-    layerFunctions.textContent = layer.functions;
-
-    layerProtocols.textContent = layer.protocols;
-
-    layerDevices.textContent = layer.devices;
-
-  }
-
-
-  // Make every layer card clickable
-
-  layerCards.forEach(card => {
-
-    card.addEventListener("click", () => {
-
-      selectLayer(card.dataset.layer);
-
-    });
-
-  });
-
-
-  // Display Layer 7 by default
-
-  selectLayer(7);
-
-});
+// Works whether this script loads before or after DOMContentLoaded.
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initializeApp);
+} else {
+  initializeApp();
+}
