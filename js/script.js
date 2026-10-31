@@ -14,13 +14,22 @@ const layerData = {
     pdu: "Data",
 
     functions:
-      "Provides network services for applications, including web browsing, email, file transfer, and name resolution.",
+      "Provides network services for applications, including web browsing, email, file transfer, name resolution, and network management.",
 
     protocols:
-      "HTTP, HTTPS, FTP, SMTP, DNS, DHCP, SSH",
+      "HTTP, HTTPS, SMTP, IMAP, POP3, FTP, SFTP, DNS, DHCP, SNMP, SSH, Telnet",
+
+    addressing:
+      "Hostnames, domain names, URLs, email addresses, and application-specific identifiers.",
 
     devices:
-      "Servers, browsers, email clients, application gateways"
+      "Servers, browsers, email clients, proxies, application gateways, and network management systems.",
+
+    fault:
+      "Incorrect URLs, DNS resolution failures, incorrect application settings, unavailable services, authentication failures, or server-side errors.",
+
+    example:
+      "When you enter a website address in your browser, DNS resolves the domain name to an IP address and HTTP or HTTPS is used to request the webpage."
   },
 
 
@@ -36,10 +45,19 @@ const layerData = {
       "Handles data translation, character encoding, serialization, encryption, decryption, and compression.",
 
     protocols:
-      "TLS, JPEG, MPEG, ASCII, Unicode, GIF, JSON, XML",
+      "TLS, ASCII, Unicode, EBCDIC, JPEG, GIF, MPEG, MP3, JSON, XML",
+
+    addressing:
+      "No independent network addressing. This layer focuses on data formats, character sets, serialization, and representation.",
 
     devices:
-      "Software libraries, encryption components, encoding and compression software"
+      "Software libraries, encryption components, encoding and compression software, and application frameworks.",
+
+    fault:
+      "Character encoding mismatches, incompatible data formats, corrupted or unsupported files, certificate problems, and encryption configuration errors.",
+
+    example:
+      "A system converts text into UTF-8, compresses an image, or encrypts application data using TLS. TLS is commonly associated with this layer conceptually, although its actual implementation spans the TCP/IP stack."
   },
 
 
@@ -52,13 +70,22 @@ const layerData = {
     pdu: "Data",
 
     functions:
-      "Handles session establishment, session maintenance, dialogue control, synchronization, and session termination.",
+      "Handles session establishment, session maintenance, dialogue control, synchronization, checkpoints, and session termination.",
 
     protocols:
-      "NetBIOS, RPC, SMB, NFS",
+      "NetBIOS session services, RPC, SMB, NFS, and application-level session functions.",
+
+    addressing:
+      "Session identifiers, application session IDs, and logical conversation identifiers. There is no universal Session Layer address.",
 
     devices:
-      "Applications and session-management software"
+      "Applications, session-management software, RPC services, and systems that manage persistent application sessions.",
+
+    fault:
+      "Session timeouts, unexpected disconnections, failed authentication, expired session tokens, synchronization problems, and session limits.",
+
+    example:
+      "When a user signs in to an application, the application establishes a session and maintains it while the user interacts with the service. Modern TCP/IP applications often handle these functions directly rather than through a separate Session Layer."
   },
 
 
@@ -68,16 +95,25 @@ const layerData = {
     description:
       "Provides end-to-end communication between application processes running on different hosts.",
 
-    pdu: "Segment / Datagram",
+    pdu: "TCP Segment / UDP Datagram",
 
     functions:
-      "Handles port addressing, segmentation, reassembly, connection management, reliability, flow control, and error recovery.",
+      "Handles port addressing, segmentation, reassembly, connection management, reliability, sequencing, acknowledgements, retransmission, and flow control. TCP provides reliability, while UDP offers lower-overhead connectionless communication.",
 
     protocols:
       "TCP, UDP, SCTP, QUIC",
 
+    addressing:
+      "Port numbers identify application processes. Examples include TCP port 443 for HTTPS and UDP port 53 for DNS.",
+
     devices:
-      "Stateful firewalls, Layer 4 load balancers"
+      "Stateful firewalls, Layer 4 load balancers, and systems that inspect or filter transport traffic.",
+
+    fault:
+      "Blocked ports, failed TCP handshakes, connection timeouts, packet loss, incorrect port numbers, and transport-level filtering. HTTP/1.1 and HTTP/2 commonly use TCP, while HTTP/3 uses QUIC over UDP.",
+
+    example:
+      "When a browser connects to a web server over HTTPS using TCP, the client and server establish a connection and exchange data reliably using sequencing, acknowledgements, and retransmissions."
   },
 
 
@@ -93,10 +129,19 @@ const layerData = {
       "Handles logical IP addressing, routing, path selection, packet forwarding, and fragmentation where supported.",
 
     protocols:
-      "IPv4, IPv6, ICMP, OSPF, RIP, BGP",
+      "IPv4, IPv6, ICMP, OSPF, EIGRP, RIP, BGP",
+
+    addressing:
+      "Logical IP addresses, including IPv4 and IPv6 addresses. Subnet masks and prefixes define network boundaries.",
 
     devices:
-      "Routers, Layer 3 switches, packet-filtering firewalls"
+      "Routers, Layer 3 switches, and packet-filtering firewalls.",
+
+    fault:
+      "Missing routes, incorrect IP addresses, wrong subnet masks, invalid default gateways, routing loops, and unreachable destinations.",
+
+    example:
+      "When a computer sends a packet to a device on another network, its default gateway receives the packet and uses its routing table to determine the next hop."
   },
 
 
@@ -109,13 +154,22 @@ const layerData = {
     pdu: "Frame",
 
     functions:
-      "Handles framing, MAC addressing, media access control, link-level error detection, and VLAN handling.",
+      "Handles framing, MAC addressing, media access control, link-level error detection, VLAN handling, and logical link control (LLC).",
 
     protocols:
-      "Ethernet, Wi-Fi, PPP, VLAN, STP, LACP",
+      "Ethernet, Wi-Fi (IEEE 802.11), PPP, VLAN (IEEE 802.1Q), STP, LACP",
+
+    addressing:
+      "MAC addresses identify network interfaces on a local network link. Ethernet switches use MAC address tables to forward frames.",
 
     devices:
-      "Switches, bridges, network adapters, wireless access points"
+      "Switches, bridges, network adapters, wireless access points, and Layer 2 network devices.",
+
+    fault:
+      "VLAN mismatches, switching loops, incorrect MAC learning, damaged frames, duplex mismatches, and Layer 2 connectivity problems.",
+
+    example:
+      "When a computer sends an Ethernet frame, a switch examines the destination MAC address and uses its MAC address table to forward the frame through the appropriate port."
   },
 
 
@@ -125,16 +179,25 @@ const layerData = {
     description:
       "Transmits raw binary data as electrical, optical, or radio signals over a physical medium.",
 
-    pdu: "Bits",
+    pdu: "Bits (1s and 0s)",
 
     functions:
-      "Handles signal transmission, bit timing, physical connections, media characteristics, and transmission rates.",
+      "Handles signal transmission, bit timing, physical connections, media characteristics, connectors, transmission rates, and duplex modes.",
 
     protocols:
-      "Ethernet physical standards, DSL, USB, fibre-optic standards, radio",
+      "Ethernet physical standards, DSL, USB, fibre-optic standards, and wireless radio specifications.",
+
+    addressing:
+      "No logical or MAC addressing. Information is transmitted as physical signals representing bits.",
 
     devices:
-      "Cables, connectors, hubs, repeaters, transceivers"
+      "Cables, connectors, hubs, repeaters, transceivers, antennas, and physical network interfaces.",
+
+    fault:
+      "Damaged cables, disconnected ports, faulty connectors, bad transceivers, wireless interference, and cable-length limitations.",
+
+    example:
+      "When an Ethernet cable is connected, electrical signals travel through its copper wires. A link light on the network port can indicate that a physical connection has been established."
   }
 
 };
@@ -183,7 +246,13 @@ function initializeLayerButtons() {
 
     protocols: document.getElementById("layer-protocols"),
 
-    devices: document.getElementById("layer-devices")
+    addressing: document.getElementById("layer-addressing"),
+
+    devices: document.getElementById("layer-devices"),
+
+    fault: document.getElementById("layer-fault"),
+
+    example: document.getElementById("layer-example-text")
 
   };
 
@@ -269,8 +338,23 @@ function initializeLayerButtons() {
     );
 
     updateContent(
+      elements.addressing,
+      layer.addressing
+    );
+
+    updateContent(
       elements.devices,
       layer.devices
+    );
+
+    updateContent(
+      elements.fault,
+      layer.fault
+    );
+
+    updateContent(
+      elements.example,
+      layer.example
     );
 
   }

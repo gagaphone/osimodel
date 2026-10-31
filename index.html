@@ -109,7 +109,6 @@
 
 
 
-
 <section class="layer-overview" id="osi-layers">
 
   <p class="eyebrow dark-eyebrow">OVERVIEW</p>
@@ -201,7 +200,7 @@
     </nav>
 
 
-    <!-- RIGHT SIDE: DYNAMIC CONTENT -->
+    <!-- RIGHT SIDE: DYNAMIC LAYER CONTENT -->
 
     <div class="layer-content"
          id="layer-content"
@@ -209,7 +208,7 @@
          aria-atomic="true">
 
       <p class="eyebrow dark-eyebrow" id="layer-number">
-        OSI MODEL — LAYER 7
+        OSI MODEL — LAYER 07
       </p>
 
       <h2 id="layer-name">Application Layer</h2>
@@ -219,34 +218,60 @@
         to communicate over a network.
       </p>
 
-      <div class="layer-information">
 
-        <div class="layer-info-item">
-          <h3>PDU</h3>
-          <p id="layer-pdu">Data</p>
-        </div>
+      <!-- DYNAMIC ATTRIBUTE LIST -->
 
-        <div class="layer-info-item">
-          <h3>Key Functions</h3>
-          <p id="layer-functions">
-            Provides network services for applications, including
-            web browsing, email, file transfer, and name resolution.
-          </p>
-        </div>
+      <dl class="attribute-list">
 
-        <div class="layer-info-item">
-          <h3>Example Protocols / Technologies</h3>
-          <p id="layer-protocols">
-            HTTP, HTTPS, FTP, SMTP, DNS, DHCP, SSH
-          </p>
-        </div>
+        <dt>PDU</dt>
+        <dd id="layer-pdu">Data</dd>
 
-        <div class="layer-info-item">
-          <h3>Common Devices</h3>
-          <p id="layer-devices">
-            Servers, browsers, email clients, application gateways
-          </p>
-        </div>
+        <dt>Responsibilities</dt>
+        <dd id="layer-functions">
+          Provides network services for applications, including web
+          browsing, email, file transfer, name resolution, and
+          network management.
+        </dd>
+
+        <dt>Protocols / Technologies</dt>
+        <dd id="layer-protocols">
+          HTTP, HTTPS, SMTP, IMAP, POP3, FTP, SFTP, DNS, DHCP,
+          SNMP, SSH, Telnet
+        </dd>
+
+        <dt>Addressing</dt>
+        <dd id="layer-addressing">
+          Hostnames, domain names, URLs, email addresses, and
+          application-specific identifiers.
+        </dd>
+
+        <dt>Common Devices</dt>
+        <dd id="layer-devices">
+          Servers, browsers, email clients, proxies, and
+          application gateways.
+        </dd>
+
+        <dt>Typical Fault</dt>
+        <dd id="layer-fault">
+          Incorrect URLs, DNS resolution failures, incorrect
+          application settings, unavailable services, or
+          authentication failures.
+        </dd>
+
+      </dl>
+
+
+      <!-- REAL-WORLD EXAMPLE -->
+
+      <div class="example-callout" id="layer-example">
+
+        <strong>Real-world example:</strong>
+
+        <span id="layer-example-text">
+          When you enter a website address in your browser, DNS
+          resolves the domain name to an IP address and HTTP or
+          HTTPS is used to request the webpage.
+        </span>
 
       </div>
 
@@ -257,87 +282,6 @@
 </section>
 
 
-
-    <!-- QUICK REFERENCE -->
-    <section id="layer-reference" class="content-section">
-      <p class="eyebrow dark-eyebrow">QUICK REFERENCE</p>
-      <h2>Layer Functions, PDUs, Protocols, and Devices</h2>
-      <p>
-        This table summarizes the role of each layer and examples
-        commonly associated with it.
-      </p>
-
-      <div class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th scope="col">Layer</th>
-              <th scope="col">PDU</th>
-              <th scope="col">Key Functions</th>
-              <th scope="col">Example Protocols / Technologies</th>
-              <th scope="col">Common Devices</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>7 — Application</strong></td>
-              <td>Data</td>
-              <td>Network services for applications</td>
-              <td>HTTP, HTTPS, FTP, SMTP, DNS, DHCP, SSH</td>
-              <td>Servers, browsers, email clients</td>
-            </tr>
-            <tr>
-              <td><strong>6 — Presentation</strong></td>
-              <td>Data</td>
-              <td>Translation, encoding, encryption, compression</td>
-              <td>TLS, JPEG, MPEG, ASCII, Unicode, GIF</td>
-              <td>Software libraries and encoding components</td>
-            </tr>
-            <tr>
-              <td><strong>5 — Session</strong></td>
-              <td>Data</td>
-              <td>Session setup, management, and termination</td>
-              <td>NetBIOS, RPC, SMB, NFS</td>
-              <td>Applications and session-management software</td>
-            </tr>
-            <tr>
-              <td><strong>4 — Transport</strong></td>
-              <td>Segment / Datagram</td>
-              <td>End-to-end delivery, ports, flow control</td>
-              <td>TCP, UDP, SCTP</td>
-              <td>Stateful firewalls, load balancers</td>
-            </tr>
-            <tr>
-              <td><strong>3 — Network</strong></td>
-              <td>Packet</td>
-              <td>Logical addressing and routing</td>
-              <td>IPv4, IPv6, ICMP, OSPF, RIP, BGP</td>
-              <td>Routers, Layer 3 switches</td>
-            </tr>
-            <tr>
-              <td><strong>2 — Data Link</strong></td>
-              <td>Frame</td>
-              <td>MAC addressing and local-link delivery</td>
-              <td>Ethernet, Wi-Fi, PPP, VLAN, STP</td>
-              <td>Switches, bridges, network adapters, access points</td>
-            </tr>
-            <tr>
-              <td><strong>1 — Physical</strong></td>
-              <td>Bits</td>
-              <td>Signal transmission and physical media</td>
-              <td>Ethernet physical standards, DSL, USB, radio</td>
-              <td>Cables, connectors, repeaters, transceivers</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <p class="small-note">
-        ARP is commonly described as operating at the boundary between
-        Layers 2 and 3 because it maps IP addresses to link-layer
-        addresses on a local network.
-      </p>
-    </section>
 
     <!-- EXPANDED LAYER EXPLANATIONS -->
     <section id="layer-details" class="content-section">

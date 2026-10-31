@@ -3,6 +3,7 @@
    OSI MODEL LEARNING WEBSITE
    Consolidated stylesheet
    Compatible with clickable OSI cards and dynamic content
+   Uses semantic definition lists for OSI layer attributes
    ========================================================= */
 
 
@@ -528,7 +529,7 @@ main > section:first-child {
 
 
 /* =========================================================
-   OSI MODEL — CLICKABLE LAYER CARDS
+   10. OSI MODEL — CLICKABLE LAYER CARDS
    ========================================================= */
 
 .layer-overview {
@@ -547,9 +548,7 @@ main > section:first-child {
 }
 
 
-/* =========================================================
-   LEFT SIDE — LAYER BUTTONS
-   ========================================================= */
+/* Left side — layer buttons */
 
 .layer-grid {
   display: flex;
@@ -685,7 +684,7 @@ main > section:first-child {
 
 
 /* =========================================================
-   RIGHT SIDE — DYNAMIC CONTENT
+   11. OSI DYNAMIC CONTENT
    ========================================================= */
 
 .layer-content {
@@ -742,66 +741,71 @@ main > section:first-child {
 
 
 /* =========================================================
-   INFORMATION GRID
+   12. OSI ATTRIBUTE DEFINITION LIST
+   Semantic replacement for .layer-information
+   and .layer-info-item
    ========================================================= */
 
-.layer-information {
+/* =========================================================
+   OSI LAYER CONTENT — DEFINITION LIST
+   ========================================================= */
+
+.attribute-list {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
+  grid-template-columns: minmax(145px, 0.7fr) minmax(0, 2fr);
 
   width: 100%;
-  margin-top: 1.75rem;
+  margin: 1.5rem 0;
+
+  border-top: 1px solid var(--border);
 }
 
-
-/* Individual information block */
-
-.layer-info-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-
+.attribute-list dt,
+.attribute-list dd {
   min-width: 0;
-  min-height: 120px;
 
-  padding: 1.25rem;
-
-  background: var(--surface-subtle);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-}
-
-
-/* Information heading */
-
-.layer-info-item h3 {
   margin: 0;
+  padding: 0.7rem 0.6rem;
 
-  color: var(--primary-dark);
-
-  font-size: 0.9rem;
-  font-weight: 700;
-  line-height: 1.4;
-}
-
-
-/* Information text */
-
-.layer-info-item p {
-  max-width: none;
-  margin: 0;
-
-  color: var(--text);
-  font-size: 0.9rem;
-  line-height: 1.7;
+  border-bottom: 1px solid var(--border);
 
   overflow-wrap: anywhere;
 }
 
+.attribute-list dt {
+  color: var(--text);
+  font-weight: 750;
+}
+
+.attribute-list dd {
+  color: var(--text-soft);
+  line-height: 1.65;
+}
+
+
+/* Mobile definition list */
+
+@media (max-width: 650px) {
+
+  .attribute-list {
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: 1.25rem;
+  }
+
+  .attribute-list dt {
+    padding-bottom: 0.15rem;
+    border-bottom: 0;
+  }
+
+  .attribute-list dd {
+    padding-top: 0.15rem;
+  }
+
+}
+
 
 /* =========================================================
-   TABLET
+   13. TABLET — OSI LAYOUT
    ========================================================= */
 
 @media (max-width: 900px) {
@@ -819,15 +823,11 @@ main > section:first-child {
     padding: 1.35rem;
   }
 
-  .layer-info-item {
-    padding: 1rem;
-  }
-
 }
 
 
 /* =========================================================
-   MOBILE
+   14. MOBILE — OSI LAYOUT
    ========================================================= */
 
 @media (max-width: 650px) {
@@ -866,22 +866,26 @@ main > section:first-child {
     font-size: 1.5rem;
   }
 
-  .layer-information {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
-    margin-top: 1.25rem;
+  /* Stack definition terms and values on narrow screens */
+
+  .attribute-list {
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .layer-info-item {
-    min-height: 0;
-    padding: 1rem;
+  .attribute-list dt {
+    padding-bottom: 0.15rem;
+    border-bottom: 0;
+  }
+
+  .attribute-list dd {
+    padding-top: 0.15rem;
   }
 
 }
 
 
 /* =========================================================
-   SMALL PHONES
+   15. SMALL PHONES
    ========================================================= */
 
 @media (max-width: 380px) {
@@ -898,7 +902,7 @@ main > section:first-child {
 
 
 /* =========================================================
-   REDUCED MOTION
+   16. REDUCED MOTION — OSI CARDS
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
@@ -915,7 +919,7 @@ main > section:first-child {
 
 
 /* =========================================================
-   PRINT
+   17. PRINT — OSI CONTENT
    ========================================================= */
 
 @media print {
@@ -938,15 +942,17 @@ main > section:first-child {
     box-shadow: none;
   }
 
-  .layer-information {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .attribute-list {
+    grid-template-columns:
+      minmax(120px, 0.7fr)
+      minmax(0, 2fr);
   }
 
 }
 
 
 /* =========================================================
-   11. INFORMATIONAL CALLOUTS
+   18. INFORMATIONAL CALLOUTS
    ========================================================= */
 
 .info-callout,
@@ -1024,8 +1030,7 @@ main > section:first-child {
 
 
 /* =========================================================
-   12. EXPANDABLE DETAILS
-   General details component
+   19. EXPANDABLE DETAILS
    ========================================================= */
 
 .details-list {
@@ -1126,41 +1131,41 @@ main > section:first-child {
 }
 
 
-/* Attribute list */
+/* Attribute list used in expandable details too */
 
-.attribute-list {
+.detail-content .attribute-list {
   display: grid;
-  grid-template-columns: minmax(145px, 0.7fr) minmax(0, 2fr);
+  grid-template-columns:
+    minmax(145px, 0.7fr)
+    minmax(0, 2fr);
 
   margin: 1.25rem 0;
 
   border-top: 1px solid var(--border);
 }
 
-.attribute-list dt,
-.attribute-list dd {
+.detail-content .attribute-list dt,
+.detail-content .attribute-list dd {
   min-width: 0;
-
   margin: 0;
   padding: 0.7rem 0.6rem;
 
   border-bottom: 1px solid var(--border);
-
   overflow-wrap: anywhere;
 }
 
-.attribute-list dt {
+.detail-content .attribute-list dt {
   color: var(--text);
   font-weight: 750;
 }
 
-.attribute-list dd {
+.detail-content .attribute-list dd {
   color: var(--text-soft);
 }
 
 
 /* =========================================================
-   13. CODE FORMATTING
+   20. CODE FORMATTING
    ========================================================= */
 
 code,
@@ -1207,7 +1212,7 @@ code {
 
 
 /* =========================================================
-   14. ENCAPSULATION DIAGRAM
+   21. ENCAPSULATION DIAGRAM
    ========================================================= */
 
 .encapsulation-layout {
@@ -1295,7 +1300,7 @@ code {
 
 
 /* =========================================================
-   15. GENERAL TABLES
+   22. GENERAL TABLES
    ========================================================= */
 
 .table-container {
@@ -1374,7 +1379,7 @@ code {
 
 
 /* =========================================================
-   16. COMMAND TABLES
+   23. COMMAND TABLES
    ========================================================= */
 
 .command-table-wrapper {
@@ -1452,7 +1457,7 @@ code {
 
 
 /* =========================================================
-   17. PROTOCOL SEARCH AND FILTERS
+   24. PROTOCOL SEARCH AND FILTERS
    ========================================================= */
 
 .filters {
@@ -1536,7 +1541,7 @@ code {
 
 
 /* =========================================================
-   18. QUIZ
+   25. QUIZ
    ========================================================= */
 
 .quiz-section {
@@ -1670,7 +1675,7 @@ code {
 
 
 /* =========================================================
-   19. OSI TROUBLESHOOTING TABS
+   26. OSI TROUBLESHOOTING TABS
    ========================================================= */
 
 .troubleshooting-tabs {
@@ -1989,7 +1994,7 @@ code {
 
 
 /* =========================================================
-   20. FOOTER
+   27. FOOTER
    ========================================================= */
 
 .site-footer {
@@ -2026,34 +2031,13 @@ code {
 
 
 /* =========================================================
-   21. TABLET RESPONSIVE
+   28. TABLET RESPONSIVE
    ========================================================= */
 
 @media (max-width: 900px) {
 
   :root {
     --space-section: 3.5rem;
-  }
-
-  .layer-layout {
-    grid-template-columns: 210px minmax(0, 1fr);
-    gap: 1rem;
-  }
-
-  .layer-card {
-    padding: 0.85rem;
-  }
-
-  .layer-content {
-    padding: 1.35rem;
-  }
-
-  .layer-information {
-    gap: 0.75rem;
-  }
-
-  .layer-info-item {
-    padding: 1rem;
   }
 
   .encapsulation-layout {
@@ -2084,7 +2068,7 @@ code {
 
 
 /* =========================================================
-   22. MOBILE RESPONSIVE
+   29. MOBILE RESPONSIVE
    ========================================================= */
 
 @media (max-width: 650px) {
@@ -2139,62 +2123,32 @@ code {
   }
 
 
-  /* OSI layer layout */
+  /* OSI definition list */
 
-  .layer-layout {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+  .attribute-list {
+    grid-template-columns: minmax(0, 1fr);
   }
 
-
-  /* Two-column clickable card grid on mobile */
-
-  .layer-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.55rem;
-
-    padding: 0.1rem;
+  .attribute-list dt {
+    padding-bottom: 0.15rem;
+    border-bottom: 0;
   }
 
-  .layer-card {
-    width: 100%;
-    min-width: 0;
-    min-height: 125px;
-    padding: 0.85rem;
-
-    gap: 0.45rem;
+  .attribute-list dd {
+    padding-top: 0.15rem;
   }
 
-  .layer-card h3 {
-    font-size: 0.95rem;
+  .detail-content .attribute-list {
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .layer-card-description {
-    font-size: 0.78rem;
+  .detail-content .attribute-list dt {
+    padding-bottom: 0.15rem;
+    border-bottom: 0;
   }
 
-
-  /* Dynamic right-side content */
-
-  .layer-content {
-    min-height: 0;
-    padding: 1.15rem;
-  }
-
-  .layer-content h2 {
-    font-size: 1.5rem;
-  }
-
-  .layer-information {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
-    margin-top: 1.25rem;
-  }
-
-  .layer-info-item {
-    min-height: 0;
-    padding: 1rem;
+  .detail-content .attribute-list dd {
+    padding-top: 0.15rem;
   }
 
 
@@ -2225,22 +2179,6 @@ code {
   .example-callout,
   .note-section {
     padding: 1rem;
-  }
-
-
-  /* Definition lists */
-
-  .attribute-list {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .attribute-list dt {
-    padding-bottom: 0.15rem;
-    border-bottom: 0;
-  }
-
-  .attribute-list dd {
-    padding-top: 0.15rem;
   }
 
 
@@ -2330,7 +2268,7 @@ code {
 
 
 /* =========================================================
-   23. NARROW PHONES
+   30. NARROW PHONES
    ========================================================= */
 
 @media (max-width: 380px) {
@@ -2366,7 +2304,7 @@ code {
 
 
 /* =========================================================
-   24. REDUCED MOTION
+   31. REDUCED MOTION
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
@@ -2388,7 +2326,7 @@ code {
 
 
 /* =========================================================
-   25. HIGH CONTRAST
+   32. HIGH CONTRAST
    ========================================================= */
 
 @media (prefers-contrast: more) {
@@ -2413,7 +2351,7 @@ code {
 
 
 /* =========================================================
-   26. PRINT STYLES
+   33. PRINT STYLES
    ========================================================= */
 
 @media print {
@@ -2530,11 +2468,17 @@ code {
     box-shadow: none;
   }
 
-  .layer-information {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .attribute-list,
+  .detail-content .attribute-list {
+    grid-template-columns:
+      minmax(120px, 0.7fr)
+      minmax(0, 2fr);
   }
 
-  .layer-info-item {
+  .attribute-list dt,
+  .attribute-list dd,
+  .detail-content .attribute-list dt,
+  .detail-content .attribute-list dd {
     break-inside: avoid;
   }
 
