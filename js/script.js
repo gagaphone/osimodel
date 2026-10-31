@@ -679,3 +679,174 @@ document.addEventListener("DOMContentLoaded", () => {
   initializeTroubleshootingTabs();
 
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const layerCards = document.querySelectorAll(".layer-card");
+
+  const layerNumber = document.getElementById("layer-number");
+  const layerName = document.getElementById("layer-name");
+  const layerDescription = document.getElementById("layer-description");
+  const layerPdu = document.getElementById("layer-pdu");
+  const layerFunctions = document.getElementById("layer-functions");
+  const layerProtocols = document.getElementById("layer-protocols");
+  const layerDevices = document.getElementById("layer-devices");
+
+
+  // Information for all seven OSI layers
+
+  const layerData = {
+
+    7: {
+      name: "Application Layer",
+      description:
+        "Provides network services and protocols used by applications to communicate over a network.",
+      pdu: "Data",
+      functions:
+        "Provides network services for applications, including web browsing, email, file transfer, and name resolution.",
+      protocols:
+        "HTTP, HTTPS, FTP, SMTP, DNS, DHCP, SSH",
+      devices:
+        "Servers, browsers, email clients, application gateways"
+    },
+
+    6: {
+      name: "Presentation Layer",
+      description:
+        "Ensures that data is represented in a format that different systems can understand.",
+      pdu: "Data",
+      functions:
+        "Data translation, character encoding, serialization, encryption, decryption, and compression.",
+      protocols:
+        "TLS, JPEG, MPEG, ASCII, Unicode, GIF, JSON, XML",
+      devices:
+        "Software libraries, encryption components, encoding and compression software"
+    },
+
+    5: {
+      name: "Session Layer",
+      description:
+        "Establishes, manages, coordinates, and terminates communication sessions between applications.",
+      pdu: "Data",
+      functions:
+        "Session establishment, session maintenance, dialogue control, synchronization, and session termination.",
+      protocols:
+        "NetBIOS, RPC, SMB, NFS",
+      devices:
+        "Applications and session-management software"
+    },
+
+    4: {
+      name: "Transport Layer",
+      description:
+        "Provides end-to-end communication between application processes running on different hosts.",
+      pdu: "Segment / Datagram",
+      functions:
+        "Port addressing, segmentation, reassembly, connection management, reliability, flow control, and error recovery.",
+      protocols:
+        "TCP, UDP, SCTP, QUIC",
+      devices:
+        "Stateful firewalls, Layer 4 load balancers"
+    },
+
+    3: {
+      name: "Network Layer",
+      description:
+        "Provides logical addressing and determines how packets travel between different networks.",
+      pdu: "Packet",
+      functions:
+        "Logical IP addressing, routing, path selection, packet forwarding, and fragmentation where supported.",
+      protocols:
+        "IPv4, IPv6, ICMP, OSPF, RIP, BGP",
+      devices:
+        "Routers, Layer 3 switches, packet-filtering firewalls"
+    },
+
+    2: {
+      name: "Data Link Layer",
+      description:
+        "Transfers data across a local network link by organizing bits into frames.",
+      pdu: "Frame",
+      functions:
+        "Framing, MAC addressing, media access control, link-level error detection, and VLAN handling.",
+      protocols:
+        "Ethernet, Wi-Fi, PPP, VLAN, STP, LACP",
+      devices:
+        "Switches, bridges, network adapters, wireless access points"
+    },
+
+    1: {
+      name: "Physical Layer",
+      description:
+        "Transmits raw binary data as electrical, optical, or radio signals over a physical medium.",
+      pdu: "Bits",
+      functions:
+        "Signal transmission, bit timing, physical connections, media characteristics, and transmission rates.",
+      protocols:
+        "Ethernet physical standards, DSL, USB, fibre-optic standards, radio",
+      devices:
+        "Cables, connectors, hubs, repeaters, transceivers"
+    }
+
+  };
+
+
+  // Update the right-side content
+
+  function selectLayer(layerId) {
+
+    const layer = layerData[layerId];
+
+    if (!layer) return;
+
+    // Update selected card appearance and accessibility state
+
+    layerCards.forEach(card => {
+
+      const isSelected = card.dataset.layer === String(layerId);
+
+      card.classList.toggle("active", isSelected);
+
+      card.setAttribute("aria-pressed", String(isSelected));
+
+    });
+
+
+    // Update right-side information
+
+    layerNumber.textContent = `OSI MODEL — LAYER ${layerId}`;
+
+    layerName.textContent = layer.name;
+
+    layerDescription.textContent = layer.description;
+
+    layerPdu.textContent = layer.pdu;
+
+    layerFunctions.textContent = layer.functions;
+
+    layerProtocols.textContent = layer.protocols;
+
+    layerDevices.textContent = layer.devices;
+
+  }
+
+
+  // Make every layer card clickable
+
+  layerCards.forEach(card => {
+
+    card.addEventListener("click", () => {
+
+      selectLayer(card.dataset.layer);
+
+    });
+
+  });
+
+
+  // Display Layer 7 by default
+
+  selectLayer(7);
+
+});

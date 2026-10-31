@@ -2,6 +2,7 @@
 /* =========================================================
    OSI MODEL LEARNING WEBSITE
    Consolidated stylesheet
+   Compatible with clickable OSI cards and dynamic content
    ========================================================= */
 
 
@@ -16,6 +17,7 @@
   --surface: #ffffff;
   --surface-subtle: #f8faff;
   --surface-blue: #edf3ff;
+  --surface-alt: #f5f8fd;
 
   --text: #172b4d;
   --text-soft: #42526e;
@@ -36,6 +38,7 @@
 
   --shadow: 0 8px 24px rgba(23, 42, 77, 0.07);
   --shadow-soft: 0 2px 8px rgba(23, 42, 77, 0.045);
+  --shadow-hover: 0 5px 16px rgba(23, 42, 77, 0.10);
 
   --content-width: 1120px;
   --reading-width: 76ch;
@@ -323,7 +326,7 @@ a:hover {
   background: #eaf1ff;
   color: #102b55;
 
-  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--shadow-hover);
 }
 
 .quiz-button {
@@ -453,13 +456,6 @@ main > section:first-child {
   min-width: 0;
 }
 
-.introduction > p:not(.eyebrow),
-.layer-overview > p:not(.eyebrow),
-.content-section > p:not(.eyebrow),
-.protocol-section > .section-heading p {
-  max-width: 78ch;
-}
-
 .section-heading {
   display: flex;
   align-items: flex-end;
@@ -475,6 +471,13 @@ main > section:first-child {
 
 .section-heading h2 {
   margin-bottom: 0.5rem;
+}
+
+.introduction > p:not(.eyebrow),
+.layer-overview > p:not(.eyebrow),
+.content-section > p:not(.eyebrow),
+.protocol-section > .section-heading p {
+  max-width: 78ch;
 }
 
 
@@ -526,8 +529,8 @@ main > section:first-child {
 
 /* =========================================================
    10. OSI LAYER OVERVIEW
-   Seven vertical cards on the left
-   Layer content body on the right
+   Clickable cards on the left
+   Dynamic selected-layer content on the right
    ========================================================= */
 
 .layer-overview {
@@ -535,25 +538,26 @@ main > section:first-child {
   min-width: 0;
 }
 
-/* Main two-column layout */
 .layer-layout {
   display: grid;
   grid-template-columns: 250px minmax(0, 1fr);
   gap: 1.5rem;
   align-items: start;
+
   width: 100%;
   margin-top: 1.5rem;
 }
 
-/* =========================================================
-   LEFT SIDE — VERTICAL LAYER CARDS
-   ========================================================= */
+
+/* ---------------------------------------------------------
+   LEFT SIDE — LAYER CARD NAVIGATION
+   --------------------------------------------------------- */
 
 .layer-grid {
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
   align-items: stretch;
+  gap: 0.65rem;
 
   width: 100%;
   min-width: 0;
@@ -563,7 +567,9 @@ main > section:first-child {
   overflow: visible;
 }
 
-/* Individual layer card */
+
+/* Clickable layer card */
+
 .layer-card {
   display: flex;
   flex-direction: column;
@@ -575,13 +581,20 @@ main > section:first-child {
   min-height: 0;
   padding: 1rem;
 
+  appearance: none;
+  -webkit-appearance: none;
+
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-soft);
 
   color: var(--text);
-  text-decoration: none;
+  font-family: inherit;
+  font-size: inherit;
+  text-align: left;
+
+  cursor: pointer;
 
   transition:
     border-color 0.2s ease,
@@ -590,7 +603,9 @@ main > section:first-child {
     transform 0.2s ease;
 }
 
+
 /* Layer number badge */
+
 .layer-card .layer-badge {
   display: inline-flex;
   align-items: center;
@@ -611,7 +626,9 @@ main > section:first-child {
   line-height: 1;
 }
 
+
 /* Layer heading */
+
 .layer-card h3 {
   margin: 0;
 
@@ -621,59 +638,77 @@ main > section:first-child {
   line-height: 1.3;
 }
 
-/* Divider and topic links */
-/* Topic divider and list */
-.layer-card .layer-links {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.45rem;
 
-  width: 100%;
-  margin-top: 0.15rem;
-  padding-top: 0.75rem;
+/* Short layer description */
 
-  border-top: 1px solid var(--border);
-}
-
-/* Topic labels */
-.layer-card .layer-links span {
+.layer-card-description {
   display: block;
-  color: var(--primary);
-  font-size: 0.85rem;
-  font-weight: 600;
-  line-height: 1.4;
+
+  margin: 0;
+
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 400;
+  line-height: 1.5;
 }
 
-/* Card hover and focus */
+
+/* Card hover */
+
 .layer-card:hover {
+  background: var(--surface-alt);
   border-color: var(--primary);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow);
+
   transform: translateY(-2px);
 }
 
+
+/* Keyboard focus */
+
+.layer-card:focus {
+  outline: none;
+}
+
 .layer-card:focus-visible {
-  outline: 3px solid var(--primary);
+  outline: 3px solid #80aaff;
   outline-offset: 3px;
 }
 
+
 /* Selected card */
+
+.layer-card.active,
 .layer-card.is-active,
-.layer-card[aria-current="true"] {
-  background: var(--surface-alt, var(--surface));
+.layer-card[aria-pressed="true"] {
+  background: var(--surface-blue);
   border-color: var(--primary);
-  box-shadow: var(--shadow-md);
+  box-shadow:
+    0 0 0 2px rgba(39, 93, 197, 0.12),
+    var(--shadow);
 }
 
-/* =========================================================
-   RIGHT SIDE — LAYER CONTENT BODY
-   ========================================================= */
+.layer-card.active h3,
+.layer-card.is-active h3,
+.layer-card[aria-pressed="true"] h3 {
+  color: var(--primary-dark);
+}
 
-/* =========================================================
-   RIGHT-SIDE BODY — OSI LAYER CONTENT
-   ========================================================= */
+.layer-card.active .layer-badge,
+.layer-card.is-active .layer-badge,
+.layer-card[aria-pressed="true"] .layer-badge {
+  background: var(--primary-dark);
+  color: #fff;
+}
+
+
+/* ---------------------------------------------------------
+   RIGHT SIDE — DYNAMIC CONTENT PANEL
+   --------------------------------------------------------- */
 
 .layer-content {
+  display: block;
+
   width: 100%;
   min-width: 0;
   min-height: 420px;
@@ -683,457 +718,115 @@ main > section:first-child {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-soft);
 
   overflow-wrap: anywhere;
 }
 
-/* =========================================================
-   RIGHT-SIDE SECTION INDEX
-   ========================================================= */
 
-.layer-content-index {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem;
+/* Layer number / eyebrow */
 
-  width: 100%;
-  margin-bottom: 1.75rem;
-  padding: 1rem;
-
-  background: var(--surface-alt, var(--surface));
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-}
-
-.layer-content-index .index-heading {
-  flex-basis: 100%;
-  margin: 0 0 0.35rem;
-
-  color: var(--muted-color, var(--text-muted));
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-}
-
-.layer-content-index a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 0.55rem 0.85rem;
-
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-
-  color: var(--text);
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-decoration: none;
-
-  transition:
-    color 0.2s ease,
-    background-color 0.2s ease,
-    border-color 0.2s ease;
-}
-
-.layer-content-index a:hover,
-.layer-content-index a:focus-visible {
-  background: var(--primary);
-  border-color: var(--primary);
-  color: #fff;
-}
-
-.layer-content-index a:focus-visible {
-  outline: 3px solid var(--primary);
-  outline-offset: 3px;
-}
-
-/* =========================================================
-   CONTENT SECTIONS
-   ========================================================= */
-
-.layer-content .content-section {
-  width: 100%;
-  min-width: 0;
-  margin-bottom: 2rem;
-  scroll-margin-top: 2rem;
-}
-
-.layer-content .content-section:last-child {
-  margin-bottom: 0;
-}
-
-/* =========================================================
-   INDIVIDUAL LAYER PANELS
-   ========================================================= */
-
-.layer-panel {
-  width: 100%;
-  min-width: 0;
-  scroll-margin-top: 2rem;
-}
-
-.layer-panel h2 {
+.layer-content .eyebrow {
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
+
+  color: var(--primary);
+
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+
+/* Selected layer heading */
+
+.layer-content h2 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
 
   color: var(--text);
-  font-size: 1.5rem;
-  line-height: 1.3;
-}
-
-.layer-panel h3 {
-  margin-top: 1.5rem;
-  margin-bottom: 0.65rem;
-
-  color: var(--text);
-}
-
-.layer-panel p {
-  color: var(--text);
-  line-height: 1.7;
-}
-
-.layer-panel ul,
-.layer-panel ol {
-  padding-left: 1.5rem;
-  line-height: 1.7;
-}
-
-.layer-panel li {
-  margin-bottom: 0.4rem;
-}
-
-/* Hide inactive panels when using tab-style JavaScript */
-.layer-panel[hidden] {
-  display: none !important;
-}
-
-/* =========================================================
-   QUICK REFERENCE TABLE
-   ========================================================= */
-
-.layer-content .table-container {
-  width: 100%;
-  max-width: 100%;
-  margin: 1.25rem 0;
-
-  overflow-x: auto;
-  overscroll-behavior-inline: contain;
-  -webkit-overflow-scrolling: touch;
-}
-
-.layer-content table {
-  width: 100%;
-  min-width: 700px;
-  border-collapse: collapse;
-}
-
-.layer-content th,
-.layer-content td {
-  padding: 0.85rem;
-  border: 1px solid var(--border);
-  text-align: left;
-  vertical-align: top;
-  line-height: 1.5;
-}
-
-.layer-content th {
-  background: var(--surface-alt, var(--surface));
-  color: var(--text);
+  font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 700;
+  line-height: 1.25;
 }
 
-.layer-content td {
-  color: var(--text);
+
+/* Selected layer description */
+
+.layer-content > p:not(.eyebrow) {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
 }
 
-/* =========================================================
-   EXPANDED LAYER DETAILS
-   ========================================================= */
 
-.layer-content .details-list {
+/* ---------------------------------------------------------
+   FOUR INFORMATION BLOCKS
+   PDU, Functions, Protocols, Devices
+   --------------------------------------------------------- */
+
+.layer-information {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+
+  width: 100%;
+  margin-top: 1.75rem;
+}
+
+
+/* Individual information block */
+
+.layer-info-item {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  margin-top: 1.25rem;
-}
+  align-items: flex-start;
+  gap: 0.65rem;
 
-.layer-content .layer-detail {
+  min-width: 0;
+  min-height: 120px;
+  padding: 1.25rem;
+
+  background: var(--surface-subtle);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  background: var(--surface);
-  overflow: hidden;
 }
 
-.layer-content .layer-detail summary {
-  padding: 1rem 1.15rem;
-  color: var(--text);
-  font-weight: 700;
-  cursor: pointer;
-  line-height: 1.5;
-}
 
-.layer-content .layer-detail summary:hover {
-  background: var(--surface-alt, var(--surface));
-}
+/* Information headings */
 
-.layer-content .layer-detail summary:focus-visible {
-  outline: 3px solid var(--primary);
-  outline-offset: -3px;
-}
-
-.layer-content .detail-content {
-  padding: 0 1.15rem 1.15rem;
-  border-top: 1px solid var(--border);
-}
-
-.layer-content .detail-content p {
-  line-height: 1.7;
-}
-
-/* Attribute list */
-.layer-content .attribute-list {
-  display: grid;
-  grid-template-columns: minmax(110px, 0.7fr) minmax(0, 2fr);
-  gap: 0.55rem 1rem;
-  margin: 1rem 0;
-  line-height: 1.6;
-}
-
-.layer-content .attribute-list dt {
-  font-weight: 700;
-  color: var(--text);
-}
-
-.layer-content .attribute-list dd {
+.layer-info-item h3 {
   margin: 0;
+
+  color: var(--primary-dark);
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+
+/* Information text */
+
+.layer-info-item p {
+  max-width: none;
+  margin: 0;
+
   color: var(--text);
+  font-size: 0.9rem;
+  line-height: 1.7;
+
+  overflow-wrap: anywhere;
 }
 
-/* Example callouts */
-.layer-content .example-callout {
-  margin-top: 1rem;
-  padding: 1rem;
 
-  background: var(--surface-alt, var(--surface));
-  border-left: 4px solid var(--primary);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+/* PDU block */
 
-  line-height: 1.65;
-}
-
-/* Small explanatory notes */
-.layer-content .small-note {
-  margin-top: 1rem;
-  color: var(--muted-color, var(--text-muted));
-  font-size: 0.88rem;
-  line-height: 1.6;
-}
-
-/* =========================================================
-   RESPONSIVE — TABLETS
-   ========================================================= */
-
-@media (max-width: 900px) {
-  .layer-content {
-    padding: 1.35rem;
-  }
-
-  .layer-content-index {
-    padding: 0.85rem;
-  }
-
-  .layer-content .attribute-list {
-    grid-template-columns: minmax(100px, 0.8fr) minmax(0, 2fr);
-  }
-}
-
-/* =========================================================
-   RESPONSIVE — MOBILE
-   ========================================================= */
-
-@media (max-width: 650px) {
-  .layer-content {
-    min-height: 250px;
-    padding: 1rem;
-  }
-
-  .layer-content-index {
-    gap: 0.4rem;
-    padding: 0.75rem;
-  }
-
-  .layer-content-index a {
-    flex: 1 1 calc(50% - 0.4rem);
-    text-align: center;
-  }
-
-  .layer-panel h2 {
-    font-size: 1.3rem;
-  }
-
-  .layer-content .attribute-list {
-    grid-template-columns: 1fr;
-    gap: 0.2rem;
-  }
-
-  .layer-content .attribute-list dd {
-    margin-bottom: 0.65rem;
-  }
-
-  .layer-content .detail-content {
-    padding: 0 0.85rem 0.85rem;
-  }
-
-  .layer-content .layer-detail summary {
-    padding: 0.85rem;
-  }
-}
-
-/* =========================================================
-   ACCESSIBILITY — REDUCED MOTION
-   ========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-  .layer-content-index a {
-    transition: none;
-  }
-}
-
-/* =========================================================
-   PRINT
-   ========================================================= */
-
-@media print {
-  .layer-content {
-    min-height: 0;
-    padding: 0;
-    border: 0;
-    box-shadow: none;
-  }
-
-  .layer-content-index {
-    display: none;
-  }
-
-  .layer-content .table-container {
-    overflow: visible;
-  }
-
-  .layer-content table {
-    min-width: 0;
-    font-size: 9pt;
-  }
-
-  .layer-content .layer-panel[hidden] {
-    display: block !important;
-  }
-
-  .layer-content .layer-detail > .detail-content {
-    display: block !important;
-  }
-
-  .layer-content .layer-detail {
-    break-inside: avoid;
-  }
-}
-/* =========================================================
-   RESPONSIVE — TABLETS
-   ========================================================= */
-
-@media (max-width: 900px) {
-  .layer-layout {
-    grid-template-columns: 220px minmax(0, 1fr);
-    gap: 1rem;
-  }
-
-  .layer-card {
-    padding: 0.85rem;
-  }
-
-  .layer-content {
-    padding: 1.35rem;
-  }
-}
-
-/* =========================================================
-   RESPONSIVE — MOBILE
-   ========================================================= */
-
-@media (max-width: 650px) {
-  .layer-layout {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  /* Cards remain vertical */
-  .layer-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 0.55rem;
-  }
-
-  .layer-card {
-    width: 100%;
-    padding: 0.9rem;
-  }
-
-  .layer-content {
-    min-height: 250px;
-    padding: 1.15rem;
-  }
-
-  .layer-panel h2 {
-    font-size: 1.3rem;
-  }
-}
-
-/* =========================================================
-   ACCESSIBILITY — REDUCED MOTION
-   ========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-  .layer-card {
-    transition: none;
-  }
-
-  .layer-card:hover {
-    transform: none;
-  }
-}
-
-/* =========================================================
-   PRINT
-   ========================================================= */
-
-@media print {
-  .layer-layout {
-    display: block;
-  }
-
-  .layer-grid {
-    display: none;
-  }
-
-  .layer-content {
-    min-height: 0;
-    padding: 0;
-    border: 0;
-    box-shadow: none;
-  }
-
-  .layer-panel[hidden] {
-    display: block !important;
-  }
-
-  .layer-panel {
-    break-inside: avoid;
-    margin-bottom: 1.5rem;
-  }
+.layer-info-item:first-child {
+  min-height: auto;
 }
 
 
@@ -1216,7 +909,8 @@ main > section:first-child {
 
 
 /* =========================================================
-   12. EXPANDABLE LAYER DETAILS
+   12. EXPANDABLE DETAILS
+   General details component
    ========================================================= */
 
 .details-list {
@@ -1228,7 +922,7 @@ main > section:first-child {
 
 .layer-detail {
   min-width: 0;
-  overflow: clip;
+  overflow: hidden;
 
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
@@ -1315,6 +1009,9 @@ main > section:first-child {
 .detail-content > p:first-child {
   margin-top: 0;
 }
+
+
+/* Attribute list */
 
 .attribute-list {
   display: grid;
@@ -1611,7 +1308,7 @@ code {
   background: var(--surface-subtle);
 }
 
-.command-table code {
+.command-table td code {
   display: inline-block;
 
   max-width: 100%;
@@ -2223,6 +1920,27 @@ code {
     --space-section: 3.5rem;
   }
 
+  .layer-layout {
+    grid-template-columns: 210px minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  .layer-card {
+    padding: 0.85rem;
+  }
+
+  .layer-content {
+    padding: 1.35rem;
+  }
+
+  .layer-information {
+    gap: 0.75rem;
+  }
+
+  .layer-info-item {
+    padding: 1rem;
+  }
+
   .encapsulation-layout {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -2254,7 +1972,7 @@ code {
    22. MOBILE RESPONSIVE
    ========================================================= */
 
-@media (max-width: 600px) {
+@media (max-width: 650px) {
 
   .container {
     width: min(
@@ -2289,6 +2007,7 @@ code {
     scroll-margin-top: 5rem;
   }
 
+
   /* Statistics */
 
   .stats {
@@ -2304,39 +2023,65 @@ code {
     line-height: 1.4;
   }
 
-  /* Layer overview */
+
+  /* OSI layer layout */
+
+  .layer-layout {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+
+  /* Two-column clickable card grid on mobile */
 
   .layer-grid {
-    grid-template-columns: repeat(7, 195px);
-
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.55rem;
 
-    margin-inline: 0;
-    padding: 0.25rem 0.1rem 0.75rem;
+    padding: 0.1rem;
   }
 
   .layer-card {
-    min-width: 195px;
-    min-height: 142px;
+    width: 100%;
+    min-width: 0;
+    min-height: 125px;
+    padding: 0.85rem;
 
-    padding: 0.75rem;
-
-    gap: 0.3rem 0.5rem;
+    gap: 0.45rem;
   }
 
   .layer-card h3 {
     font-size: 0.95rem;
   }
 
-  .layer-card .layer-links {
-    gap: 0.2rem;
-    padding-left: 0.45rem;
+  .layer-card-description {
+    font-size: 0.78rem;
   }
 
-  .layer-card .layer-links a {
-    padding: 0.2rem 0.25rem;
-    font-size: 0.73rem;
+
+  /* Dynamic right-side content */
+
+  .layer-content {
+    min-height: 0;
+    padding: 1.15rem;
   }
+
+  .layer-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .layer-information {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+  }
+
+  .layer-info-item {
+    min-height: 0;
+    padding: 1rem;
+  }
+
 
   /* Section headings */
 
@@ -2350,11 +2095,13 @@ code {
     align-self: flex-start;
   }
 
+
   /* Filters */
 
   .filters {
     grid-template-columns: minmax(0, 1fr);
   }
+
 
   /* Callouts */
 
@@ -2364,6 +2111,7 @@ code {
   .note-section {
     padding: 1rem;
   }
+
 
   /* Definition lists */
 
@@ -2379,6 +2127,7 @@ code {
   .attribute-list dd {
     padding-top: 0.15rem;
   }
+
 
   /* Tables */
 
@@ -2400,6 +2149,7 @@ code {
     padding: 0.75rem;
   }
 
+
   /* Quiz */
 
   .quiz-section {
@@ -2417,6 +2167,7 @@ code {
   .quiz-actions button {
     width: 100%;
   }
+
 
   /* Troubleshooting tabs */
 
@@ -2451,6 +2202,7 @@ code {
     grid-template-columns: minmax(0, 1fr);
   }
 
+
   /* Footer */
 
   .footer-content {
@@ -2466,7 +2218,7 @@ code {
    23. NARROW PHONES
    ========================================================= */
 
-@media (max-width: 360px) {
+@media (max-width: 380px) {
 
   .container {
     width: calc(100% - 1rem);
@@ -2485,6 +2237,14 @@ code {
     align-items: baseline;
     justify-content: space-between;
     gap: 0.75rem;
+  }
+
+  .layer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .layer-card {
+    min-height: 0;
   }
 
 }
@@ -2546,6 +2306,8 @@ code {
   :root {
     --page-bg: #fff;
     --surface: #fff;
+    --surface-subtle: #fff;
+    --surface-alt: #fff;
 
     --text: #111827;
     --text-soft: #273449;
@@ -2568,6 +2330,7 @@ code {
     padding: 0;
   }
 
+
   /* Remove navigation and interactive controls */
 
   .page-nav,
@@ -2579,6 +2342,7 @@ code {
   .troubleshooting-tabs__controls {
     display: none !important;
   }
+
 
   /* Simplify hero */
 
@@ -2594,6 +2358,7 @@ code {
     color: #111;
   }
 
+
   /* Section spacing */
 
   main > section,
@@ -2601,6 +2366,7 @@ code {
   main > .protocol-section {
     margin-block: 1.5rem;
   }
+
 
   /* Remove shadows */
 
@@ -2613,11 +2379,61 @@ code {
     box-shadow: none;
   }
 
-  /* Print expanded details */
+
+  /* Print all seven OSI cards */
+
+  .layer-layout {
+    display: block;
+  }
+
+  .layer-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    overflow: visible;
+  }
+
+  .layer-card {
+    min-width: 0;
+    min-height: 0;
+
+    break-inside: avoid;
+
+    box-shadow: none;
+    transform: none;
+  }
+
+
+  /* Print dynamic content */
+
+  .layer-content {
+    min-height: 0;
+    margin-top: 1rem;
+    padding: 0;
+
+    border: 0;
+    box-shadow: none;
+  }
+
+  .layer-information {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .layer-info-item {
+    break-inside: avoid;
+  }
+
+
+  /* Print expandable details */
 
   .layer-detail:not([open]) > .detail-content {
     display: block;
   }
+
+  .layer-detail {
+    break-inside: avoid;
+  }
+
 
   /* Print tables */
 
@@ -2640,29 +2456,6 @@ code {
     padding: 0.35rem;
   }
 
-  /* Print all seven layer cards */
-
-  .layer-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-
-    overflow: visible;
-    scroll-snap-type: none;
-  }
-
-  .layer-card {
-    min-width: 0;
-    min-height: 0;
-
-    break-inside: avoid;
-
-    box-shadow: none;
-    transform: none;
-  }
-
-  .layer-links a {
-    color: #111;
-    text-decoration: underline;
-  }
 
   /* Print all troubleshooting panels */
 
@@ -2687,6 +2480,7 @@ code {
   .troubleshooting-os-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
 
   /* Footer */
 

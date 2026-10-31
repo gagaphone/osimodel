@@ -108,681 +108,136 @@
     </section>
 
 
-<!-- =========================================================
-     SEVEN LAYERS — LEFT NAVIGATION + RIGHT CONTENT
-     ========================================================= -->
 
 <section class="layer-overview" id="osi-layers">
 
   <div class="layer-layout">
 
-    <!-- =====================================================
-         LEFT SIDE — VERTICAL OSI LAYER CARDS
-         ===================================================== -->
+    <!-- LEFT SIDE: CLICKABLE OSI LAYER CARDS -->
 
-    <nav class="layer-grid" aria-label="OSI layers">
+    <nav class="layer-grid" aria-label="Select an OSI layer">
 
-      <!-- LAYER 7 -->
-      <div class="layer-card">
+      <button class="layer-card active"
+              type="button"
+              data-layer="7"
+              aria-pressed="true">
         <span class="layer-badge">07</span>
-        <h3><a href="#layer-7">Application</a></h3>
+        <h3>Application</h3>
+        <span class="layer-card-description">Network services for applications</span>
+      </button>
 
-        
-      </div>
-
-      <!-- LAYER 6 -->
-      <div class="layer-card">
+      <button class="layer-card"
+              type="button"
+              data-layer="6"
+              aria-pressed="false">
         <span class="layer-badge">06</span>
-        <h3><a href="#layer-6">Presentation</a></h3>
+        <h3>Presentation</h3>
+        <span class="layer-card-description">Data translation and encryption</span>
+      </button>
 
-  
-      </div>
-
-      <!-- LAYER 5 -->
-      <div class="layer-card">
+      <button class="layer-card"
+              type="button"
+              data-layer="5"
+              aria-pressed="false">
         <span class="layer-badge">05</span>
-        <h3><a href="#layer-5">Session</a></h3>
+        <h3>Session</h3>
+        <span class="layer-card-description">Session establishment and management</span>
+      </button>
 
-       
-      </div>
-
-      <!-- LAYER 4 -->
-      <div class="layer-card">
+      <button class="layer-card"
+              type="button"
+              data-layer="4"
+              aria-pressed="false">
         <span class="layer-badge">04</span>
-        <h3><a href="#layer-4">Transport</a></h3>
+        <h3>Transport</h3>
+        <span class="layer-card-description">End-to-end data delivery</span>
+      </button>
 
-
-      </div>
-
-      <!-- LAYER 3 -->
-      <div class="layer-card">
+      <button class="layer-card"
+              type="button"
+              data-layer="3"
+              aria-pressed="false">
         <span class="layer-badge">03</span>
-        <h3><a href="#layer-3">Network</a></h3>
+        <h3>Network</h3>
+        <span class="layer-card-description">Logical addressing and routing</span>
+      </button>
 
-        <div class="layer-links">
-          <a href="#layer-3-overview">Overview</a>
-
-        </div>
-      </div>
-
-      <!-- LAYER 2 -->
-      <div class="layer-card">
+      <button class="layer-card"
+              type="button"
+              data-layer="2"
+              aria-pressed="false">
         <span class="layer-badge">02</span>
-        <h3><a href="#layer-2">Data Link</a></h3>
+        <h3>Data Link</h3>
+        <span class="layer-card-description">Frames and MAC addressing</span>
+      </button>
 
-      </div>
-
-      <!-- LAYER 1 -->
-      <div class="layer-card">
+      <button class="layer-card"
+              type="button"
+              data-layer="1"
+              aria-pressed="false">
         <span class="layer-badge">01</span>
-        <h3><a href="#layer-1">Physical</a></h3>
-
-
-      </div>
+        <h3>Physical</h3>
+        <span class="layer-card-description">Signals and physical media</span>
+      </button>
 
     </nav>
 
 
-    <!-- =====================================================
-         RIGHT SIDE — CONTENT BODY
-         ===================================================== -->
+    <!-- RIGHT SIDE: DYNAMIC LAYER CONTENT -->
 
-    <div class="layer-content">
+    <div class="layer-content"
+         id="layer-content"
+         aria-live="polite"
+         aria-atomic="true">
 
-      <!-- RIGHT-SIDE CONTENT INDEX -->
+      <p class="eyebrow dark-eyebrow" id="layer-number">
+        OSI MODEL — LAYER 7
+      </p>
 
-      <nav class="layer-content-index"
-           aria-label="Layer content index">
+      <h2 id="layer-name">Application Layer</h2>
 
-        <p class="index-heading">IN THIS SECTION</p>
+      <p id="layer-description">
+        Provides network services and protocols used by applications
+        to communicate over a network.
+      </p>
 
-        <a href="#layer-reference">Overview</a>
-        <a href="#reference-pdu">PDU</a>
-        <a href="#reference-protocols">Protocols</a>
-        <a href="#reference-devices">Devices</a>
-        <a href="#layer-details">Troubleshooting</a>
+      <div class="layer-information">
 
-      </nav>
-
-
-      <!-- =================================================
-           QUICK REFERENCE
-           ================================================= -->
-
-      <section id="layer-reference" class="content-section">
-
-        <p class="eyebrow dark-eyebrow">QUICK REFERENCE</p>
-
-        <h2>Layer Functions, PDUs, Protocols, and Devices</h2>
-
-        <p>
-          This table summarizes the role of each OSI layer and
-          examples commonly associated with it.
-        </p>
-
-        <div class="table-container">
-
-          <table>
-
-            <thead>
-              <tr>
-                <th scope="col">Layer</th>
-                <th scope="col" id="reference-pdu">PDU</th>
-                <th scope="col">Key Functions</th>
-                <th scope="col" id="reference-protocols">
-                  Example Protocols / Technologies
-                </th>
-                <th scope="col" id="reference-devices">
-                  Common Devices
-                </th>
-              </tr>
-            </thead>
-
-            <tbody>
-
-              <tr>
-                <td><strong>7 — Application</strong></td>
-                <td>Data</td>
-                <td>Network services for applications</td>
-                <td>HTTP, HTTPS, FTP, SMTP, DNS, DHCP, SSH</td>
-                <td>Servers, browsers, email clients</td>
-              </tr>
-
-              <tr>
-                <td><strong>6 — Presentation</strong></td>
-                <td>Data</td>
-                <td>Translation, encoding, encryption, compression</td>
-                <td>TLS, JPEG, MPEG, ASCII, Unicode, GIF</td>
-                <td>Software libraries and encoding components</td>
-              </tr>
-
-              <tr>
-                <td><strong>5 — Session</strong></td>
-                <td>Data</td>
-                <td>Session setup, management, and termination</td>
-                <td>NetBIOS, RPC, SMB, NFS</td>
-                <td>Applications and session-management software</td>
-              </tr>
-
-              <tr>
-                <td><strong>4 — Transport</strong></td>
-                <td>Segment / Datagram</td>
-                <td>End-to-end delivery, ports, flow control</td>
-                <td>TCP, UDP, SCTP</td>
-                <td>Stateful firewalls, load balancers</td>
-              </tr>
-
-              <tr>
-                <td><strong>3 — Network</strong></td>
-                <td>Packet</td>
-                <td>Logical addressing and routing</td>
-                <td>IPv4, IPv6, ICMP, OSPF, RIP, BGP</td>
-                <td>Routers, Layer 3 switches</td>
-              </tr>
-
-              <tr>
-                <td><strong>2 — Data Link</strong></td>
-                <td>Frame</td>
-                <td>MAC addressing and local-link delivery</td>
-                <td>Ethernet, Wi-Fi, PPP, VLAN, STP</td>
-                <td>Switches, bridges, network adapters, access points</td>
-              </tr>
-
-              <tr>
-                <td><strong>1 — Physical</strong></td>
-                <td>Bits</td>
-                <td>Signal transmission and physical media</td>
-                <td>Ethernet physical standards, DSL, USB, radio</td>
-                <td>Cables, connectors, repeaters, transceivers</td>
-              </tr>
-
-            </tbody>
-
-          </table>
-
+        <div class="layer-info-item">
+          <h3>PDU</h3>
+          <p id="layer-pdu">Data</p>
         </div>
 
-        <p class="small-note">
-          ARP is commonly described as operating at the boundary
-          between Layers 2 and 3 because it maps IP addresses to
-          link-layer addresses on a local network.
-        </p>
-
-      </section>
-
-
-      <!-- =================================================
-           LAYER-BY-LAYER DETAILS
-           ================================================= -->
-
-      <section id="layer-details" class="content-section">
-
-        <p class="eyebrow dark-eyebrow">LEARN THE DETAILS</p>
-
-        <h2>Layer-by-Layer Deep Dive</h2>
-
-        <p>
-          Expand a layer to explore its responsibilities, PDU,
-          protocols, devices, and troubleshooting scenarios.
-        </p>
-
-
-        <div class="details-list">
-
-
-          <!-- =============================================
-               LAYER 1 — PHYSICAL
-               ============================================= -->
-
-          <details id="layer-1" class="layer-detail">
-
-            <summary>Layer 1 — Physical</summary>
-
-            <div class="detail-content">
-
-              <div id="layer-1-overview">
-                <h3>Overview</h3>
-                <p>
-                  The Physical Layer transmits raw binary data across
-                  a physical medium. It deals with signals, timing,
-                  connectors, physical topology, and the characteristics
-                  of cables or radio.
-                </p>
-              </div>
-
-              <dl class="attribute-list">
-
-                <dt id="layer-1-pdu">PDU</dt>
-                <dd>Bit (1s and 0s)</dd>
-
-                <dt>Responsibilities</dt>
-                <dd>
-                  Signal encoding, bit timing, physical media,
-                  duplex settings.
-                </dd>
-
-                <dt id="layer-1-protocols">Protocols / Technologies</dt>
-                <dd>
-                  Ethernet physical standards, DSL, USB,
-                  fibre-optic standards, radio.
-                </dd>
-
-                <dt id="layer-1-devices">Devices</dt>
-                <dd>
-                  Cables, connectors, hubs, repeaters, transceivers.
-                </dd>
-
-                <dt id="layer-1-troubleshooting">Typical fault</dt>
-                <dd>
-                  Damaged cable, disconnected port, bad transceiver,
-                  incorrect cable distance.
-                </dd>
-
-              </dl>
-
-              <div class="example-callout">
-                <strong>Real-world example:</strong>
-                A user has no network connection. Check that the cable
-                is connected and the switch-port link light is on,
-                then test with a known-good cable.
-              </div>
-
-            </div>
-
-          </details>
-
-
-          <!-- =============================================
-               LAYER 2 — DATA LINK
-               ============================================= -->
-
-          <details id="layer-2" class="layer-detail">
-
-            <summary>Layer 2 — Data Link</summary>
-
-            <div class="detail-content">
-
-              <div id="layer-2-overview">
-                <h3>Overview</h3>
-                <p>
-                  The Data Link Layer organizes bits into frames and
-                  supports delivery across a local network link.
-                  Ethernet and Wi-Fi use link-layer addressing and
-                  media-access mechanisms.
-                </p>
-              </div>
-
-              <dl class="attribute-list">
-
-                <dt id="layer-2-pdu">PDU</dt>
-                <dd>Frame</dd>
-
-                <dt>Sub-layers</dt>
-                <dd>
-                  LLC (Logical Link Control) and MAC
-                  (Media Access Control).
-                </dd>
-
-                <dt>Addressing</dt>
-                <dd>
-                  MAC addresses, commonly represented as six
-                  hexadecimal octets.
-                </dd>
-
-                <dt id="layer-2-protocols">Protocols / Technologies</dt>
-                <dd>
-                  Ethernet, Wi-Fi, PPP, VLAN tagging, STP, LACP.
-                </dd>
-
-                <dt id="layer-2-devices">Devices</dt>
-                <dd>
-                  Switches, bridges, wireless access points,
-                  network adapters.
-                </dd>
-
-                <dt id="layer-2-troubleshooting">Typical fault</dt>
-                <dd>
-                  VLAN mismatch, switching loop, MAC-learning issue,
-                  frame errors.
-                </dd>
-
-              </dl>
-
-              <div class="example-callout">
-                <strong>Real-world example:</strong>
-                A switch learns source MAC addresses and uses its
-                MAC address table to forward frames toward the
-                correct port.
-              </div>
-
-            </div>
-
-          </details>
-
-
-          <!-- =============================================
-               LAYER 3 — NETWORK
-               ============================================= -->
-
-          <details id="layer-3" class="layer-detail">
-
-            <summary>Layer 3 — Network</summary>
-
-            <div class="detail-content">
-
-              <div id="layer-3-overview">
-                <h3>Overview</h3>
-                <p>
-                  The Network Layer provides logical addressing and
-                  routes packets between different IP networks.
-                  Routers inspect destination IP addresses and
-                  consult their routing tables.
-                </p>
-              </div>
-
-              <dl class="attribute-list">
-
-                <dt id="layer-3-pdu">PDU</dt>
-                <dd>Packet</dd>
-
-                <dt>Addressing</dt>
-                <dd>IPv4 (32-bit) and IPv6 (128-bit).</dd>
-
-                <dt id="layer-3-protocols">Protocols / Technologies</dt>
-                <dd>
-                  IP, ICMP, OSPF, EIGRP, RIP, BGP.
-                </dd>
-
-                <dt id="layer-3-devices">Devices</dt>
-                <dd>
-                  Routers, Layer 3 switches,
-                  packet-filtering firewalls.
-                </dd>
-
-                <dt id="layer-3-troubleshooting">Typical fault</dt>
-                <dd>
-                  Missing route, wrong subnet mask,
-                  incorrect default gateway.
-                </dd>
-
-              </dl>
-
-              <div class="example-callout">
-                <strong>Real-world example:</strong>
-                A host sends a packet to a server on another network.
-                A router checks its routing table and forwards the
-                packet toward the destination network.
-              </div>
-
-            </div>
-
-          </details>
-
-
-          <!-- =============================================
-               LAYER 4 — TRANSPORT
-               ============================================= -->
-
-          <details id="layer-4" class="layer-detail">
-
-            <summary>Layer 4 — Transport</summary>
-
-            <div class="detail-content">
-
-              <div id="layer-4-overview">
-                <h3>Overview</h3>
-                <p>
-                  The Transport Layer supports communication between
-                  application processes on different hosts.
-                  Transport ports identify source and destination
-                  application endpoints.
-                </p>
-              </div>
-
-              <dl class="attribute-list">
-
-                <dt id="layer-4-pdu">PDU</dt>
-                <dd>TCP segment or UDP datagram.</dd>
-
-                <dt id="layer-4-protocols">Protocols / Technologies</dt>
-                <dd>TCP, UDP, SCTP.</dd>
-
-                <dt>TCP</dt>
-                <dd>
-                  Connection-oriented transport with sequencing,
-                  acknowledgements, retransmission, and flow control.
-                </dd>
-
-                <dt>UDP</dt>
-                <dd>
-                  Connectionless transport with lower overhead
-                  and no built-in retransmission.
-                </dd>
-
-                <dt id="layer-4-devices">Devices</dt>
-                <dd>
-                  Stateful firewalls, Layer 4 load balancers.
-                </dd>
-
-                <dt id="layer-4-troubleshooting">Typical fault</dt>
-                <dd>
-                  Blocked port, failed TCP handshake,
-                  wrong port configuration.
-                </dd>
-
-              </dl>
-
-              <div class="example-callout">
-                <strong>TCP vs. UDP:</strong>
-                A conventional web connection using HTTP/1.1 or HTTP/2
-                typically uses TCP. Many real-time applications use UDP.
-                HTTP/3 uses QUIC over UDP.
-              </div>
-
-            </div>
-
-          </details>
-
-
-          <!-- =============================================
-               LAYER 5 — SESSION
-               ============================================= -->
-
-          <details id="layer-5" class="layer-detail">
-
-            <summary>Layer 5 — Session</summary>
-
-            <div class="detail-content">
-
-              <div id="layer-5-overview">
-                <h3>Overview</h3>
-                <p>
-                  The Session Layer describes functions for establishing,
-                  maintaining, coordinating, and terminating conversations
-                  between applications. Session functions may include
-                  dialogue control and checkpoints.
-                </p>
-              </div>
-
-              <dl class="attribute-list">
-
-                <dt id="layer-5-pdu">PDU</dt>
-                <dd>Data</dd>
-
-                <dt id="layer-5-protocols">Protocols / Technologies</dt>
-                <dd>
-                  NetBIOS session services, RPC, SMB, NFS,
-                  and session-related functions in applications.
-                </dd>
-
-                <dt>Functions</dt>
-                <dd>
-                  Session establishment, maintenance,
-                  graceful termination, checkpoints.
-                </dd>
-
-                <dt id="layer-5-devices">Devices</dt>
-                <dd>
-                  Applications and session-management software.
-                </dd>
-
-                <dt id="layer-5-troubleshooting">Typical fault</dt>
-                <dd>
-                  Session timeout, authentication failure,
-                  session limits.
-                </dd>
-
-              </dl>
-
-              <div class="example-callout">
-                <strong>Real-world note:</strong>
-                In modern TCP/IP systems, session functionality is
-                often implemented by application protocols and
-                software rather than a separate visible layer.
-              </div>
-
-            </div>
-
-          </details>
-
-
-          <!-- =============================================
-               LAYER 6 — PRESENTATION
-               ============================================= -->
-
-          <details id="layer-6" class="layer-detail">
-
-            <summary>Layer 6 — Presentation</summary>
-
-            <div class="detail-content">
-
-              <div id="layer-6-overview">
-                <h3>Overview</h3>
-                <p>
-                  The Presentation Layer describes how data is represented
-                  so that different systems can interpret it consistently.
-                  Related functions include encoding, serialization,
-                  encryption, and compression.
-                </p>
-              </div>
-
-              <dl class="attribute-list">
-
-                <dt id="layer-6-pdu">PDU</dt>
-                <dd>Data</dd>
-
-                <dt id="layer-6-protocols">Protocols / Technologies</dt>
-                <dd>
-                  ASCII, Unicode, EBCDIC, JSON, XML,
-                  JPEG, GIF, MPEG, MP3, TLS.
-                </dd>
-
-                <dt>Security</dt>
-                <dd>
-                  TLS provides encryption in modern network stacks;
-                  its placement in OSI is a conceptual simplification.
-                </dd>
-
-                <dt id="layer-6-devices">Devices</dt>
-                <dd>
-                  Software libraries and encoding components.
-                </dd>
-
-                <dt id="layer-6-troubleshooting">Typical fault</dt>
-                <dd>
-                  Encoding mismatch, certificate problem,
-                  incompatible data format.
-                </dd>
-
-              </dl>
-
-              <div class="example-callout">
-                <strong>Real-world example:</strong>
-                Applications encode text as UTF-8 and may compress
-                content before transmitting it. Secure connections
-                use TLS to protect data in transit.
-              </div>
-
-            </div>
-
-          </details>
-
-
-          <!-- =============================================
-               LAYER 7 — APPLICATION
-               ============================================= -->
-
-          <details id="layer-7" class="layer-detail">
-
-            <summary>Layer 7 — Application</summary>
-
-            <div class="detail-content">
-
-              <div id="layer-7-overview">
-                <h3>Overview</h3>
-                <p>
-                  The Application Layer provides network protocols
-                  and services used by software such as browsers,
-                  mail clients, file-transfer tools, and management
-                  applications. It describes the protocol interface,
-                  not the application program itself.
-                </p>
-              </div>
-
-              <dl class="attribute-list">
-
-                <dt id="layer-7-pdu">PDU</dt>
-                <dd>Data</dd>
-
-                <dt id="layer-7-protocols">Protocols / Technologies</dt>
-                <dd>
-                  HTTP, HTTPS, FTP, SFTP, DNS, DHCP,
-                  SMTP, IMAP, POP3, SNMP, SSH, Telnet.
-                </dd>
-
-                <dt>Web</dt>
-                <dd>HTTP and HTTPS.</dd>
-
-                <dt>Email</dt>
-                <dd>SMTP, IMAP, POP3.</dd>
-
-                <dt id="layer-7-devices">Devices</dt>
-                <dd>
-                  Servers, browsers, email clients,
-                  application gateways.
-                </dd>
-
-                <dt id="layer-7-troubleshooting">Typical fault</dt>
-                <dd>
-                  Incorrect URL, application configuration,
-                  unavailable service, DNS lookup issue.
-                </dd>
-
-              </dl>
-
-              <div class="example-callout">
-                <strong>Real-world example:</strong>
-                A browser requests a page using HTTP or HTTPS.
-                DNS may first resolve the domain name to an IP address
-                so the browser can connect to the destination.
-              </div>
-
-            </div>
-
-          </details>
-
-
+        <div class="layer-info-item">
+          <h3>Key Functions</h3>
+          <p id="layer-functions">
+            Provides network services for applications, including
+            web browsing, email, file transfer, and name resolution.
+          </p>
         </div>
-      </section>
+
+        <div class="layer-info-item">
+          <h3>Example Protocols / Technologies</h3>
+          <p id="layer-protocols">
+            HTTP, HTTPS, FTP, SMTP, DNS, DHCP, SSH
+          </p>
+        </div>
+
+        <div class="layer-info-item">
+          <h3>Common Devices</h3>
+          <p id="layer-devices">
+            Servers, browsers, email clients, application gateways
+          </p>
+        </div>
+
+      </div>
 
     </div>
-    <!-- END RIGHT CONTENT -->
+    <!-- END DYNAMIC CONTENT -->
 
   </div>
-  <!-- END LAYER LAYOUT -->
 
 </section>
-<!-- END SEVEN LAYERS -->
 
 
     <!-- QUICK REFERENCE -->
