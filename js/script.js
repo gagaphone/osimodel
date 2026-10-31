@@ -11,7 +11,7 @@ const layerData = {
     description:
       "Provides network services and protocols used by applications to communicate over a network.",
 
-    pdu: "Data",
+    pdu: "Data (Application payload, such as an HTTP request or DNS query)",
 
     functions:
       "Provides network services for applications, including web browsing, email, file transfer, name resolution, and network management.",
@@ -39,7 +39,7 @@ const layerData = {
     description:
       "Ensures that data is represented in a format that different systems can understand.",
 
-    pdu: "Data",
+    pdu: "Data (Data representation, encoding, or encryption)",
 
     functions:
       "Handles data translation, character encoding, serialization, encryption, decryption, and compression.",
@@ -67,7 +67,7 @@ const layerData = {
     description:
       "Establishes, manages, coordinates, and terminates communication sessions between applications.",
 
-    pdu: "Data",
+    pdu: "Data (Session and dialogue context)",
 
     functions:
       "Handles session establishment, session maintenance, dialogue control, synchronization, checkpoints, and session termination.",
@@ -95,7 +95,7 @@ const layerData = {
     description:
       "Provides end-to-end communication between application processes running on different hosts.",
 
-    pdu: "TCP Segment / UDP Datagram",
+    pdu: "TCP Segment / UDP Datagram (Port numbers and, for TCP, sequencing and acknowledgement information)",
 
     functions:
       "Handles port addressing, segmentation, reassembly, connection management, reliability, sequencing, acknowledgements, retransmission, and flow control. TCP provides reliability, while UDP offers lower-overhead connectionless communication.",
@@ -123,16 +123,16 @@ const layerData = {
     description:
       "Provides logical addressing and determines how packets travel between different networks.",
 
-    pdu: "Packet",
+    pdu: "Packet (Source and destination IP addresses)",
 
     functions:
       "Handles logical IP addressing, routing, path selection, packet forwarding, and fragmentation where supported.",
 
     protocols:
-      "IPv4, IPv6, ICMP, OSPF, EIGRP, RIP, BGP",
+      "IP, ICMP, OSPF, EIGRP, RIP, BGP",
 
     addressing:
-      "Logical IP addresses, including IPv4 and IPv6 addresses. Subnet masks and prefixes define network boundaries.",
+      "Logical IP addresses, including IPv4 (32-bit) and IPv6 (128-bit) addresses. Subnet masks and prefixes define network boundaries.",
 
     devices:
       "Routers, Layer 3 switches, and packet-filtering firewalls.",
@@ -151,10 +151,10 @@ const layerData = {
     description:
       "Transfers data across a local network link by organizing bits into frames.",
 
-    pdu: "Frame",
+    pdu: "Frame (Link-layer addresses and frame-check information)",
 
     functions:
-      "Handles framing, MAC addressing, media access control, link-level error detection, VLAN handling, and logical link control (LLC).",
+      "Handles framing, MAC addressing (Media Access Control) link-level error detection, VLAN handling, and LLC (Logical Link Control).",
 
     protocols:
       "Ethernet, Wi-Fi (IEEE 802.11), PPP, VLAN (IEEE 802.1Q), STP, LACP",
@@ -179,7 +179,7 @@ const layerData = {
     description:
       "Transmits raw binary data as electrical, optical, or radio signals over a physical medium.",
 
-    pdu: "Bits (1s and 0s)",
+    pdu: "Bits (1s and 0s), Signals represented as binary data",
 
     functions:
       "Handles signal transmission, bit timing, physical connections, media characteristics, connectors, transmission rates, and duplex modes.",
