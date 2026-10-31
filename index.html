@@ -109,6 +109,7 @@
 
 
 
+
 <section class="layer-overview" id="osi-layers">
 
   <p class="eyebrow dark-eyebrow">OVERVIEW</p>
@@ -226,6 +227,7 @@
         <dt>PDU</dt>
         <dd id="layer-pdu">Data</dd>
 
+
         <dt>Responsibilities</dt>
         <dd id="layer-functions">
           Provides network services for applications, including web
@@ -233,11 +235,34 @@
           network management.
         </dd>
 
+
+        <!-- PROTOCOLS / TECHNOLOGIES -->
+
         <dt>Protocols / Technologies</dt>
+
         <dd id="layer-protocols">
-          HTTP, HTTPS, SMTP, IMAP, POP3, FTP, SFTP, DNS, DHCP,
-          SNMP, SSH, Telnet
+
+          <!-- Layer 7: Application -->
+
+          <div class="protocol-group">
+            <strong>Web</strong>
+            <span>HTTP, HTTPS</span>
+          </div>
+
+          <div class="protocol-group">
+            <strong>Email</strong>
+            <span>SMTP, IMAP, POP3</span>
+          </div>
+
+          <div class="protocol-group">
+            <strong>Other Protocols</strong>
+            <span>
+              FTP, SFTP, DNS, DHCP, SNMP, SSH, Telnet
+            </span>
+          </div>
+
         </dd>
+
 
         <dt>Addressing</dt>
         <dd id="layer-addressing">
@@ -245,11 +270,13 @@
           application-specific identifiers.
         </dd>
 
+
         <dt>Common Devices</dt>
         <dd id="layer-devices">
           Servers, browsers, email clients, proxies, and
           application gateways.
         </dd>
+
 
         <dt>Typical Fault</dt>
         <dd id="layer-fault">
@@ -280,6 +307,7 @@
   </div>
 
 </section>
+
 
 
 

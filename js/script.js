@@ -228,6 +228,12 @@ function initializeLayerButtons() {
   );
 
 
+  if (layerCards.length === 0) {
+    console.warn("No OSI layer buttons were found.");
+    return;
+  }
+
+
   /* -----------------------------------------
      GET DYNAMIC CONTENT ELEMENTS
      ----------------------------------------- */
@@ -266,6 +272,76 @@ function initializeLayerButtons() {
     if (!element) return;
 
     element.textContent = value;
+
+  }
+
+
+  /* -----------------------------------------
+     UPDATE PROTOCOL GROUPS
+     ----------------------------------------- */
+
+  function updateProtocols(id, layer) {
+
+    if (!elements.protocols) return;
+
+
+    // LAYER 7 — APPLICATION
+
+    if (id === 7) {
+
+      elements.protocols.innerHTML = `
+
+        <div class="protocol-group">
+          <strong>Web</strong>
+          <span>HTTP, HTTPS</span>
+        </div>
+
+        <div class="protocol-group">
+          <strong>Email</strong>
+          <span>SMTP, IMAP, POP3</span>
+        </div>
+
+        <div class="protocol-group">
+          <strong>Other Protocols</strong>
+          <span>FTP, SFTP, DNS, DHCP, SNMP, SSH, Telnet</span>
+        </div>
+
+      `;
+
+    }
+
+
+    // LAYER 6 — PRESENTATION
+
+    else if (id === 6) {
+
+      elements.protocols.innerHTML = `
+
+        <div class="protocol-group">
+          <strong>Encoding</strong>
+          <span>ASCII, Unicode, EBCDIC</span>
+        </div>
+
+        <div class="protocol-group">
+          <strong>Data Formats</strong>
+          <span>JSON, XML, JPEG, GIF, MPEG, MP3</span>
+        </div>
+
+      `;
+
+    }
+
+
+    // LAYERS 1–5 — STANDARD PROTOCOL TEXT
+
+    else {
+
+      updateContent(
+        elements.protocols,
+        layer.protocols
+      );
+
+    }
 
   }
 
@@ -332,10 +408,17 @@ function initializeLayerButtons() {
       layer.functions
     );
 
-    updateContent(
-      elements.protocols,
-      layer.protocols
-    );
+
+    /* -----------------------------------------
+       UPDATE PROTOCOLS
+       ----------------------------------------- */
+
+    updateProtocols(id, layer);
+
+
+    /* -----------------------------------------
+       UPDATE REMAINING ATTRIBUTES
+       ----------------------------------------- */
 
     updateContent(
       elements.addressing,
