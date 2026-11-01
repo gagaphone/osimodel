@@ -1845,36 +1845,37 @@ code {
 
 .layer-info-grid {
   display: grid;
-
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-
+  grid-template-columns: repeat(3, 1fr);
   align-items: stretch;
   gap: 1rem;
-
   width: 100%;
   margin: 1.5rem 0;
 }
 
-
 /* Individual cards */
-
 .layer-info-grid .info-card {
   display: flex;
-  min-width: 0;
   flex-direction: column;
-
+  min-width: 0;
   padding: 1.15rem;
-
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-
-  background: #f1f5ff;
-
+  background-color: #f1f5ff;
   box-shadow: var(--shadow-soft);
-
   overflow-wrap: anywhere;
 }
 
+.layer-info-grid .info-card:nth-child(1) {
+  background-color: #e0f2fe;
+}
+
+.layer-info-grid .info-card:nth-child(2) {
+  background-color: #dcfce7;
+}
+
+.layer-info-grid .info-card:nth-child(3) {
+  background-color: #fef3c7;
+}
 
 /* Different background for each card */
 
