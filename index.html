@@ -36,7 +36,6 @@
       <a href="#encapsulation">Encapsulation</a>
       <a href="#tcpip">TCP/IP</a>
       <a href="#troubleshooting">Troubleshooting</a>
-      <a href="#quiz">Quiz</a>
     </div>
   </nav>
 
@@ -105,8 +104,6 @@
         </ul>
       </div>
     </section>
-
-
 
 
 <section class="layer-overview" id="osi-layers">
@@ -1414,93 +1411,8 @@
       </div>
     </article>
 
-    <!-- PREVIOUS / NEXT NAVIGATION -->
-    <div class="troubleshooting-tabs__controls">
-      <button
-        class="troubleshooting-tabs__prev"
-        type="button"
-        aria-label="Go to previous OSI layer"
-        disabled
-      >
-        &larr; Previous Layer
-      </button>
-
-      <span
-        class="troubleshooting-tabs__progress"
-        aria-live="polite"
-        aria-atomic="true"
-      >
-        Layer 1 of 7
-      </span>
-
-      <button
-        class="troubleshooting-tabs__next"
-        type="button"
-        aria-label="Go to next OSI layer"
-      >
-        Next Layer &rarr;
-      </button>
-    </div>
-
   </div>
 </section>
-
-
-    <!-- EMAIL JOURNEY -->
-    <section id="email-journey" class="content-section">
-      <p class="eyebrow dark-eyebrow">END-TO-END EXAMPLE</p>
-      <h2>What Happens When You Send an Email?</h2>
-
-      <p>
-        An email passes through multiple networking functions. The table
-        shows the conceptual role associated with each OSI layer.
-      </p>
-
-      <div class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th scope="col">Layer</th>
-              <th scope="col">What Happens</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>7 — Application</strong></td><td>The email client uses an email protocol, such as SMTP, to submit the message to a mail server.</td></tr>
-            <tr><td><strong>6 — Presentation</strong></td><td>Text and attachments are represented in defined formats; TLS may protect the connection.</td></tr>
-            <tr><td><strong>5 — Session</strong></td><td>The application maintains the conversation and command/response context with the mail service.</td></tr>
-            <tr><td><strong>4 — Transport</strong></td><td>TCP carries application data and uses port numbers to identify endpoints.</td></tr>
-            <tr><td><strong>3 — Network</strong></td><td>IP addresses identify the source and destination; routers forward packets between networks.</td></tr>
-            <tr><td><strong>2 — Data Link</strong></td><td>Frames carry packets across a local link, such as Ethernet or Wi-Fi.</td></tr>
-            <tr><td><strong>1 — Physical</strong></td><td>Bits are transmitted through the physical medium as electrical, optical, or radio signals.</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- QUIZ -->
-    <section id="quiz" class="content-section quiz-section">
-      <p class="eyebrow dark-eyebrow">CHECK YOUR KNOWLEDGE</p>
-      <h2>OSI Model Quiz</h2>
-      <p>
-        Answer the questions, check your score, and review the explanations.
-      </p>
-
-      <form id="quiz-form">
-        <div id="quiz-questions"></div>
-
-        <div class="quiz-actions">
-          <button type="submit" class="quiz-button">Check Answers</button>
-          <button type="button" id="show-answers" class="reset-button">
-            Show Answers
-          </button>
-          <button type="button" id="retake-quiz" class="reset-button">
-            Re-take Quiz
-          </button>
-        </div>
-
-        <p id="quiz-result" class="quiz-result" aria-live="polite"></p>
-      </form>
-    </section>
 
     <!-- CAVEAT -->
     <section class="note-section">
@@ -1523,4 +1435,5 @@
     </div>
   </footer>
 </body>
+
 </html>
