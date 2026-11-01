@@ -202,365 +202,453 @@ const layerData = {
 
 };
 
-
 /* =========================================================
-   INITIALIZE CLICKABLE OSI LAYERS
+   OSI MODEL — APPLICATION INITIALIZATION
    ========================================================= */
 
-function initializeLayerButtons() {
+(function () {
+  "use strict";
 
-  const layerGrid = document.querySelector(".layer-grid");
+  /* =======================================================
+     SHARED HELPERS
+     ======================================================= */
 
-  const layerContent = document.getElementById("layer-content");
-
-  if (!layerGrid || !layerContent) {
-    console.warn("OSI layer elements were not found.");
-    return;
-  }
-
-
-  /* -----------------------------------------
-     GET BUTTONS
-     ----------------------------------------- */
-
-  const layerCards = Array.from(
-    layerGrid.querySelectorAll(".layer-card")
-  );
-
-
-  if (layerCards.length === 0) {
-    console.warn("No OSI layer buttons were found.");
-    return;
-  }
-
-
-  /* -----------------------------------------
-     GET DYNAMIC CONTENT ELEMENTS
-     ----------------------------------------- */
-
-  const elements = {
-
-    number: document.getElementById("layer-number"),
-
-    name: document.getElementById("layer-name"),
-
-    description: document.getElementById("layer-description"),
-
-    pdu: document.getElementById("layer-pdu"),
-
-    functions: document.getElementById("layer-functions"),
-
-    protocols: document.getElementById("layer-protocols"),
-
-    addressing: document.getElementById("layer-addressing"),
-
-    devices: document.getElementById("layer-devices"),
-
-    fault: document.getElementById("layer-fault"),
-
-    example: document.getElementById("layer-example-text")
-
-  };
-
-
-  /* -----------------------------------------
-     UPDATE CONTENT FUNCTION
-     ----------------------------------------- */
-
-  function updateContent(element, value) {
-
-    if (!element) return;
-
-    element.textContent = value;
-
-  }
-
-
-  /* -----------------------------------------
-     UPDATE PROTOCOL GROUPS
-     ----------------------------------------- */
-
-  function updateProtocols(id, layer) {
-
-    if (!elements.protocols) return;
-
-
-    // LAYER 7 — APPLICATION
-
-    if (id === 7) {
-
-      elements.protocols.innerHTML = `
-
-        <div class="protocol-group">
-          <strong>Web</strong>
-          <span>HTTP, HTTPS</span>
-        </div>
-
-        <div class="protocol-group">
-          <strong>Email</strong>
-          <span>SMTP, IMAP, POP3</span>
-        </div>
-
-        <div class="protocol-group">
-          <strong>Other Protocols</strong>
-          <span>FTP, SFTP, DNS, DHCP, SNMP, SSH, Telnet</span>
-        </div>
-
-      `;
-
+  function setText(element, value) {
+    if (element && value !== undefined && value !== null) {
+      element.textContent = value;
     }
+  }
 
+  function getLayerNumber(card) {
+    return Number(card.dataset.layer);
+  }
 
-    // LAYER 6 — PRESENTATION
+  /* =======================================================
+     OSI LAYER INFORMATION
+     ======================================================= */
 
-    else if (id === 6) {
+  function initializeLayerButtons() {
+    const layerGrid = document.querySelector(".layer-grid");
+    const layerContent = document.getElementById("layer-content");
 
-      elements.protocols.innerHTML = `
-
-        <div class="protocol-group">
-          <strong>Encoding</strong>
-          <span>ASCII, Unicode, EBCDIC</span>
-        </div>
-
-        <div class="protocol-group">
-          <strong>Data Formats</strong>
-          <span>JSON, XML, JPEG, GIF, MPEG, MP3</span>
-        </div>
-
-      `;
-
-    }
-
-
-    // LAYERS 1–5 — STANDARD PROTOCOL TEXT
-
-    else {
-
-      updateContent(
-        elements.protocols,
-        layer.protocols
+    if (!layerGrid || !layerContent) {
+      console.warn(
+        "OSI layer overview not found; skipping layer initialization."
       );
-
+      return;
     }
 
-  }
+    const layerCards = Array.from(
+      layerGrid.querySelectorAll(".layer-card[data-layer]")
+    );
 
+    if (!layerCards.length) {
+      console.warn("No OSI layer cards found.");
+      return;
+    }
 
-  /* -----------------------------------------
-     SELECT OSI LAYER
-     ----------------------------------------- */
-
-  function selectLayer(layerId) {
-
-    const id = Number(layerId);
-
-    const layer = layerData[id];
-
-    // Stop if the selected layer does not exist.
-    if (!layer) return;
-
+    const elements = {
+      number: document.getElementById("layer-number"),
+      name: document.getElementById("layer-name"),
+      description: document.getElementById("layer-description"),
+      pdu: document.getElementById("layer-pdu"),
+      functions: document.getElementById("layer-functions"),
+      protocols: document.getElementById("layer-protocols"),
+      addressing: document.getElementById("layer-addressing"),
+      devices: document.getElementById("layer-devices"),
+      fault: document.getElementById("layer-fault"),
+      example: document.getElementById("layer-example-text")
+    };
 
     /* -----------------------------------------
-       UPDATE ACTIVE BUTTON
+       PROTOCOL GROUPS
        ----------------------------------------- */
 
-    layerCards.forEach(card => {
+    function updateProtocols(id, layer) {
+      const element = elements.protocols;
 
-      const isActive =
-        Number(card.dataset.layer) === id;
+      if (!element) return;
 
-      card.classList.toggle("active", isActive);
+      if (id === 7) {
+        element.replaceChildren();
 
-      card.setAttribute(
-        "aria-pressed",
-        String(isActive)
+        const groups = [
+          ["Web", "HTTP, HTTPS"],
+          ["Email", "SMTP, IMAP, POP3"],
+          [
+            "Other Protocols",
+            "FTP, SFTP, DNS, DHCP, SNMP, SSH, Telnet"
+          ]
+        ];
+
+        groups.forEach(([heading, description]) => {
+          const group = document.createElement("div");
+          group.className = "protocol-group";
+
+          const strong = document.createElement("strong");
+          strong.textContent = heading;
+
+          const span = document.createElement("span");
+          span.textContent = description;
+
+          group.append(strong, span);
+          element.appendChild(group);
+        });
+
+      } else if (id === 6) {
+        element.replaceChildren();
+
+        const groups = [
+          ["Encoding", "ASCII, Unicode, EBCDIC"],
+          ["Data Formats", "JSON, XML, JPEG, GIF, MPEG, MP3"]
+        ];
+
+        groups.forEach(([heading, description]) => {
+          const group = document.createElement("div");
+          group.className = "protocol-group";
+
+          const strong = document.createElement("strong");
+          strong.textContent = heading;
+
+          const span = document.createElement("span");
+          span.textContent = description;
+
+          group.append(strong, span);
+          element.appendChild(group);
+        });
+
+      } else {
+        setText(element, layer.protocols);
+      }
+    }
+
+    /* -----------------------------------------
+       SELECT A LAYER
+       ----------------------------------------- */
+
+    function selectLayer(layerId) {
+      const id = Number(layerId);
+      const layer = layerData[id];
+
+      if (!layer) return;
+
+      layerCards.forEach(card => {
+        const active = getLayerNumber(card) === id;
+
+        card.classList.toggle("active", active);
+        card.setAttribute("aria-pressed", String(active));
+      });
+
+      setText(
+        elements.number,
+        `OSI MODEL — LAYER ${String(id).padStart(2, "0")}`
       );
 
+      setText(elements.name, layer.name);
+      setText(elements.description, layer.description);
+      setText(elements.pdu, layer.pdu);
+      setText(elements.functions, layer.functions);
+
+      updateProtocols(id, layer);
+
+      setText(elements.addressing, layer.addressing);
+      setText(elements.devices, layer.devices);
+      setText(elements.fault, layer.fault);
+      setText(elements.example, layer.example);
+    }
+
+    /* -----------------------------------------
+       CARD CLICK HANDLER
+       ----------------------------------------- */
+
+    layerGrid.addEventListener("click", event => {
+      const target = event.target;
+
+      if (!(target instanceof Element)) return;
+
+      const card = target.closest(".layer-card[data-layer]");
+
+      if (!card || !layerGrid.contains(card)) return;
+
+      selectLayer(card.dataset.layer);
     });
 
-
     /* -----------------------------------------
-       UPDATE RIGHT-SIDE CONTENT
+       KEYBOARD NAVIGATION
        ----------------------------------------- */
 
-    updateContent(
-      elements.number,
-      `OSI MODEL — LAYER ${String(id).padStart(2, "0")}`
-    );
+    layerCards.forEach((card, index) => {
+      card.addEventListener("keydown", event => {
+        let nextIndex;
 
-    updateContent(
-      elements.name,
-      layer.name
-    );
+        switch (event.key) {
+          case "ArrowDown":
+          case "ArrowRight":
+            nextIndex = (index + 1) % layerCards.length;
+            break;
 
-    updateContent(
-      elements.description,
-      layer.description
-    );
+          case "ArrowUp":
+          case "ArrowLeft":
+            nextIndex =
+              (index - 1 + layerCards.length) % layerCards.length;
+            break;
 
-    updateContent(
-      elements.pdu,
-      layer.pdu
-    );
+          case "Home":
+            nextIndex = 0;
+            break;
 
-    updateContent(
-      elements.functions,
-      layer.functions
-    );
+          case "End":
+            nextIndex = layerCards.length - 1;
+            break;
 
+          default:
+            return;
+        }
+
+        event.preventDefault();
+
+        const nextCard = layerCards[nextIndex];
+
+        selectLayer(nextCard.dataset.layer);
+        nextCard.focus();
+      });
+    });
 
     /* -----------------------------------------
-       UPDATE PROTOCOLS
+       INITIAL SELECTION
        ----------------------------------------- */
 
-    updateProtocols(id, layer);
+    const initialCard =
+      layerCards.find(card =>
+        card.getAttribute("aria-pressed") === "true"
+      ) ||
+      layerCards.find(card =>
+        card.classList.contains("active")
+      ) ||
+      layerCards.find(card =>
+        card.dataset.layer === "7"
+      ) ||
+      layerCards[0];
 
-
-    /* -----------------------------------------
-       UPDATE REMAINING ATTRIBUTES
-       ----------------------------------------- */
-
-    updateContent(
-      elements.addressing,
-      layer.addressing
-    );
-
-    updateContent(
-      elements.devices,
-      layer.devices
-    );
-
-    updateContent(
-      elements.fault,
-      layer.fault
-    );
-
-    updateContent(
-      elements.example,
-      layer.example
-    );
-
+    if (initialCard) {
+      selectLayer(initialCard.dataset.layer);
+    }
   }
 
+  /* =======================================================
+     GENERIC TAB INITIALIZER
+     ======================================================= */
 
-  /* -----------------------------------------
-     CLICK EVENT
-     ----------------------------------------- */
+  function initializeTabGroup(tabContainer) {
+    if (tabContainer.dataset.tabsInitialized === "true") {
+      return;
+    }
 
-  layerGrid.addEventListener("click", event => {
+    /*
+     * Supported button patterns:
+     *   <button role="tab" aria-controls="panel-id">
+     *   <button data-tab-target="#panel-id">
+     *   <button data-tab="panel-id">
+     *
+     * For data-tab, the value can be either an element ID
+     * or a CSS selector.
+     */
 
-    const card = event.target.closest(".layer-card");
+    const tabButtons = Array.from(
+      tabContainer.querySelectorAll(
+        '[role="tab"], [data-tab-target], button[data-tab]'
+      )
+    );
 
-    if (!card || !layerGrid.contains(card)) return;
+    if (!tabButtons.length) return;
 
-    selectLayer(card.dataset.layer);
+    function getPanel(button) {
+      const target =
+        button.getAttribute("data-tab-target") ||
+        button.getAttribute("aria-controls") ||
+        button.getAttribute("data-tab");
 
-  });
+      if (!target) return null;
 
-
-  /* -----------------------------------------
-     KEYBOARD NAVIGATION
-     ----------------------------------------- */
-
-  layerCards.forEach((card, index) => {
-
-    card.addEventListener("keydown", event => {
-
-      let nextIndex = index;
-
-      switch (event.key) {
-
-        case "ArrowDown":
-        case "ArrowRight":
-
-          nextIndex = (index + 1) % layerCards.length;
-          break;
-
-
-        case "ArrowUp":
-        case "ArrowLeft":
-
-          nextIndex =
-            (index - 1 + layerCards.length) % layerCards.length;
-
-          break;
-
-
-        case "Home":
-
-          nextIndex = 0;
-          break;
-
-
-        case "End":
-
-          nextIndex = layerCards.length - 1;
-          break;
-
-
-        default:
-
-          return;
-
+      // Prefer an ID lookup for simple ID values.
+      if (/^[A-Za-z][\w:.-]*$/.test(target)) {
+        const byId = document.getElementById(target);
+        if (byId) return byId;
       }
 
+      try {
+        return document.querySelector(target);
+      } catch {
+        return null;
+      }
+    }
+
+    const pairs = tabButtons
+      .map(button => ({
+        button,
+        panel: getPanel(button)
+      }))
+      .filter(pair => pair.panel);
+
+    if (!pairs.length) {
+      console.warn(
+        "Tab buttons were found, but no matching panels were found.",
+        tabContainer
+      );
+      return;
+    }
+
+    function activateTab(selectedButton, moveFocus = false) {
+      pairs.forEach(({ button, panel }) => {
+        const active = button === selectedButton;
+
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-selected", String(active));
+
+        if (button.hasAttribute("role")) {
+          button.setAttribute("tabindex", active ? "0" : "-1");
+        }
+
+        panel.hidden = !active;
+        panel.classList.toggle("active", active);
+      });
+
+      if (moveFocus) {
+        selectedButton.focus();
+      }
+    }
+
+    /* Click to activate a tab. */
+
+    tabContainer.addEventListener("click", event => {
+      const target = event.target;
+
+      if (!(target instanceof Element)) return;
+
+      const button = target.closest(
+        '[role="tab"], [data-tab-target], button[data-tab]'
+      );
+
+      if (!button || !tabContainer.contains(button)) return;
+
+      if (!pairs.some(pair => pair.button === button)) return;
 
       event.preventDefault();
-
-      const nextCard = layerCards[nextIndex];
-
-      selectLayer(nextCard.dataset.layer);
-
-      nextCard.focus();
-
+      activateTab(button);
     });
 
-  });
+    /* Keyboard navigation for tabs. */
 
+    tabButtons.forEach((button, index) => {
+      button.addEventListener("keydown", event => {
+        let nextIndex;
 
-  /* -----------------------------------------
-     INITIAL ACTIVE LAYER
-     ----------------------------------------- */
+        switch (event.key) {
+          case "ArrowRight":
+          case "ArrowDown":
+            nextIndex = (index + 1) % tabButtons.length;
+            break;
 
-  const initialCard =
+          case "ArrowLeft":
+          case "ArrowUp":
+            nextIndex =
+              (index - 1 + tabButtons.length) % tabButtons.length;
+            break;
 
-    layerCards.find(card =>
-      card.getAttribute("aria-pressed") === "true"
-    ) ||
+          case "Home":
+            nextIndex = 0;
+            break;
 
-    layerCards.find(card =>
-      card.classList.contains("active")
-    ) ||
+          case "End":
+            nextIndex = tabButtons.length - 1;
+            break;
 
-    layerCards.find(card =>
-      card.dataset.layer === "7"
-    ) ||
+          default:
+            return;
+        }
 
-    layerCards[0];
+        const nextButton = tabButtons[nextIndex];
 
+        if (!pairs.some(pair => pair.button === nextButton)) return;
 
-  if (initialCard) {
+        event.preventDefault();
+        activateTab(nextButton, true);
+      });
+    });
 
-    selectLayer(initialCard.dataset.layer);
+    /* Keep the existing active tab where possible. */
 
+    const initialPair =
+      pairs.find(({ button }) =>
+        button.getAttribute("aria-selected") === "true"
+      ) ||
+      pairs.find(({ button }) =>
+        button.classList.contains("active")
+      ) ||
+      pairs[0];
+
+    activateTab(initialPair.button);
+
+    tabContainer.dataset.tabsInitialized = "true";
   }
 
-}
+  /* =======================================================
+     FIND TROUBLESHOOTING AND QUIZ TAB GROUPS
+     ======================================================= */
 
+  function initializeTabs() {
+    const tabContainers = new Set();
 
-/* =========================================================
-   INITIALIZE OSI LAYER INTERACTION
-   ========================================================= */
+    /*
+     * Standard accessible tab groups.
+     */
+    document.querySelectorAll('[role="tablist"]').forEach(container => {
+      tabContainers.add(container);
+    });
 
-if (document.readyState === "loading") {
+    /*
+     * Common custom tab wrappers.
+     * These are included only when they contain recognizable
+     * tab buttons, to avoid capturing unrelated controls.
+     */
+    const wrapperSelectors = [
+      ".troubleshooting-tabs",
+      ".quiz-tabs",
+      ".tab-container",
+      ".tabs",
+      "[data-tabs]"
+    ];
 
-  document.addEventListener(
-    "DOMContentLoaded",
-    initializeLayerButtons
-  );
+    wrapperSelectors.forEach(selector => {
+      document.querySelectorAll(selector).forEach(container => {
+        if (
+          container.querySelector(
+            '[role="tab"], [data-tab-target], button[data-tab]'
+          )
+        ) {
+          tabContainers.add(container);
+        }
+      });
+    });
 
-} else {
+    tabContainers.forEach(initializeTabGroup);
+  }
 
-  initializeLayerButtons();
+  /* =======================================================
+     INITIALIZE APPLICATION FEATURES
+     ======================================================= */
 
-}
+  function initializeApp() {
+    initializeLayerButtons();
+    initializeTabs();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeApp, {
+      once: true
+    });
+  } else {
+    initializeApp();
+  }
+
+})();
