@@ -572,122 +572,51 @@
       </button>
     </div>
 
-    <!-- LAYER 1: PHYSICAL -->
-    <article
-      class="troubleshooting-tabs__panel is-active"
-      id="troubleshooting-panel-1"
-      role="tabpanel"
-      aria-labelledby="troubleshooting-tab-1"
-      tabindex="0"
-    >
-      <div class="layer-header">
-        <span class="layer-badge">Layer 1</span>
-        <h3>Physical Layer</h3>
-        <p>
-          Troubleshoots physical connectivity, cables, wireless signals,
-          network interfaces, and hardware status.
-        </p>
-      </div>
+<!-- LAYER 1: PHYSICAL -->
+<article
+  class="troubleshooting-tabs__panel is-active"
+  id="troubleshooting-panel-1"
+  role="tabpanel"
+  aria-labelledby="troubleshooting-tab-1"
+  tabindex="0"
+>
+  <div class="layer-header">
+    <p class="eyebrow dark-eyebrow">Layer 1</p>
+    <h3>Physical Layer</h3>
+    <p>
+      Troubleshoots physical connectivity, cables, wireless signals,
+      network interfaces, and hardware status.
+    </p>
+  </div>
 
-      <div class="layer-info-grid">
-        <div class="info-card">
-          <h4>What to Check</h4>
-          <ul>
-            <li>Ethernet cable connections</li>
-            <li>Link lights on network ports</li>
-            <li>Wi-Fi signal strength</li>
-            <li>Network adapter status</li>
-            <li>Port speed and duplex</li>
-            <li>Power and hardware failures</li>
-          </ul>
-        </div>
+  <!-- THREE ALIGNED INFORMATION CARDS -->
+  <div class="layer-info-grid">
 
-        <div class="info-card">
-          <h4>Common Devices</h4>
-          <ul>
-            <li>Hubs and repeaters</li>
-            <li>Network cables</li>
-            <li>Connectors and transceivers</li>
-            <li>Network interface cards</li>
-            <li>Wireless radio hardware</li>
-          </ul>
-        </div>
-      </div>
+    <div class="info-card">
+      <h4>What to Check</h4>
+      <ul>
+        <li>Ethernet cable connections</li>
+        <li>Link lights on network ports</li>
+        <li>Wi-Fi signal strength</li>
+        <li>Network adapter status</li>
+        <li>Port speed and duplex</li>
+        <li>Power and hardware failures</li>
+      </ul>
+    </div>
 
-      <h4>Platform Troubleshooting Commands</h4>
+    <div class="info-card">
+      <h4>Common Devices</h4>
+      <ul>
+        <li>Hubs and repeaters</li>
+        <li>Network cables</li>
+        <li>Connectors and transceivers</li>
+        <li>Network interface cards</li>
+        <li>Wireless radio hardware</li>
+      </ul>
+    </div>
 
-      <div class="command-table-wrapper">
-        <table class="command-table">
-          <thead>
-            <tr>
-              <th scope="col">Linux</th>
-              <th scope="col">Windows</th>
-              <th scope="col">macOS</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <code>ip link show</code>
-                <p>Displays network interfaces and link state.</p>
-              </td>
-              <td>
-                <code>Get-NetAdapter</code>
-                <p>Displays network adapters and their status.</p>
-              </td>
-              <td>
-                <code>ifconfig</code>
-                <p>Displays network interfaces and status.</p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <code>ethtool eth0</code>
-                <p>Checks Ethernet speed, duplex, and link detection.</p>
-              </td>
-              <td>
-                <code>Get-NetAdapterStatistics</code>
-                <p>Shows adapter traffic and error counters.</p>
-              </td>
-              <td>
-                <code>networksetup -listallhardwareports</code>
-                <p>Lists network hardware ports and interfaces.</p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <code>nmcli device status</code>
-                <p>Displays NetworkManager device status.</p>
-              </td>
-              <td>
-                <code>netsh wlan show interfaces</code>
-                <p>Displays Wi-Fi connection and signal information.</p>
-              </td>
-              <td>
-                <code>networksetup -getairportnetwork en0</code>
-                <p>Shows the connected Wi-Fi network.</p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <code>iw dev wlan0 link</code>
-                <p>Shows wireless connection information.</p>
-              </td>
-              <td>
-                <code>ipconfig /all</code>
-                <p>Shows adapter configuration and physical addresses.</p>
-              </td>
-              <td>
-                <code>wdutil info</code>
-                <p>Displays wireless diagnostics on supported macOS versions.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
+    <div class="info-card problem-card">
       <h4>Common Problems</h4>
-
       <div class="problem-table">
         <div class="problem-row">
           <strong>No Link Light</strong>
@@ -706,94 +635,66 @@
           <span>Enable the network interface and check its driver.</span>
         </div>
       </div>
-    </article>
+    </div>
 
-    <!-- LAYER 2: DATA LINK -->
-    <article
-      class="troubleshooting-tabs__panel"
-      id="troubleshooting-panel-2"
-      role="tabpanel"
-      aria-labelledby="troubleshooting-tab-2"
-      tabindex="0"
-      hidden
-    >
-      <div class="layer-header">
-        <span class="layer-badge">Layer 2</span>
-        <h3>Data Link Layer</h3>
-        <p>
-          Troubleshoots MAC addressing, Ethernet frames, switching,
-          VLANs, and communication within a local network.
-        </p>
-      </div>
+  </div>
 
-      <div class="layer-info-grid">
-        <div class="info-card">
-          <h4>What to Check</h4>
-          <ul>
-            <li>MAC address tables</li>
-            <li>ARP and neighbor cache</li>
-            <li>VLAN membership</li>
-            <li>Switch port configuration</li>
-            <li>Spanning Tree Protocol</li>
-            <li>Frame errors and drops</li>
-          </ul>
-        </div>
+  <!-- COMMAND TABLE BELOW THE THREE CARDS -->
+  <h4 class="command-section-title">Platform Troubleshooting Commands</h4>
 
-        <div class="info-card">
-          <h4>Common Devices</h4>
-          <ul>
-            <li>Layer 2 switches</li>
-            <li>Bridges</li>
-            <li>Wireless access points</li>
-            <li>Network interface cards</li>
-            <li>VLAN-aware switches</li>
-          </ul>
-        </div>
-      </div>
+  <div class="command-table-wrapper">
+    <!-- KEEP YOUR EXISTING LAYER 1 COMMAND TABLE HERE, UNCHANGED -->
+  </div>
+</article>
 
-      <h4>Platform Troubleshooting Commands</h4>
 
-      <div class="command-table-wrapper">
-        <table class="command-table">
-          <thead>
-            <tr>
-              <th scope="col">Linux</th>
-              <th scope="col">Windows</th>
-              <th scope="col">macOS</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>ip neigh show</code><p>Displays the IP-to-MAC neighbor cache.</p></td>
-              <td><code>arp -a</code><p>Displays the ARP cache.</p></td>
-              <td><code>arp -a</code><p>Displays the ARP cache.</p></td>
-            </tr>
-            <tr>
-              <td><code>ip link show</code><p>Displays interface MAC addresses and link state.</p></td>
-              <td><code>getmac /v</code><p>Displays MAC addresses and adapter information.</p></td>
-              <td><code>ifconfig en0</code><p>Displays interface details, including its MAC address.</p></td>
-            </tr>
-            <tr>
-              <td><code>bridge link</code><p>Displays bridge port information.</p></td>
-              <td><code>Get-NetNeighbor</code><p>Displays neighbor cache entries.</p></td>
-              <td><code>networksetup -listallhardwareports</code><p>Maps hardware ports to network interfaces.</p></td>
-            </tr>
-            <tr>
-              <td><code>bridge fdb show</code><p>Displays the bridge forwarding database.</p></td>
-              <td><code>Get-NetAdapterStatistics</code><p>Checks adapter packet errors and discards.</p></td>
-              <td><code>sudo tcpdump -i en0 -e -n</code><p>Captures link-layer headers where supported.</p></td>
-            </tr>
-            <tr>
-              <td><code>sudo tcpdump -i eth0 -e -n</code><p>Captures packets with Ethernet header information.</p></td>
-              <td><code>Get-NetAdapter -IncludeHidden</code><p>Lists network adapters, including hidden adapters.</p></td>
-              <td><code>ifconfig</code><p>Displays interface configuration and hardware addresses.</p></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+<!-- =====================================================
+     LAYER 2: DATA LINK
+===================================================== -->
+<article
+  class="troubleshooting-tabs__panel"
+  id="troubleshooting-panel-2"
+  role="tabpanel"
+  aria-labelledby="troubleshooting-tab-2"
+  tabindex="0"
+  hidden
+>
+  <div class="layer-header">
+    <p class="eyebrow dark-eyebrow">Layer 2</p>
+    <h3>Data Link Layer</h3>
+    <p>
+      Troubleshoots MAC addressing, Ethernet frames, switching,
+      VLANs, and communication within a local network.
+    </p>
+  </div>
 
+  <div class="layer-info-grid">
+
+    <div class="info-card">
+      <h4>What to Check</h4>
+      <ul>
+        <li>MAC address tables</li>
+        <li>ARP and neighbor cache</li>
+        <li>VLAN membership</li>
+        <li>Switch port configuration</li>
+        <li>Spanning Tree Protocol</li>
+        <li>Frame errors and drops</li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <h4>Common Devices</h4>
+      <ul>
+        <li>Layer 2 switches</li>
+        <li>Network bridges</li>
+        <li>Wireless access points</li>
+        <li>Network interface cards</li>
+        <li>VLAN-aware switches</li>
+      </ul>
+    </div>
+
+    <div class="info-card problem-card">
       <h4>Common Problems</h4>
-
       <div class="problem-table">
         <div class="problem-row">
           <strong>ARP Resolution Failure</strong>
@@ -816,98 +717,100 @@
           <span>Investigate switching loops and Spanning Tree Protocol status.</span>
         </div>
       </div>
-    </article>
+    </div>
 
-    <!-- LAYER 3: NETWORK -->
-    <article
-      class="troubleshooting-tabs__panel"
-      id="troubleshooting-panel-3"
-      role="tabpanel"
-      aria-labelledby="troubleshooting-tab-3"
-      tabindex="0"
-      hidden
-    >
-      <div class="layer-header">
-        <span class="layer-badge">Layer 3</span>
-        <h3>Network Layer</h3>
-        <p>
-          Troubleshoots IP addressing, subnet masks, gateways,
-          routing, and connectivity between different networks.
-        </p>
-      </div>
+  </div>
 
-      <div class="layer-info-grid">
-        <div class="info-card">
-          <h4>What to Check</h4>
-          <ul>
-            <li>IP address and subnet mask</li>
-            <li>Default gateway</li>
-            <li>Routing table</li>
-            <li>Packet loss and latency</li>
-            <li>Path between networks</li>
-          </ul>
-        </div>
+  <h4 class="command-section-title">Platform Troubleshooting Commands</h4>
 
-        <div class="info-card">
-          <h4>Common Protocols</h4>
-          <ul>
-            <li>IPv4 and IPv6</li>
-            <li>ICMP</li>
-            <li>IPsec</li>
-            <li>OSPF and BGP</li>
-            <li>ARP for local IPv4 address resolution</li>
-          </ul>
-        </div>
-      </div>
+  <div class="command-table-wrapper">
+    <table class="command-table">
+      <thead>
+        <tr>
+          <th scope="col">Linux</th>
+          <th scope="col">Windows</th>
+          <th scope="col">macOS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>ip neigh show</code><p>Displays the IP-to-MAC neighbor cache.</p></td>
+          <td><code>arp -a</code><p>Displays the ARP cache.</p></td>
+          <td><code>arp -a</code><p>Displays the ARP cache.</p></td>
+        </tr>
+        <tr>
+          <td><code>ip link show</code><p>Displays interface MAC addresses and link state.</p></td>
+          <td><code>getmac /v</code><p>Displays MAC addresses and adapter information.</p></td>
+          <td><code>ifconfig en0</code><p>Displays interface details, including its MAC address.</p></td>
+        </tr>
+        <tr>
+          <td><code>bridge link</code><p>Displays bridge port information.</p></td>
+          <td><code>Get-NetNeighbor</code><p>Displays neighbor cache entries.</p></td>
+          <td><code>networksetup -listallhardwareports</code><p>Maps hardware ports to network interfaces.</p></td>
+        </tr>
+        <tr>
+          <td><code>bridge fdb show</code><p>Displays the bridge forwarding database.</p></td>
+          <td><code>Get-NetAdapterStatistics</code><p>Checks adapter packet errors and discards.</p></td>
+          <td><code>sudo tcpdump -i en0 -e -n</code><p>Captures link-layer headers where supported.</p></td>
+        </tr>
+        <tr>
+          <td><code>sudo tcpdump -i eth0 -e -n</code><p>Captures packets with Ethernet header information.</p></td>
+          <td><code>Get-NetAdapter -IncludeHidden</code><p>Lists network adapters, including hidden adapters.</p></td>
+          <td><code>ifconfig</code><p>Displays interface configuration and hardware addresses.</p></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</article>
 
-      <h4>Platform Troubleshooting Commands</h4>
 
-      <div class="command-table-wrapper">
-        <table class="command-table">
-          <thead>
-            <tr>
-              <th scope="col">Linux</th>
-              <th scope="col">Windows</th>
-              <th scope="col">macOS</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>ip addr show</code><p>Displays IP addresses assigned to interfaces.</p></td>
-              <td><code>ipconfig /all</code><p>Displays IP configuration, gateway, and DNS servers.</p></td>
-              <td><code>ifconfig</code><p>Displays interface IP configuration.</p></td>
-            </tr>
-            <tr>
-              <td><code>ip route show</code><p>Displays the routing table.</p></td>
-              <td><code>route print</code><p>Displays IPv4 and IPv6 routing tables.</p></td>
-              <td><code>netstat -rn</code><p>Displays the routing table.</p></td>
-            </tr>
-            <tr>
-              <td><code>ip route get 8.8.8.8</code><p>Shows the route selected for a destination.</p></td>
-              <td><code>Get-NetRoute</code><p>Displays configured network routes.</p></td>
-              <td><code>route get default</code><p>Displays the default route.</p></td>
-            </tr>
-            <tr>
-              <td><code>ping -c 4 8.8.8.8</code><p>Tests IP reachability.</p></td>
-              <td><code>ping 8.8.8.8</code><p>Tests IP connectivity.</p></td>
-              <td><code>ping -c 4 8.8.8.8</code><p>Tests IP connectivity.</p></td>
-            </tr>
-            <tr>
-              <td><code>traceroute 8.8.8.8</code><p>Displays the path to a destination.</p></td>
-              <td><code>tracert 8.8.8.8</code><p>Traces the network path to a destination.</p></td>
-              <td><code>traceroute 8.8.8.8</code><p>Traces the network path.</p></td>
-            </tr>
-            <tr>
-              <td><code>tracepath 8.8.8.8</code><p>Helps trace a route and identify path MTU issues.</p></td>
-              <td><code>pathping 8.8.8.8</code><p>Combines route tracing with packet-loss analysis.</p></td>
-              <td><code>route get 8.8.8.8</code><p>Shows the route selected for a destination.</p></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+<!-- =====================================================
+     LAYER 3: NETWORK
+===================================================== -->
+<article
+  class="troubleshooting-tabs__panel"
+  id="troubleshooting-panel-3"
+  role="tabpanel"
+  aria-labelledby="troubleshooting-tab-3"
+  tabindex="0"
+  hidden
+>
+  <div class="layer-header">
+    <p class="eyebrow dark-eyebrow">Layer 3</p>
+    <h3>Network Layer</h3>
+    <p>
+      Troubleshoots IP addressing, subnet masks, gateways,
+      routing, and connectivity between different networks.
+    </p>
+  </div>
 
+  <div class="layer-info-grid">
+
+    <div class="info-card">
+      <h4>What to Check</h4>
+      <ul>
+        <li>IP address and subnet mask</li>
+        <li>Default gateway</li>
+        <li>Routing table</li>
+        <li>Packet loss and latency</li>
+        <li>Path between networks</li>
+        <li>Route selection and reachability</li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <h4>Common Protocols</h4>
+      <ul>
+        <li>IPv4 and IPv6</li>
+        <li>ICMP</li>
+        <li>IPsec</li>
+        <li>OSPF and BGP</li>
+        <li>ARP for local IPv4 address resolution</li>
+      </ul>
+    </div>
+
+    <div class="info-card problem-card">
       <h4>Common Problems</h4>
-
       <div class="problem-table">
         <div class="problem-row">
           <strong>APIPA Address (169.254.x.x)</strong>
@@ -930,92 +833,105 @@
           <span>Compare results across network hops and investigate congestion or faulty links.</span>
         </div>
       </div>
-    </article>
+    </div>
 
-    <!-- LAYER 4: TRANSPORT -->
-    <article
-      class="troubleshooting-tabs__panel"
-      id="troubleshooting-panel-4"
-      role="tabpanel"
-      aria-labelledby="troubleshooting-tab-4"
-      tabindex="0"
-      hidden
-    >
-      <div class="layer-header">
-        <span class="layer-badge">Layer 4</span>
-        <h3>Transport Layer</h3>
-        <p>
-          Troubleshoots TCP and UDP communication, ports,
-          connections, retransmissions, and firewall filtering.
-        </p>
-      </div>
+  </div>
 
-      <div class="layer-info-grid">
-        <div class="info-card">
-          <h4>What to Check</h4>
-          <ul>
-            <li>TCP connection state</li>
-            <li>Listening ports</li>
-            <li>UDP communication</li>
-            <li>Firewall rules</li>
-            <li>Connection timeouts</li>
-            <li>TCP resets and retransmissions</li>
-          </ul>
-        </div>
+  <h4 class="command-section-title">Platform Troubleshooting Commands</h4>
 
-        <div class="info-card">
-          <h4>Common Protocols</h4>
-          <ul>
-            <li>TCP</li>
-            <li>UDP</li>
-            <li>SCTP</li>
-          </ul>
-        </div>
-      </div>
+  <div class="command-table-wrapper">
+    <table class="command-table">
+      <thead>
+        <tr>
+          <th scope="col">Linux</th>
+          <th scope="col">Windows</th>
+          <th scope="col">macOS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>ip addr show</code><p>Displays IP addresses assigned to interfaces.</p></td>
+          <td><code>ipconfig /all</code><p>Displays IP configuration, gateway, and DNS servers.</p></td>
+          <td><code>ifconfig</code><p>Displays interface IP configuration.</p></td>
+        </tr>
+        <tr>
+          <td><code>ip route show</code><p>Displays the routing table.</p></td>
+          <td><code>route print</code><p>Displays IPv4 and IPv6 routing tables.</p></td>
+          <td><code>netstat -rn</code><p>Displays the routing table.</p></td>
+        </tr>
+        <tr>
+          <td><code>ip route get 8.8.8.8</code><p>Shows the route selected for a destination.</p></td>
+          <td><code>Get-NetRoute</code><p>Displays configured network routes.</p></td>
+          <td><code>route get default</code><p>Displays the default route.</p></td>
+        </tr>
+        <tr>
+          <td><code>ping -c 4 8.8.8.8</code><p>Tests IP reachability.</p></td>
+          <td><code>ping 8.8.8.8</code><p>Tests IP connectivity.</p></td>
+          <td><code>ping -c 4 8.8.8.8</code><p>Tests IP connectivity.</p></td>
+        </tr>
+        <tr>
+          <td><code>traceroute 8.8.8.8</code><p>Displays the path to a destination.</p></td>
+          <td><code>tracert 8.8.8.8</code><p>Traces the network path to a destination.</p></td>
+          <td><code>traceroute 8.8.8.8</code><p>Traces the network path.</p></td>
+        </tr>
+        <tr>
+          <td><code>tracepath 8.8.8.8</code><p>Helps trace a route and identify path MTU issues.</p></td>
+          <td><code>pathping 8.8.8.8</code><p>Combines route tracing with packet-loss analysis.</p></td>
+          <td><code>route get 8.8.8.8</code><p>Shows the route selected for a destination.</p></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</article>
 
-      <h4>Platform Troubleshooting Commands</h4>
 
-      <div class="command-table-wrapper">
-        <table class="command-table">
-          <thead>
-            <tr>
-              <th scope="col">Linux</th>
-              <th scope="col">Windows</th>
-              <th scope="col">macOS</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>ss -tulnp</code><p>Displays listening TCP and UDP sockets.</p></td>
-              <td><code>netstat -ano</code><p>Displays connections, listening ports, and process IDs.</p></td>
-              <td><code>netstat -an</code><p>Displays network connections and listening sockets.</p></td>
-            </tr>
-            <tr>
-              <td><code>ss -ant</code><p>Displays TCP connection states.</p></td>
-              <td><code>Get-NetTCPConnection</code><p>Displays TCP connections and their states.</p></td>
-              <td><code>lsof -i -P -n</code><p>Shows processes using network ports.</p></td>
-            </tr>
-            <tr>
-              <td><code>sudo lsof -i -P -n</code><p>Shows processes using network connections.</p></td>
-              <td><code>Test-NetConnection example.com -Port 443</code><p>Tests TCP connectivity to a specific port.</p></td>
-              <td><code>nc -vz example.com 443</code><p>Tests TCP port connectivity.</p></td>
-            </tr>
-            <tr>
-              <td><code>nc -vz example.com 443</code><p>Tests whether a TCP port is reachable.</p></td>
-              <td><code>Get-NetUDPEndpoint</code><p>Displays local UDP endpoints.</p></td>
-              <td><code>sudo tcpdump -i en0 port 443</code><p>Captures traffic on port 443.</p></td>
-            </tr>
-            <tr>
-              <td><code>sudo tcpdump -i any port 443</code><p>Captures traffic on port 443 across interfaces.</p></td>
-              <td><code>pktmon start --capture</code><p>Starts packet monitoring on supported Windows versions.</p></td>
-              <td><code>netstat -an | grep LISTEN</code><p>Lists listening network sockets.</p></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+<!-- =====================================================
+     LAYER 4: TRANSPORT
+===================================================== -->
+<article
+  class="troubleshooting-tabs__panel"
+  id="troubleshooting-panel-4"
+  role="tabpanel"
+  aria-labelledby="troubleshooting-tab-4"
+  tabindex="0"
+  hidden
+>
+  <div class="layer-header">
+    <p class="eyebrow dark-eyebrow">Layer 4</p>
+    <h3>Transport Layer</h3>
+    <p>
+      Troubleshoots TCP and UDP communication, ports,
+      connections, retransmissions, and firewall filtering.
+    </p>
+  </div>
 
+  <div class="layer-info-grid">
+
+    <div class="info-card">
+      <h4>What to Check</h4>
+      <ul>
+        <li>TCP connection state</li>
+        <li>Listening ports</li>
+        <li>UDP communication</li>
+        <li>Firewall rules</li>
+        <li>Connection timeouts</li>
+        <li>TCP resets and retransmissions</li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <h4>Common Protocols</h4>
+      <ul>
+        <li>TCP</li>
+        <li>UDP</li>
+        <li>SCTP</li>
+        <li>Port-based communication</li>
+        <li>Connection-oriented transport</li>
+      </ul>
+    </div>
+
+    <div class="info-card problem-card">
       <h4>Common Problems</h4>
-
       <div class="problem-table">
         <div class="problem-row">
           <strong>Connection Refused</strong>
@@ -1038,100 +954,100 @@
           <span>Check firewall policies and whether the receiving application is listening.</span>
         </div>
       </div>
-    </article>
+    </div>
 
-    <!-- LAYER 5: SESSION -->
-    <article
-      class="troubleshooting-tabs__panel"
-      id="troubleshooting-panel-5"
-      role="tabpanel"
-      aria-labelledby="troubleshooting-tab-5"
-      tabindex="0"
-      hidden
-    >
-      <div class="layer-header">
-        <span class="layer-badge">Layer 5</span>
-        <h3>Session Layer</h3>
-        <p>
-          Investigates session establishment, persistence,
-          authentication sessions, and session termination.
-        </p>
-      </div>
+  </div>
 
-      <div class="layer-info-grid">
-        <div class="info-card">
-          <h4>What to Check</h4>
-          <ul>
-            <li>Session establishment</li>
-            <li>Session timeout settings</li>
-            <li>Authentication state</li>
-            <li>Remote desktop sessions</li>
-            <li>File-sharing sessions</li>
-            <li>RPC service availability</li>
-          </ul>
-        </div>
+  <h4 class="command-section-title">Platform Troubleshooting Commands</h4>
 
-        <div class="info-card">
-          <h4>Examples</h4>
-          <ul>
-            <li>SMB sessions</li>
-            <li>Remote Desktop sessions</li>
-            <li>RPC-based communication</li>
-            <li>Application login sessions</li>
-            <li>Session keep-alive mechanisms</li>
-          </ul>
-        </div>
-      </div>
+  <div class="command-table-wrapper">
+    <table class="command-table">
+      <thead>
+        <tr>
+          <th scope="col">Linux</th>
+          <th scope="col">Windows</th>
+          <th scope="col">macOS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>ss -tulnp</code><p>Displays listening TCP and UDP sockets.</p></td>
+          <td><code>netstat -ano</code><p>Displays connections, listening ports, and process IDs.</p></td>
+          <td><code>netstat -an</code><p>Displays network connections and listening sockets.</p></td>
+        </tr>
+        <tr>
+          <td><code>ss -ant</code><p>Displays TCP connection states.</p></td>
+          <td><code>Get-NetTCPConnection</code><p>Displays TCP connections and their states.</p></td>
+          <td><code>lsof -i -P -n</code><p>Shows processes using network ports.</p></td>
+        </tr>
+        <tr>
+          <td><code>sudo lsof -i -P -n</code><p>Shows processes using network connections.</p></td>
+          <td><code>Test-NetConnection example.com -Port 443</code><p>Tests TCP connectivity to a specific port.</p></td>
+          <td><code>nc -vz example.com 443</code><p>Tests TCP port connectivity.</p></td>
+        </tr>
+        <tr>
+          <td><code>nc -vz example.com 443</code><p>Tests whether a TCP port is reachable.</p></td>
+          <td><code>Get-NetUDPEndpoint</code><p>Displays local UDP endpoints.</p></td>
+          <td><code>sudo tcpdump -i en0 port 443</code><p>Captures traffic on port 443.</p></td>
+        </tr>
+        <tr>
+          <td><code>sudo tcpdump -i any port 443</code><p>Captures traffic on port 443 across interfaces.</p></td>
+          <td><code>pktmon start --capture</code><p>Starts packet monitoring on supported Windows versions.</p></td>
+          <td><code>netstat -an | grep LISTEN</code><p>Lists listening network sockets.</p></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</article>
 
-      <p class="layer-note">
-        The Session Layer is a conceptual OSI layer. Modern operating
-        systems and applications often implement session management
-        within application protocols and libraries.
-      </p>
 
-      <h4>Platform Troubleshooting Commands</h4>
+<!-- =====================================================
+     LAYER 5: SESSION
+===================================================== -->
+<article
+  class="troubleshooting-tabs__panel"
+  id="troubleshooting-panel-5"
+  role="tabpanel"
+  aria-labelledby="troubleshooting-tab-5"
+  tabindex="0"
+  hidden
+>
+  <div class="layer-header">
+    <p class="eyebrow dark-eyebrow">Layer 5</p>
+    <h3>Session Layer</h3>
+    <p>
+      Investigates session establishment, persistence,
+      authentication sessions, and session termination.
+    </p>
+  </div>
 
-      <div class="command-table-wrapper">
-        <table class="command-table">
-          <thead>
-            <tr>
-              <th scope="col">Linux</th>
-              <th scope="col">Windows</th>
-              <th scope="col">macOS</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>who</code><p>Displays currently logged-in users.</p></td>
-              <td><code>query session</code><p>Displays Remote Desktop session information.</p></td>
-              <td><code>who</code><p>Displays logged-in users.</p></td>
-            </tr>
-            <tr>
-              <td><code>w</code><p>Shows logged-in users and their activity.</p></td>
-              <td><code>qwinsta</code><p>Lists terminal sessions on a Windows system.</p></td>
-              <td><code>last</code><p>Displays login history.</p></td>
-            </tr>
-            <tr>
-              <td><code>loginctl list-sessions</code><p>Lists active system login sessions.</p></td>
-              <td><code>Get-SmbConnection</code><p>Displays active SMB client connections.</p></td>
-              <td><code>smbutil statshares -a</code><p>Displays mounted SMB share information.</p></td>
-            </tr>
-            <tr>
-              <td><code>smbstatus</code><p>Displays Samba connections and active sessions.</p></td>
-              <td><code>Get-Service RpcSs</code><p>Checks the Remote Procedure Call service status.</p></td>
-              <td><code>launchctl list</code><p>Lists launchd-managed jobs and services.</p></td>
-            </tr>
-            <tr>
-              <td><code>rpcinfo -p localhost</code><p>Lists registered local RPC services.</p></td>
-              <td><code>Get-SmbSession</code><p>Displays SMB server sessions with appropriate permissions.</p></td>
-              <td><code>log show --last 1h</code><p>Displays recent system logs.</p></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  <div class="layer-info-grid">
 
+    <div class="info-card">
+      <h4>What to Check</h4>
+      <ul>
+        <li>Session establishment</li>
+        <li>Session timeout settings</li>
+        <li>Authentication state</li>
+        <li>Remote desktop sessions</li>
+        <li>File-sharing sessions</li>
+        <li>RPC service availability</li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <h4>Common Examples</h4>
+      <ul>
+        <li>SMB sessions</li>
+        <li>Remote Desktop sessions</li>
+        <li>RPC-based communication</li>
+        <li>Application login sessions</li>
+        <li>Session keep-alive mechanisms</li>
+      </ul>
+    </div>
+
+    <div class="info-card problem-card">
       <h4>Common Problems</h4>
-
       <div class="problem-table">
         <div class="problem-row">
           <strong>Session Disconnects</strong>
@@ -1154,100 +1070,106 @@
           <span>Identify inactive sessions and safely reconnect or terminate them.</span>
         </div>
       </div>
-    </article>
+    </div>
 
-    <!-- LAYER 6: PRESENTATION -->
-    <article
-      class="troubleshooting-tabs__panel"
-      id="troubleshooting-panel-6"
-      role="tabpanel"
-      aria-labelledby="troubleshooting-tab-6"
-      tabindex="0"
-      hidden
-    >
-      <div class="layer-header">
-        <span class="layer-badge">Layer 6</span>
-        <h3>Presentation Layer</h3>
-        <p>
-          Checks data formatting, encryption, decryption, certificates,
-          encoding, and data conversion.
-        </p>
-      </div>
+  </div>
 
-      <div class="layer-info-grid">
-        <div class="info-card">
-          <h4>What to Check</h4>
-          <ul>
-            <li>TLS certificate validity</li>
-            <li>Certificate trust chain</li>
-            <li>Hostname matching</li>
-            <li>Encryption negotiation</li>
-            <li>Character encoding</li>
-            <li>Data format and serialization</li>
-          </ul>
-        </div>
+  <p class="layer-note">
+    The Session Layer is a conceptual OSI layer. Modern operating
+    systems and applications often implement session management
+    within application protocols and libraries.
+  </p>
 
-        <div class="info-card">
-          <h4>Common Technologies</h4>
-          <ul>
-            <li>TLS</li>
-            <li>UTF-8 and ASCII</li>
-            <li>JSON and XML serialization</li>
-            <li>Data compression</li>
-            <li>Cryptographic libraries</li>
-          </ul>
-        </div>
-      </div>
+  <h4 class="command-section-title">Platform Troubleshooting Commands</h4>
 
-      <p class="layer-note">
-        TLS is commonly associated with Presentation Layer functions
-        in OSI teaching models, but real-world implementations combine
-        these functions with protocol stacks and application libraries.
-      </p>
+  <div class="command-table-wrapper">
+    <table class="command-table">
+      <thead>
+        <tr>
+          <th scope="col">Linux</th>
+          <th scope="col">Windows</th>
+          <th scope="col">macOS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>who</code><p>Displays currently logged-in users.</p></td>
+          <td><code>query session</code><p>Displays Remote Desktop session information.</p></td>
+          <td><code>who</code><p>Displays logged-in users.</p></td>
+        </tr>
+        <tr>
+          <td><code>w</code><p>Shows logged-in users and their activity.</p></td>
+          <td><code>qwinsta</code><p>Lists terminal sessions on a Windows system.</p></td>
+          <td><code>last</code><p>Displays login history.</p></td>
+        </tr>
+        <tr>
+          <td><code>loginctl list-sessions</code><p>Lists active system login sessions.</p></td>
+          <td><code>Get-SmbConnection</code><p>Displays active SMB client connections.</p></td>
+          <td><code>smbutil statshares -a</code><p>Displays mounted SMB share information.</p></td>
+        </tr>
+        <tr>
+          <td><code>smbstatus</code><p>Displays Samba connections and active sessions.</p></td>
+          <td><code>Get-Service RpcSs</code><p>Checks the Remote Procedure Call service status.</p></td>
+          <td><code>launchctl list</code><p>Lists launchd-managed jobs and services.</p></td>
+        </tr>
+        <tr>
+          <td><code>rpcinfo -p localhost</code><p>Lists registered local RPC services.</p></td>
+          <td><code>Get-SmbSession</code><p>Displays SMB server sessions with appropriate permissions.</p></td>
+          <td><code>log show --last 1h</code><p>Displays recent system logs.</p></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</article>
 
-      <h4>Platform Troubleshooting Commands</h4>
 
-      <div class="command-table-wrapper">
-        <table class="command-table">
-          <thead>
-            <tr>
-              <th scope="col">Linux</th>
-              <th scope="col">Windows</th>
-              <th scope="col">macOS</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>openssl s_client -connect example.com:443 -servername example.com</code><p>Inspects a TLS connection and certificate information.</p></td>
-              <td><code>certutil -verify certificate.cer</code><p>Verifies a certificate and its chain where applicable.</p></td>
-              <td><code>openssl s_client -connect example.com:443 -servername example.com</code><p>Inspects a TLS connection and certificate details.</p></td>
-            </tr>
-            <tr>
-              <td><code>openssl x509 -in certificate.crt -text -noout</code><p>Displays certificate details.</p></td>
-              <td><code>certutil -store My</code><p>Displays certificates in the personal certificate store.</p></td>
-              <td><code>security find-certificate -a -p /Library/Keychains/System.keychain</code><p>Displays certificates from the system keychain.</p></td>
-            </tr>
-            <tr>
-              <td><code>file document.dat</code><p>Identifies the type of a file.</p></td>
-              <td><code>Get-ChildItem Cert:\CurrentUser\My</code><p>Lists certificates in the current user's personal store.</p></td>
-              <td><code>file document.dat</code><p>Identifies file types.</p></td>
-            </tr>
-            <tr>
-              <td><code>iconv -f ISO-8859-1 -t UTF-8 input.txt</code><p>Converts text between character encodings.</p></td>
-              <td><code>Format-Hex .\file.dat</code><p>Displays file contents in hexadecimal format.</p></td>
-              <td><code>iconv -f ISO-8859-1 -t UTF-8 input.txt</code><p>Converts text encoding.</p></td>
-            </tr>
-            <tr>
-              <td><code>curl -Iv https://example.com</code><p>Displays HTTP and TLS connection diagnostics.</p></td>
-              <td><code>curl.exe -Iv https://example.com</code><p>Displays HTTP and TLS connection diagnostics.</p></td>
-              <td><code>openssl x509 -in certificate.crt -text -noout</code><p>Displays certificate details from a certificate file.</p></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+<!-- =====================================================
+     LAYER 6: PRESENTATION
+===================================================== -->
+<article
+  class="troubleshooting-tabs__panel"
+  id="troubleshooting-panel-6"
+  role="tabpanel"
+  aria-labelledby="troubleshooting-tab-6"
+  tabindex="0"
+  hidden
+>
+  <div class="layer-header">
+    <p class="eyebrow dark-eyebrow">Layer 6</p>
+    <h3>Presentation Layer</h3>
+    <p>
+      Checks data formatting, encryption, decryption, certificates,
+      encoding, and data conversion.
+    </p>
+  </div>
 
+  <div class="layer-info-grid">
+
+    <div class="info-card">
+      <h4>What to Check</h4>
+      <ul>
+        <li>TLS certificate validity</li>
+        <li>Certificate trust chain</li>
+        <li>Hostname matching</li>
+        <li>Encryption negotiation</li>
+        <li>Character encoding</li>
+        <li>Data format and serialization</li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <h4>Common Technologies</h4>
+      <ul>
+        <li>TLS encryption</li>
+        <li>UTF-8 and ASCII</li>
+        <li>JSON and XML serialization</li>
+        <li>Data compression</li>
+        <li>Cryptographic libraries</li>
+      </ul>
+    </div>
+
+    <div class="info-card problem-card">
       <h4>Common Problems</h4>
-
       <div class="problem-table">
         <div class="problem-row">
           <strong>Expired Certificate</strong>
@@ -1274,111 +1196,108 @@
           <span>Check serialization, compression, and file integrity.</span>
         </div>
       </div>
-    </article>
+    </div>
 
-    <!-- LAYER 7: APPLICATION -->
-    <article
-      class="troubleshooting-tabs__panel"
-      id="troubleshooting-panel-7"
-      role="tabpanel"
-      aria-labelledby="troubleshooting-tab-7"
-      tabindex="0"
-      hidden
-    >
-      <div class="layer-header">
-        <span class="layer-badge">Layer 7</span>
-        <h3>Application Layer</h3>
-        <p>
-          Troubleshoots application services, DNS resolution, HTTP requests,
-          email, file transfers, and application-level errors.
-        </p>
-      </div>
+  </div>
 
-      <div class="layer-info-grid">
-        <div class="info-card">
-          <h4>What to Check</h4>
-          <ul>
-            <li>DNS resolution</li>
-            <li>Web server availability</li>
-            <li>HTTP response codes</li>
-            <li>Application logs</li>
-            <li>DHCP lease information</li>
-            <li>Service configuration</li>
-          </ul>
-        </div>
+  <p class="layer-note">
+    TLS is commonly associated with Presentation Layer functions
+    in OSI teaching models, but real-world implementations combine
+    these functions with protocol stacks and application libraries.
+  </p>
 
-        <div class="info-card">
-          <h4>Common Protocols</h4>
-          <ul>
-            <li>HTTP and HTTPS</li>
-            <li>DNS</li>
-            <li>DHCP</li>
-            <li>SMTP, IMAP, and POP3</li>
-            <li>FTP and SFTP</li>
-            <li>SSH</li>
-            <li>SNMP</li>
-          </ul>
-        </div>
-      </div>
+  <h4 class="command-section-title">Platform Troubleshooting Commands</h4>
 
-      <h4>Platform Troubleshooting Commands</h4>
+  <div class="command-table-wrapper">
+    <table class="command-table">
+      <thead>
+        <tr>
+          <th scope="col">Linux</th>
+          <th scope="col">Windows</th>
+          <th scope="col">macOS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>openssl s_client -connect example.com:443 -servername example.com</code><p>Inspects a TLS connection and certificate information.</p></td>
+          <td><code>certutil -verify certificate.cer</code><p>Verifies a certificate and its chain where applicable.</p></td>
+          <td><code>openssl s_client -connect example.com:443 -servername example.com</code><p>Inspects a TLS connection and certificate details.</p></td>
+        </tr>
+        <tr>
+          <td><code>openssl x509 -in certificate.crt -text -noout</code><p>Displays certificate details.</p></td>
+          <td><code>certutil -store My</code><p>Displays certificates in the personal certificate store.</p></td>
+          <td><code>security find-certificate -a -p /Library/Keychains/System.keychain</code><p>Displays certificates from the system keychain.</p></td>
+        </tr>
+        <tr>
+          <td><code>file document.dat</code><p>Identifies the type of a file.</p></td>
+          <td><code>Get-ChildItem Cert:\CurrentUser\My</code><p>Lists certificates in the current user's personal store.</p></td>
+          <td><code>file document.dat</code><p>Identifies file types.</p></td>
+        </tr>
+        <tr>
+          <td><code>iconv -f ISO-8859-1 -t UTF-8 input.txt</code><p>Converts text between character encodings.</p></td>
+          <td><code>Format-Hex .\file.dat</code><p>Displays file contents in hexadecimal format.</p></td>
+          <td><code>iconv -f ISO-8859-1 -t UTF-8 input.txt</code><p>Converts text encoding.</p></td>
+        </tr>
+        <tr>
+          <td><code>curl -Iv https://example.com</code><p>Displays HTTP and TLS connection diagnostics.</p></td>
+          <td><code>curl.exe -Iv https://example.com</code><p>Displays HTTP and TLS connection diagnostics.</p></td>
+          <td><code>openssl x509 -in certificate.crt -text -noout</code><p>Displays certificate details from a certificate file.</p></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</article>
 
-      <div class="command-table-wrapper">
-        <table class="command-table">
-          <thead>
-            <tr>
-              <th scope="col">Linux</th>
-              <th scope="col">Windows</th>
-              <th scope="col">macOS</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>curl -I https://example.com</code><p>Checks HTTP response headers.</p></td>
-              <td><code>curl.exe -I https://example.com</code><p>Checks HTTP response headers.</p></td>
-              <td><code>curl -I https://example.com</code><p>Checks HTTP response headers.</p></td>
-            </tr>
-            <tr>
-              <td><code>curl -v https://example.com</code><p>Displays detailed HTTP connection information.</p></td>
-              <td><code>nslookup example.com</code><p>Queries DNS records.</p></td>
-              <td><code>dig example.com</code><p>Queries DNS records.</p></td>
-            </tr>
-            <tr>
-              <td><code>dig example.com</code><p>Queries DNS records.</p></td>
-              <td><code>Resolve-DnsName example.com</code><p>Performs DNS resolution using PowerShell.</p></td>
-              <td><code>nslookup example.com</code><p>Performs DNS resolution.</p></td>
-            </tr>
-            <tr>
-              <td><code>nslookup example.com</code><p>Performs a DNS lookup.</p></td>
-              <td><code>ipconfig /displaydns</code><p>Displays the local DNS resolver cache.</p></td>
-              <td><code>scutil --dns</code><p>Displays DNS resolver configuration.</p></td>
-            </tr>
-            <tr>
-              <td><code>ssh user@server</code><p>Tests SSH connectivity and authentication.</p></td>
-              <td><code>ipconfig /flushdns</code><p>Clears the local DNS resolver cache.</p></td>
-              <td><code>ipconfig getpacket en0</code><p>Displays DHCP packet information where available.</p></td>
-            </tr>
-            <tr>
-              <td><code>sudo dhclient -v eth0</code><p>Requests a DHCP lease on systems using dhclient.</p></td>
-              <td><code>ipconfig /release</code><p>Releases the current DHCP IPv4 lease.</p></td>
-              <td><code>ssh user@server</code><p>Tests SSH connectivity and authentication.</p></td>
-            </tr>
-            <tr>
-              <td><code>journalctl -u nginx</code><p>Checks Nginx service logs on systems using systemd.</p></td>
-              <td><code>ipconfig /renew</code><p>Requests a new DHCP IPv4 lease.</p></td>
-              <td><code>log show --last 1h</code><p>Displays recent system logs.</p></td>
-            </tr>
-            <tr>
-              <td><code>journalctl -u ssh</code><p>Checks SSH service logs where the service is named ssh.</p></td>
-              <td><code>Get-Service</code><p>Displays Windows service status.</p></td>
-              <td><code>log show --last 1h --predicate 'process == "Safari"'</code><p>Displays matching recent Safari process logs.</p></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
 
+<!-- =====================================================
+     LAYER 7: APPLICATION
+===================================================== -->
+<article
+  class="troubleshooting-tabs__panel"
+  id="troubleshooting-panel-7"
+  role="tabpanel"
+  aria-labelledby="troubleshooting-tab-7"
+  tabindex="0"
+  hidden
+>
+  <div class="layer-header">
+    <p class="eyebrow dark-eyebrow">Layer 7</p>
+    <h3>Application Layer</h3>
+    <p>
+      Troubleshoots application services, DNS resolution, HTTP requests,
+      email, file transfers, and application-level errors.
+    </p>
+  </div>
+
+  <div class="layer-info-grid">
+
+    <div class="info-card">
+      <h4>What to Check</h4>
+      <ul>
+        <li>DNS resolution</li>
+        <li>Web server availability</li>
+        <li>HTTP response codes</li>
+        <li>Application logs</li>
+        <li>DHCP lease information</li>
+        <li>Service configuration</li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <h4>Common Protocols</h4>
+      <ul>
+        <li>HTTP and HTTPS</li>
+        <li>DNS</li>
+        <li>DHCP</li>
+        <li>SMTP, IMAP, and POP3</li>
+        <li>FTP and SFTP</li>
+        <li>SSH</li>
+        <li>SNMP</li>
+      </ul>
+    </div>
+
+    <div class="info-card problem-card">
       <h4>Common Problems</h4>
-
       <div class="problem-table">
         <div class="problem-row">
           <strong>DNS Lookup Failure</strong>
@@ -1409,7 +1328,67 @@
           <span>Check SMTP configuration, authentication, DNS records, and mail server logs.</span>
         </div>
       </div>
-    </article>
+    </div>
+
+  </div>
+
+  <h4 class="command-section-title">Platform Troubleshooting Commands</h4>
+
+  <div class="command-table-wrapper">
+    <table class="command-table">
+      <thead>
+        <tr>
+          <th scope="col">Linux</th>
+          <th scope="col">Windows</th>
+          <th scope="col">macOS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>curl -I https://example.com</code><p>Checks HTTP response headers.</p></td>
+          <td><code>curl.exe -I https://example.com</code><p>Checks HTTP response headers.</p></td>
+          <td><code>curl -I https://example.com</code><p>Checks HTTP response headers.</p></td>
+        </tr>
+        <tr>
+          <td><code>curl -v https://example.com</code><p>Displays detailed HTTP connection information.</p></td>
+          <td><code>nslookup example.com</code><p>Queries DNS records.</p></td>
+          <td><code>dig example.com</code><p>Queries DNS records.</p></td>
+        </tr>
+        <tr>
+          <td><code>dig example.com</code><p>Queries DNS records.</p></td>
+          <td><code>Resolve-DnsName example.com</code><p>Performs DNS resolution using PowerShell.</p></td>
+          <td><code>nslookup example.com</code><p>Performs DNS resolution.</p></td>
+        </tr>
+        <tr>
+          <td><code>nslookup example.com</code><p>Performs a DNS lookup.</p></td>
+          <td><code>ipconfig /displaydns</code><p>Displays the local DNS resolver cache.</p></td>
+          <td><code>scutil --dns</code><p>Displays DNS resolver configuration.</p></td>
+        </tr>
+        <tr>
+          <td><code>ssh user@server</code><p>Tests SSH connectivity and authentication.</p></td>
+          <td><code>ipconfig /flushdns</code><p>Clears the local DNS resolver cache.</p></td>
+          <td><code>ipconfig getpacket en0</code><p>Displays DHCP packet information where available.</p></td>
+        </tr>
+        <tr>
+          <td><code>sudo dhclient -v eth0</code><p>Requests a DHCP lease on systems using dhclient.</p></td>
+          <td><code>ipconfig /release</code><p>Releases the current DHCP IPv4 lease.</p></td>
+          <td><code>ssh user@server</code><p>Tests SSH connectivity and authentication.</p></td>
+        </tr>
+        <tr>
+          <td><code>journalctl -u nginx</code><p>Checks Nginx service logs on systems using systemd.</p></td>
+          <td><code>ipconfig /renew</code><p>Requests a new DHCP IPv4 lease.</p></td>
+          <td><code>log show --last 1h</code><p>Displays recent system logs.</p></td>
+        </tr>
+        <tr>
+          <td><code>journalctl -u ssh</code><p>Checks SSH service logs where the service is named ssh.</p></td>
+          <td><code>Get-Service</code><p>Displays Windows service status.</p></td>
+          <td><code>log show --last 1h --predicate 'process == "Safari"'</code><p>Displays matching recent Safari process logs.</p></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</article>
+
 
   </div>
 </section>

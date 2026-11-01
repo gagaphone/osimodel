@@ -1678,15 +1678,32 @@ code {
    26. OSI TROUBLESHOOTING TABS
    ========================================================= */
 
+.troubleshooting-section {
+  min-width: 0;
+}
+
+.troubleshooting-section .section-header {
+  margin-bottom: 1.5rem;
+}
+
+.troubleshooting-section .section-header p {
+  max-width: 75ch;
+}
+
 .troubleshooting-tabs {
   min-width: 0;
   margin-top: 1.5rem;
 }
 
 
-/* Tab navigation */
+/* ---------------------------------------------------------
+   TAB NAVIGATION
+   Matches the supplied HTML:
+   .troubleshooting-tabs__list
+   .troubleshooting-tabs__tab
+   --------------------------------------------------------- */
 
-.troubleshooting-tabs__nav {
+.troubleshooting-tabs__list {
   display: flex;
   flex-wrap: nowrap;
   gap: 0.4rem;
@@ -1705,12 +1722,8 @@ code {
   -webkit-overflow-scrolling: touch;
 }
 
-
-/* Individual tabs */
-
-.troubleshooting-tabs__button {
+.troubleshooting-tabs__tab {
   display: inline-flex;
-
   flex: 1 0 auto;
 
   min-width: 76px;
@@ -1742,27 +1755,26 @@ code {
     box-shadow 150ms ease;
 }
 
-.troubleshooting-tabs__button:hover {
+.troubleshooting-tabs__tab:hover {
   background: var(--primary-light);
   color: var(--primary-dark);
 }
 
-.troubleshooting-tabs__button[aria-selected="true"] {
+.troubleshooting-tabs__tab.is-active,
+.troubleshooting-tabs__tab[aria-selected="true"] {
   border-color: #b9cbed;
-
   background: var(--surface);
   color: var(--primary-dark);
-
   box-shadow: var(--shadow-soft);
 }
 
-.troubleshooting-tabs__button:focus-visible {
+.troubleshooting-tabs__tab:focus-visible {
   outline: 3px solid #80aaff;
   outline-offset: 2px;
 }
 
 
-/* Layer numbers */
+/* Tab numbers */
 
 .troubleshooting-tabs__number {
   display: inline-grid;
@@ -1780,18 +1792,21 @@ code {
 
   font-size: 0.75rem;
   font-weight: 850;
-
   font-variant-numeric: tabular-nums;
 }
 
-.troubleshooting-tabs__button[aria-selected="true"]
+.troubleshooting-tabs__tab.is-active
+.troubleshooting-tabs__number,
+.troubleshooting-tabs__tab[aria-selected="true"]
 .troubleshooting-tabs__number {
   background: var(--primary);
   color: #fff;
 }
 
 
-/* Tab panels */
+/* ---------------------------------------------------------
+   TAB PANELS
+   --------------------------------------------------------- */
 
 .troubleshooting-tabs__panel {
   min-width: 0;
@@ -1800,7 +1815,7 @@ code {
   padding: clamp(1rem, 3vw, 1.5rem);
 
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
 
   background: var(--surface);
   box-shadow: var(--shadow-soft);
@@ -1810,186 +1825,353 @@ code {
   display: none !important;
 }
 
-
-/* Panel headings */
-
-.troubleshooting-tabs__heading {
-  display: flex;
-  flex-wrap: wrap;
-
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-
-  margin-bottom: 1rem;
+.troubleshooting-tabs__panel > .layer-header {
+  margin-bottom: 1.5rem;
 }
 
-.troubleshooting-tabs__heading h3 {
-  margin: 0;
+.troubleshooting-tabs__panel .layer-header h3 {
+  margin-bottom: 0.6rem;
 }
 
-.troubleshooting-tabs__pdu {
-  display: inline-flex;
-  align-items: center;
-
-  padding: 0.35rem 0.7rem;
-
-  border: 1px solid #d5e3ff;
-  border-radius: 999px;
-
-  background: var(--primary-light);
-  color: var(--primary-dark);
-
-  font-size: 0.78rem;
-  font-weight: 750;
-}
-
-
-/* Troubleshooting commands */
-
-.troubleshooting-command {
-  margin-block: 1rem;
-}
-
-.troubleshooting-command h4 {
-  margin: 0 0 0.65rem;
-  font-size: 0.95rem;
-}
-
-.troubleshooting-command pre {
-  margin: 0.5rem 0;
-  padding: 1rem;
-
-  overflow-x: auto;
-
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-
-  background: #f4f6fa;
-  color: #253d61;
-
-  font-size: 0.85rem;
-  line-height: 1.7;
-
-  tab-size: 2;
-}
-
-.troubleshooting-command pre code {
-  padding: 0;
-
-  border: 0;
-
-  background: transparent;
-  color: inherit;
-
-  white-space: pre;
-  overflow-wrap: normal;
-}
-
-
-/* Operating system command cards */
-
-.troubleshooting-os-grid {
-  display: grid;
-
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-
-  gap: 0.85rem;
-
-  margin-top: 1.25rem;
-}
-
-.troubleshooting-os-card {
-  min-width: 0;
-
-  padding: 1rem;
-
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-
-  background: var(--surface-subtle);
-}
-
-.troubleshooting-os-card h4 {
-  margin: 0 0 0.75rem;
-
-  color: var(--primary-dark);
-  font-size: 0.95rem;
-}
-
-.troubleshooting-os-card pre {
-  margin: 0;
-  padding: 0.75rem;
-
-  overflow-x: auto;
-
-  border-radius: 7px;
-
-  background: #eef2f8;
-
-  font-size: 0.78rem;
-  line-height: 1.65;
-}
-
-.troubleshooting-os-card code {
-  padding: 0;
-
-  border: 0;
-  background: transparent;
-
-  white-space: pre;
-}
-
-
-/* Common problems */
-
-.troubleshooting-problems {
-  margin-top: 1.75rem;
-}
-
-.troubleshooting-problems h4 {
-  margin-bottom: 0.75rem;
-}
-
-.troubleshooting-problems .table-container {
-  margin-top: 0.75rem;
-}
-
-
-/* Troubleshooting notes */
-
-.troubleshooting-note {
-  margin-top: 1.25rem;
-  padding: 1rem;
-
-  border-left: 4px solid var(--primary);
-  border-radius: var(--radius-sm);
-
-  background: var(--surface-blue);
-}
-
-.troubleshooting-note p:last-child {
+.troubleshooting-tabs__panel .layer-header p:last-child {
   margin-bottom: 0;
 }
 
 
-/* Previous and next controls */
+/* ---------------------------------------------------------
+   THREE-COLUMN INFORMATION GRID
+   What to Check | Devices/Protocols | Common Problems
+   --------------------------------------------------------- */
 
-.troubleshooting-tabs__controls {
-  display: flex;
-  flex-wrap: wrap;
+.layer-info-grid {
+  display: grid;
 
-  justify-content: space-between;
-  gap: 0.75rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 
-  margin-top: 1.25rem;
+  align-items: stretch;
+  gap: 1rem;
+
+  width: 100%;
+  margin: 1.5rem 0;
 }
 
-.troubleshooting-tabs__controls button {
-  min-height: 42px;
-  padding: 0.6rem 0.9rem;
 
-  font-size: 0.875rem;
+/* Individual cards */
+
+.layer-info-grid .info-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+
+  padding: 1.15rem;
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+
+  background: #f1f5ff;
+
+  box-shadow: var(--shadow-soft);
+
+  overflow-wrap: anywhere;
+}
+
+
+/* Different background for each card */
+
+.layer-info-grid .info-card:nth-child(1) {
+  background: #edf4ff;
+  border-color: #c9daf5;
+}
+
+.layer-info-grid .info-card:nth-child(2) {
+  background: #eef8f4;
+  border-color: #c8e6d8;
+}
+
+.layer-info-grid .info-card:nth-child(3) {
+  background: #fff5eb;
+  border-color: #f0d8bd;
+}
+
+
+/* Card headings */
+
+.layer-info-grid .info-card h4 {
+  margin: 0 0 0.9rem;
+
+  color: var(--primary-dark);
+
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+
+/* Card lists */
+
+.layer-info-grid .info-card ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.layer-info-grid .info-card li {
+  margin-bottom: 0.45rem;
+
+  color: var(--text-soft);
+
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.layer-info-grid .info-card li:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ---------------------------------------------------------
+   COMMON PROBLEMS CARD
+   --------------------------------------------------------- */
+
+.layer-info-grid .problem-card {
+  background: #fff5eb;
+  border-color: #f0d8bd;
+}
+
+.problem-table {
+  display: grid;
+  gap: 0.8rem;
+  min-width: 0;
+}
+
+.problem-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  padding-bottom: 0.75rem;
+
+  border-bottom: 1px solid rgba(120, 91, 60, 0.16);
+}
+
+.problem-row:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.problem-row strong {
+  color: #70431e;
+
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+.problem-row span {
+  color: #65564a;
+
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+
+/* ---------------------------------------------------------
+   COMMAND TABLE SECTION
+   --------------------------------------------------------- */
+
+.command-section-title {
+  margin: 1.75rem 0 0.85rem;
+
+  color: var(--text);
+
+  font-size: 1.05rem;
+}
+
+.command-table-wrapper {
+  width: 100%;
+  max-width: 100%;
+
+  overflow-x: auto;
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+
+  background: var(--surface);
+
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.command-table {
+  width: 100%;
+  min-width: 760px;
+
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.command-table th,
+.command-table td {
+  padding: 1rem;
+
+  text-align: left;
+  vertical-align: top;
+
+  border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
+
+.command-table th:last-child,
+.command-table td:last-child {
+  border-right: 0;
+}
+
+.command-table thead th {
+  background: #edf2fa;
+  color: var(--text);
+  font-weight: 750;
+}
+
+.command-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.command-table tbody tr:hover {
+  background: var(--surface-subtle);
+}
+
+.command-table td code {
+  display: inline-block;
+  max-width: 100%;
+
+  margin-bottom: 0.4rem;
+  padding: 0.35rem 0.5rem;
+
+  border-radius: 5px;
+
+  background: #e9edf3;
+  color: #263449;
+
+  font-size: 0.82rem;
+
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.command-table td p {
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+
+/* ---------------------------------------------------------
+   TABLET: TWO INFORMATION COLUMNS
+   --------------------------------------------------------- */
+
+@media (max-width: 900px) {
+
+  .layer-info-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .layer-info-grid .problem-card {
+    grid-column: 1 / -1;
+  }
+
+  .troubleshooting-tabs__tab {
+    flex: 0 0 auto;
+  }
+
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE: STACK INFORMATION CARDS
+   --------------------------------------------------------- */
+
+@media (max-width: 650px) {
+
+  .troubleshooting-tabs__list {
+    margin-inline: -0.15rem;
+    padding: 0.35rem;
+  }
+
+  .troubleshooting-tabs__tab {
+    min-width: 68px;
+    min-height: 46px;
+    padding: 0.55rem 0.7rem;
+    font-size: 0.8rem;
+  }
+
+  .troubleshooting-tabs__panel {
+    padding: 0.9rem;
+  }
+
+  .layer-info-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.85rem;
+  }
+
+  .layer-info-grid .problem-card {
+    grid-column: auto;
+  }
+
+  .layer-info-grid .info-card {
+    padding: 1rem;
+  }
+
+  .command-table {
+    min-width: 760px;
+  }
+
+}
+
+
+/* ---------------------------------------------------------
+   PRINT
+   --------------------------------------------------------- */
+
+@media print {
+
+  .troubleshooting-tabs__list {
+    display: none !important;
+  }
+
+  .troubleshooting-tabs__panel,
+  .troubleshooting-tabs__panel[hidden] {
+    display: block !important;
+
+    margin-block: 1rem;
+    padding: 0;
+
+    border: 0;
+    box-shadow: none;
+  }
+
+  .troubleshooting-tabs__panel + .troubleshooting-tabs__panel {
+    break-before: page;
+  }
+
+  .layer-info-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .layer-info-grid .info-card {
+    box-shadow: none;
+    break-inside: avoid;
+  }
+
+  .command-table-wrapper {
+    overflow: visible;
+  }
+
+  .command-table {
+    min-width: 0;
+    font-size: 8pt;
+  }
+
 }
 
 
