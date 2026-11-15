@@ -652,3 +652,150 @@ const layerData = {
   }
 
 })();
+
+
+  /* =======================================================
+   interactive OSI MODEL — LAYER SELECTION
+     ======================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const steps = document.querySelectorAll(
+    ".encapsulation-step"
+  );
+
+  const connections = document.querySelectorAll(
+    ".layer-connection"
+  );
+
+  const infoTitle = document.getElementById(
+    "osi-info-title"
+  );
+
+  const infoText = document.getElementById(
+    "osi-info-text"
+  );
+
+  const layerInformation = {
+
+    7: {
+      title: "Layer 7 – Application",
+      text:
+        "The Application layer provides network services " +
+        "to applications. Example: an HTTP request containing " +
+        "a URL, headers and possibly a request body. The " +
+        "receiving application processes the corresponding " +
+        "application data."
+    },
+
+    6: {
+      title: "Layer 6 – Presentation",
+      text:
+        "The Presentation layer concerns data representation. " +
+        "Information may be encoded, serialized, compressed " +
+        "or encrypted before transmission. The receiving side " +
+        "performs the corresponding decoding or decryption " +
+        "when required."
+    },
+
+    5: {
+      title: "Layer 5 – Session",
+      text:
+        "The Session layer manages logical communication " +
+        "sessions, including establishment, synchronization " +
+        "and termination. In modern networks, these functions " +
+        "are frequently handled by application protocols " +
+        "rather than a distinct OSI layer."
+    },
+
+    4: {
+      title: "Layer 4 – Transport",
+      text:
+        "The Transport layer provides process-to-process " +
+        "communication using port numbers. TCP adds sequence " +
+        "numbers, acknowledgement information and control " +
+        "flags. It creates segments and provides reliable, " +
+        "ordered byte-stream delivery. UDP provides datagrams."
+    },
+
+    3: {
+      title: "Layer 3 – Network",
+      text:
+        "The Network layer provides logical addressing and " +
+        "routing. The IP header contains source and destination " +
+        "IP addresses. Routers examine this information to " +
+        "forward packets towards their destination."
+    },
+
+    2: {
+      title: "Layer 2 – Data Link",
+      text:
+        "The Data Link layer delivers frames across an " +
+        "individual network link. Ethernet frames contain " +
+        "source and destination MAC addresses and an FCS " +
+        "trailer for error detection. Switches use MAC " +
+        "addresses to forward Ethernet frames."
+    },
+
+    1: {
+      title: "Layer 1 – Physical",
+      text:
+        "The Physical layer transmits raw bits as electrical, " +
+        "optical or radio signals. The sender converts bits " +
+        "into signals and the receiver reconstructs the " +
+        "bit stream. This is the actual physical transmission."
+    }
+
+  };
+
+  function selectLayer(layer) {
+
+    // Remove previous selection
+    steps.forEach(function (step) {
+      step.classList.remove("is-active");
+      step.setAttribute("aria-pressed", "false");
+    });
+
+    connections.forEach(function (connection) {
+      connection.classList.remove("is-active");
+    });
+
+    // Highlight both matching endpoint layers
+    steps.forEach(function (step) {
+
+      if (step.dataset.layer === layer) {
+        step.classList.add("is-active");
+        step.setAttribute("aria-pressed", "true");
+      }
+
+    });
+
+    // Highlight the matching peer connection
+    connections.forEach(function (connection) {
+
+      if (connection.dataset.layer === layer) {
+        connection.classList.add("is-active");
+      }
+
+    });
+
+    // Update explanatory information
+    const information = layerInformation[layer];
+
+    if (information) {
+      infoTitle.textContent = information.title;
+      infoText.textContent = information.text;
+    }
+
+  }
+
+  // Add click and keyboard interaction
+  steps.forEach(function (step) {
+
+    step.addEventListener("click", function () {
+      selectLayer(step.dataset.layer);
+    });
+
+  });
+
+});

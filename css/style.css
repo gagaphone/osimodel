@@ -1,4 +1,3 @@
-
 /* =========================================================
    OSI MODEL LEARNING WEBSITE
    Consolidated stylesheet
@@ -107,10 +106,8 @@ button {
 }
 
 .container {
-  width: min(
-    var(--content-width),
-    calc(100% - 2.5rem)
-  );
+  width: min(var(--content-width),
+      calc(100% - 2.5rem));
 
   margin-inline: auto;
 }
@@ -171,14 +168,12 @@ a:hover {
   color: var(--primary-dark);
 }
 
-:where(
-  a,
+:where(a,
   button,
   input,
   select,
   textarea,
-  summary
-):focus-visible {
+  summary):focus-visible {
   outline: 3px solid #80aaff;
   outline-offset: 3px;
 }
@@ -227,17 +222,13 @@ a:hover {
   padding: clamp(3.5rem, 8vw, 6.5rem) 0;
 
   background:
-    radial-gradient(
-      ellipse at 90% 5%,
+    radial-gradient(ellipse at 90% 5%,
       rgba(123, 169, 255, 0.23),
-      transparent 38%
-    ),
-    linear-gradient(
-      135deg,
+      transparent 38%),
+    linear-gradient(135deg,
       #102b55 0%,
       #173a70 55%,
-      #2455a0 100%
-    );
+      #2455a0 100%);
 
   color: #fff;
 }
@@ -434,14 +425,14 @@ a:hover {
    8. SECTION LAYOUT
    ========================================================= */
 
-main > section,
-main > .content-section,
-main > .protocol-section {
+main>section,
+main>.content-section,
+main>.protocol-section {
   margin-block: var(--space-section);
   scroll-margin-top: 6.5rem;
 }
 
-main > section:first-child {
+main>section:first-child {
   margin-top: 0;
 }
 
@@ -466,7 +457,7 @@ main > section:first-child {
   margin-bottom: 1.25rem;
 }
 
-.section-heading > div {
+.section-heading>div {
   min-width: 0;
 }
 
@@ -474,10 +465,10 @@ main > section:first-child {
   margin-bottom: 0.5rem;
 }
 
-.introduction > p:not(.eyebrow),
-.layer-overview > p:not(.eyebrow),
-.content-section > p:not(.eyebrow),
-.protocol-section > .section-heading p {
+.introduction>p:not(.eyebrow),
+.layer-overview>p:not(.eyebrow),
+.content-section>p:not(.eyebrow),
+.protocol-section>.section-heading p {
   max-width: 78ch;
 }
 
@@ -731,7 +722,7 @@ main > section:first-child {
 
 /* Layer description */
 
-.layer-content > p:not(.eyebrow) {
+.layer-content>p:not(.eyebrow) {
   margin: 0 0 1.5rem;
 
   color: var(--muted);
@@ -944,8 +935,7 @@ main > section:first-child {
 
   .attribute-list {
     grid-template-columns:
-      minmax(120px, 0.7fr)
-      minmax(0, 2fr);
+      minmax(120px, 0.7fr) minmax(0, 2fr);
   }
 
 }
@@ -1126,7 +1116,7 @@ main > section:first-child {
   padding: clamp(1rem, 3vw, 1.5rem);
 }
 
-.detail-content > p:first-child {
+.detail-content>p:first-child {
   margin-top: 0;
 }
 
@@ -1136,8 +1126,7 @@ main > section:first-child {
 .detail-content .attribute-list {
   display: grid;
   grid-template-columns:
-    minmax(145px, 0.7fr)
-    minmax(0, 2fr);
+    minmax(145px, 0.7fr) minmax(0, 2fr);
 
   margin: 1.25rem 0;
 
@@ -1219,9 +1208,7 @@ code {
   display: grid;
 
   grid-template-columns:
-    minmax(0, 1fr)
-    minmax(120px, 0.42fr)
-    minmax(0, 1fr);
+    minmax(0, 1fr) minmax(120px, 0.42fr) minmax(0, 1fr);
 
   align-items: stretch;
   gap: 1rem;
@@ -1464,8 +1451,7 @@ code {
   display: grid;
 
   grid-template-columns:
-    minmax(0, 2fr)
-    minmax(210px, 1fr);
+    minmax(0, 2fr) minmax(210px, 1fr);
 
   gap: 0.85rem;
 
@@ -1795,10 +1781,8 @@ code {
   font-variant-numeric: tabular-nums;
 }
 
-.troubleshooting-tabs__tab.is-active
-.troubleshooting-tabs__number,
-.troubleshooting-tabs__tab[aria-selected="true"]
-.troubleshooting-tabs__number {
+.troubleshooting-tabs__tab.is-active .troubleshooting-tabs__number,
+.troubleshooting-tabs__tab[aria-selected="true"] .troubleshooting-tabs__number {
   background: var(--primary);
   color: #fff;
 }
@@ -1825,7 +1809,7 @@ code {
   display: none !important;
 }
 
-.troubleshooting-tabs__panel > .layer-header {
+.troubleshooting-tabs__panel>.layer-header {
   margin-bottom: 1.5rem;
 }
 
@@ -1893,6 +1877,8 @@ code {
   background: #fff5eb;
   border-color: #f0d8bd;
 }
+
+
 
 
 /* Card headings */
@@ -2150,7 +2136,7 @@ code {
     box-shadow: none;
   }
 
-  .troubleshooting-tabs__panel + .troubleshooting-tabs__panel {
+  .troubleshooting-tabs__panel+.troubleshooting-tabs__panel {
     break-before: page;
   }
 
@@ -2257,10 +2243,8 @@ code {
 @media (max-width: 650px) {
 
   .container {
-    width: min(
-      calc(100% - 1.25rem),
-      var(--content-width)
-    );
+    width: min(calc(100% - 1.25rem),
+        var(--content-width));
   }
 
   main.container {
@@ -2282,9 +2266,9 @@ code {
     font-size: 0.82rem;
   }
 
-  main > section,
-  main > .content-section,
-  main > .protocol-section {
+  main>section,
+  main>.content-section,
+  main>.protocol-section {
     margin-block: 3rem;
     scroll-margin-top: 5rem;
   }
@@ -2597,9 +2581,9 @@ code {
 
   /* Section spacing */
 
-  main > section,
-  main > .content-section,
-  main > .protocol-section {
+  main>section,
+  main>.content-section,
+  main>.protocol-section {
     margin-block: 1.5rem;
   }
 
@@ -2654,8 +2638,7 @@ code {
   .attribute-list,
   .detail-content .attribute-list {
     grid-template-columns:
-      minmax(120px, 0.7fr)
-      minmax(0, 2fr);
+      minmax(120px, 0.7fr) minmax(0, 2fr);
   }
 
   .attribute-list dt,
@@ -2668,7 +2651,7 @@ code {
 
   /* Print expandable details */
 
-  .layer-detail:not([open]) > .detail-content {
+  .layer-detail:not([open])>.detail-content {
     display: block;
   }
 
@@ -2714,8 +2697,7 @@ code {
     break-inside: auto;
   }
 
-  .troubleshooting-tabs__panel
-  + .troubleshooting-tabs__panel {
+  .troubleshooting-tabs__panel+.troubleshooting-tabs__panel {
     break-before: page;
   }
 
@@ -2735,4 +2717,302 @@ code {
     text-decoration: underline;
   }
 
+}
+
+/* Interactive model */
+/* MAIN CONTAINER */
+
+.osi-visualization {
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #253247;
+}
+
+.osi-intro {
+  margin-bottom: 20px;
+}
+
+.osi-intro h2 {
+  margin-bottom: 8px;
+  font-size: 23px;
+}
+
+.osi-intro p {
+  line-height: 1.6;
+  color: #586579;
+}
+
+.osi-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.legend-item {
+  padding: 7px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.legend-item.upper {
+  background: #e7efff;
+  color: #2456a6;
+}
+
+.legend-item.lower {
+  background: #e0f3ed;
+  color: #147455;
+}
+
+/* HORIZONTAL SCROLL */
+
+.osi-scroll {
+  width: 100%;
+  overflow-x: auto;
+  padding: 5px 2px 15px;
+}
+
+.encapsulation-layout {
+  display: grid;
+  grid-template-columns:
+    minmax(300px, 1fr)
+    minmax(180px, 0.65fr)
+    minmax(300px, 1fr);
+  gap: 16px;
+  min-width: 1000px;
+  align-items: stretch;
+}
+
+/* ENDPOINTS */
+
+.encapsulation-endpoint,
+.osi-connections {
+  display: grid;
+  grid-template-rows: 42px repeat(7, minmax(112px, auto));
+  gap: 9px;
+  min-width: 0;
+}
+
+.encapsulation-endpoint h3,
+.osi-connections h3 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 15px;
+  color: #253247;
+}
+
+/* CLICKABLE LAYERS */
+
+.encapsulation-step {
+  appearance: none;
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  gap: 7px;
+  padding: 12px;
+  border: 2px solid transparent;
+  border-radius: 9px;
+  cursor: pointer;
+  font: inherit;
+  color: #253247;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.encapsulation-step:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.09);
+}
+
+.encapsulation-step:focus-visible {
+  outline: 3px solid #e6a23c;
+  outline-offset: 3px;
+}
+
+/* UPPER LAYERS 7-5 */
+
+.upper-layer {
+  background: #edf3ff;
+  border-color: #c9d9fa;
+}
+
+.upper-layer .step-label {
+  color: #2456a6;
+}
+
+/* LOWER LAYERS 4-1 */
+
+.lower-layer {
+  background: #eaf6f1;
+  border-color: #c2e5d6;
+}
+
+.lower-layer .step-label {
+  color: #147455;
+}
+
+.step-label {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.encapsulation-step code {
+  display: block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: normal;
+  font-size: 12px;
+  font-weight: 700;
+  color: #27364a;
+  background: rgba(255,255,255,0.75);
+  padding: 5px 7px;
+  border-radius: 4px;
+}
+
+.encapsulation-step small {
+  font-size: 11px;
+  line-height: 1.45;
+  color: #536174;
+}
+
+/* PHYSICAL LAYER */
+
+.physical-step {
+  border-style: dashed;
+}
+
+/* CENTER CONNECTIONS */
+
+.osi-connections {
+  min-width: 0;
+}
+
+.layer-connection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 5px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.connection-line {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #9aa8b8;
+  transition: background 0.2s ease;
+}
+
+.connection-line::before,
+.connection-line::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  width: 9px;
+  height: 9px;
+  border-top: 2px solid #9aa8b8;
+  transition: border-color 0.2s ease;
+}
+
+.connection-line::before {
+  left: 0;
+  border-left: 2px solid #9aa8b8;
+  transform: rotate(-45deg);
+}
+
+.connection-line::after {
+  right: 0;
+  border-right: 2px solid #9aa8b8;
+  transform: rotate(45deg);
+}
+
+.connection-label {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #59677a;
+}
+
+/* SELECTED LAYER AND ITS CONNECTION */
+
+.encapsulation-step.is-active {
+  border-color: #e09b29;
+  background: #fff4d9;
+  box-shadow: 0 0 0 3px rgba(224,155,41,0.16);
+  transform: translateY(-2px);
+}
+
+.layer-connection.is-active {
+  background: #fff4d9;
+}
+
+.layer-connection.is-active .connection-line {
+  background: #e09b29;
+  height: 3px;
+}
+
+.layer-connection.is-active .connection-line::before,
+.layer-connection.is-active .connection-line::after {
+  border-color: #e09b29;
+}
+
+.layer-connection.is-active .connection-label {
+  color: #9a6110;
+}
+
+/* INFORMATION PANEL */
+
+.osi-info {
+  margin-top: 20px;
+  padding: 18px;
+  background: #f4f6f9;
+  border: 1px solid #dce2ea;
+  border-radius: 9px;
+}
+
+.osi-info h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+
+.osi-info p {
+  margin: 0;
+  color: #536174;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.osi-note {
+  margin-top: 15px;
+  padding: 12px;
+  background: #f8f9fb;
+  border-left: 4px solid #8094ac;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #536174;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+  .osi-intro h2 {
+    font-size: 19px;
+  }
 }

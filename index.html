@@ -312,151 +312,264 @@
     at the sender and decapsulated at the receiver.
   </p>
 
-  <div class="encapsulation-layout">
+<div class="osi-visualization">
 
-    <!-- SENDER -->
-    <article class="encapsulation-endpoint">
-      <h3>Sender: Encapsulation ↓</h3>
-
-      <div class="encapsulation-step">
-        <span class="step-label">Layer 7 · Application</span>
-        <code>HTTP data</code>
-        <small>
-          Application protocols create the data to be transmitted.
-        </small>
-      </div>
-
-      <div class="encapsulation-step">
-        <span class="step-label">Layer 6 · Presentation</span>
-        <code>Formatted / encoded data</code>
-        <small>
-          Data representation, encryption, or compression may be applied.
-        </small>
-      </div>
-
-      <div class="encapsulation-step">
-        <span class="step-label">Layer 5 · Session</span>
-        <code>Session-managed data</code>
-        <small>
-          Communication sessions are established and managed.
-        </small>
-      </div>
-
-      <div class="encapsulation-step">
-        <span class="step-label">Layer 4 · Transport</span>
-        <code>TCP header | Data</code>
-        <small>
-          Adds source and destination ports, sequencing, and
-          other transport information. The result is a TCP segment.
-        </small>
-      </div>
-
-      <div class="encapsulation-step">
-        <span class="step-label">Layer 3 · Network</span>
-        <code>IP header | TCP segment</code>
-        <small>
-          Adds source and destination IP addresses.
-          The result is an IP packet.
-        </small>
-      </div>
-
-      <div class="encapsulation-step">
-        <span class="step-label">Layer 2 · Data Link</span>
-        <code>Ethernet header | IP packet | FCS</code>
-        <small>
-          Adds source and destination MAC addresses and a
-          Frame Check Sequence (FCS). The result is an Ethernet frame.
-        </small>
-      </div>
-
-      <div class="encapsulation-step physical-step">
-        <span class="step-label">Layer 1 · Physical</span>
-        <code>Bits: 10101001 01101101 ...</code>
-        <small>
-          Converts the frame into signals suitable for the
-          transmission medium.
-        </small>
-      </div>
-    </article>
-
-    <!-- PHYSICAL TRANSMISSION -->
-    <div class="physical-arrow" aria-label="Physical transmission">
-      <span>Across the physical medium</span>
-      <span class="arrow-symbol" aria-hidden="true">⇄</span>
-      <small>Electrical, optical, or radio signals</small>
+  <div class="osi-intro">
+    <h2>OSI Model: Encapsulation & Decapsulation</h2>
+    <p>
+      Select any layer on either endpoint to see how the
+      corresponding layer communicates and what information
+      is exchanged.
+    </p>
+    <div class="osi-legend">
+      <span class="legend-item upper">Upper layers · 7–5</span>
+      <span class="legend-item lower">Lower layers · 4–1</span>
     </div>
-
-<!-- RECEIVER -->
-<article class="encapsulation-endpoint">
-  <h3>Receiver: Decapsulation ↑</h3>
-
-  <div class="encapsulation-step">
-    <span class="step-label">Layer 7 · Application</span>
-    <code>HTTP data delivered</code>
-    <small>
-      Delivers the received application data to the
-      appropriate network application or service.
-    </small>
   </div>
 
-  <div class="encapsulation-step">
-    <span class="step-label">Layer 6 · Presentation</span>
-    <code>Decoded / decrypted data</code>
-    <small>
-      Performs any required data decoding, decompression,
-      or decryption.
-    </small>
+  <div class="osi-scroll">
+    <div class="encapsulation-layout">
+
+      <!-- SENDER -->
+      <article class="encapsulation-endpoint">
+
+        <h3>Sender: Encapsulation ↓</h3>
+
+        <button class="encapsulation-step upper-layer"
+                data-layer="7" aria-pressed="false">
+          <span class="step-label">Layer 7 · Application</span>
+          <code>HTTP request / application data</code>
+          <small>
+            Creates application data. Examples include HTTP,
+            DNS, SMTP and FTP. Identifies the service and
+            application-level information being exchanged.
+          </small>
+        </button>
+
+        <button class="encapsulation-step upper-layer"
+                data-layer="6" aria-pressed="false">
+          <span class="step-label">Layer 6 · Presentation</span>
+          <code>Encoded / encrypted data</code>
+          <small>
+            Defines data representation, character encoding,
+            serialization, compression and encryption.
+            TLS is commonly associated with this layer
+            conceptually, although it operates across layers
+            in real TCP/IP stacks.
+          </small>
+        </button>
+
+        <button class="encapsulation-step upper-layer"
+                data-layer="5" aria-pressed="false">
+          <span class="step-label">Layer 5 · Session</span>
+          <code>Session information</code>
+          <small>
+            Manages logical communication sessions, including
+            session establishment, synchronization and
+            termination. These functions are often implemented
+            within application protocols today.
+          </small>
+        </button>
+
+        <button class="encapsulation-step lower-layer"
+                data-layer="4" aria-pressed="false">
+          <span class="step-label">Layer 4 · Transport</span>
+          <code>TCP header | Application data</code>
+          <small>
+            Adds source and destination port numbers,
+            sequence and acknowledgement numbers, and
+            transport control information. TCP produces
+            a segment. UDP produces a datagram.
+          </small>
+        </button>
+
+        <button class="encapsulation-step lower-layer"
+                data-layer="3" aria-pressed="false">
+          <span class="step-label">Layer 3 · Network</span>
+          <code>IP header | TCP segment</code>
+          <small>
+            Adds source and destination IP addresses.
+            Determines logical addressing and supports
+            routing between different networks.
+            The result is an IP packet.
+          </small>
+        </button>
+
+        <button class="encapsulation-step lower-layer"
+                data-layer="2" aria-pressed="false">
+          <span class="step-label">Layer 2 · Data Link</span>
+          <code>Ethernet header | IP packet | FCS</code>
+          <small>
+            Adds source and destination MAC addresses,
+            frame control information and, where applicable,
+            an FCS trailer for error detection.
+            The result is an Ethernet frame.
+          </small>
+        </button>
+
+        <button class="encapsulation-step lower-layer physical-step"
+                data-layer="1" aria-pressed="false">
+          <span class="step-label">Layer 1 · Physical</span>
+          <code>Bits: 10101001 01101101 ...</code>
+          <small>
+            Converts bits into electrical, optical or radio
+            signals suitable for transmission over the
+            physical medium.
+          </small>
+        </button>
+
+      </article>
+
+      <!-- CONNECTIONS BETWEEN PEER LAYERS -->
+      <div class="osi-connections" aria-label="Logical peer-layer communication">
+
+        <h3>Peer communication</h3>
+
+        <div class="layer-connection" data-layer="7">
+          <span class="connection-line"></span>
+          <span class="connection-label">Application data</span>
+        </div>
+
+        <div class="layer-connection" data-layer="6">
+          <span class="connection-line"></span>
+          <span class="connection-label">Data format / encryption</span>
+        </div>
+
+        <div class="layer-connection" data-layer="5">
+          <span class="connection-line"></span>
+          <span class="connection-label">Session control</span>
+        </div>
+
+        <div class="layer-connection" data-layer="4">
+          <span class="connection-line"></span>
+          <span class="connection-label">Ports / TCP segment</span>
+        </div>
+
+        <div class="layer-connection" data-layer="3">
+          <span class="connection-line"></span>
+          <span class="connection-label">IP addressing / packet</span>
+        </div>
+
+        <div class="layer-connection" data-layer="2">
+          <span class="connection-line"></span>
+          <span class="connection-label">MAC addressing / frame</span>
+        </div>
+
+        <div class="layer-connection" data-layer="1">
+          <span class="connection-line"></span>
+          <span class="connection-label">Physical signals / bits</span>
+        </div>
+
+      </div>
+
+      <!-- RECEIVER -->
+      <article class="decapsulation-endpoint">
+
+        <h3>Receiver: Decapsulation ↑</h3>
+
+        <button class="encapsulation-step upper-layer"
+                data-layer="7" aria-pressed="false">
+          <span class="step-label">Layer 7 · Application</span>
+          <code>HTTP request delivered</code>
+          <small>
+            Delivers the recovered application data to the
+            appropriate application or service, such as
+            a web server or browser.
+          </small>
+        </button>
+
+        <button class="encapsulation-step upper-layer"
+                data-layer="6" aria-pressed="false">
+          <span class="step-label">Layer 6 · Presentation</span>
+          <code>Decoded / decrypted data</code>
+          <small>
+            Interprets the data representation and performs
+            any required decryption, decompression or decoding.
+          </small>
+        </button>
+
+        <button class="encapsulation-step upper-layer"
+                data-layer="5" aria-pressed="false">
+          <span class="step-label">Layer 5 · Session</span>
+          <code>Session information processed</code>
+          <small>
+            Handles session-related functions, such as
+            maintaining communication context and
+            synchronization where implemented.
+          </small>
+        </button>
+
+        <button class="encapsulation-step lower-layer"
+                data-layer="4" aria-pressed="false">
+          <span class="step-label">Layer 4 · Transport</span>
+          <code>TCP segment → Application data</code>
+          <small>
+            Processes transport information, checks ports,
+            handles TCP sequencing and acknowledgements,
+            reassembles the byte stream and delivers data
+            to the appropriate application.
+          </small>
+        </button>
+
+        <button class="encapsulation-step lower-layer"
+                data-layer="3" aria-pressed="false">
+          <span class="step-label">Layer 3 · Network</span>
+          <code>IP packet → TCP segment</code>
+          <small>
+            Examines the destination IP address, processes
+            the packet and passes its payload to the
+            appropriate transport protocol.
+          </small>
+        </button>
+
+        <button class="encapsulation-step lower-layer"
+                data-layer="2" aria-pressed="false">
+          <span class="step-label">Layer 2 · Data Link</span>
+          <code>Ethernet frame → IP packet</code>
+          <small>
+            Processes the received frame, checks its
+            destination MAC address, verifies the FCS
+            where applicable and passes the payload
+            to the Network layer.
+          </small>
+        </button>
+
+        <button class="encapsulation-step lower-layer physical-step"
+                data-layer="1" aria-pressed="false">
+          <span class="step-label">Layer 1 · Physical</span>
+          <code>Signals → Bits</code>
+          <small>
+            Receives electrical, optical or radio signals
+            and reconstructs the transmitted bit stream.
+          </small>
+        </button>
+
+      </article>
+
+    </div>
   </div>
 
-  <div class="encapsulation-step">
-    <span class="step-label">Layer 5 · Session</span>
-    <code>Session-managed data</code>
-    <small>
-      Handles session-related communication functions.
-    </small>
-  </div>
+  <!-- INTERACTIVE INFORMATION PANEL -->
+  <section class="osi-info" aria-live="polite">
+    <h3 id="osi-info-title">Explore the OSI layers</h3>
+    <p id="osi-info-text">
+      Click any layer in the sender or receiver to highlight
+      both corresponding layers and their logical connection.
+    </p>
+  </section>
 
-  <div class="encapsulation-step">
-    <span class="step-label">Layer 4 · Transport</span>
-    <code>Segment → Data</code>
-    <small>
-      Processes transport ports and protocol information.
-      TCP reassembles data when necessary and delivers
-      it to the appropriate application endpoint.
-    </small>
-  </div>
+  <p class="osi-note">
+    <strong>Important:</strong>
+    The horizontal lines represent logical peer-layer
+    communication, not direct physical connections between
+    the two computers. Actual data travels down the sender's
+    protocol stack, across the medium and up the receiver's
+    protocol stack. Intermediate routers and switches may
+    process lower-layer information along the way.
+  </p>
 
-  <div class="encapsulation-step">
-    <span class="step-label">Layer 3 · Network</span>
-    <code>Packet → Segment</code>
-    <small>
-      Examines the destination IP address and processes
-      the packet before removing its IP header.
-    </small>
-  </div>
+</div>
 
-  <div class="encapsulation-step">
-    <span class="step-label">Layer 2 · Data Link</span>
-    <code>Frame → Packet</code>
-    <small>
-      Checks the frame, examines its destination MAC address,
-      verifies the FCS where applicable, and removes the
-      Data Link header and trailer.
-    </small>
-  </div>
-
-  <div class="encapsulation-step physical-step">
-    <span class="step-label">Layer 1 · Physical</span>
-    <code>Signals become bits</code>
-    <small>
-      Receives signals from the physical medium and
-      reconstructs the transmitted bits.
-    </small>
-  </div>
-</article>
-
-
-  </div>
 
   <!-- DATA UNIT EXPLANATION -->
   <div class="info-callout">
