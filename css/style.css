@@ -2719,13 +2719,23 @@ code {
 
 }
 
-/* Interactive model */
+/* =========================================================
+   INTERACTIVE OSI MODEL
+   ========================================================= */
+
 /* MAIN CONTAINER */
 
 .osi-visualization {
   width: 100%;
   font-family: Arial, Helvetica, sans-serif;
   color: #253247;
+  box-sizing: border-box;
+}
+
+.osi-visualization *,
+.osi-visualization *::before,
+.osi-visualization *::after {
+  box-sizing: border-box;
 }
 
 .osi-intro {
@@ -2766,253 +2776,522 @@ code {
   color: #147455;
 }
 
-/* HORIZONTAL SCROLL */
+
+/* =========================================================
+   HORIZONTAL LAYOUT
+   ========================================================= */
 
 .osi-scroll {
   width: 100%;
   overflow-x: auto;
-  padding: 5px 2px 15px;
+  padding: 5px 8px 15px;
 }
 
 .encapsulation-layout {
   display: grid;
+
   grid-template-columns:
     minmax(300px, 1fr)
     minmax(180px, 0.65fr)
     minmax(300px, 1fr);
+
   gap: 16px;
+
   min-width: 1000px;
+
   align-items: stretch;
+
+  position: relative;
 }
 
-/* ENDPOINTS */
+
+/* =========================================================
+   ENDPOINT CONTAINERS
+   BOTH ENDPOINTS USE IDENTICAL BACKGROUNDS
+   ========================================================= */
 
 .encapsulation-endpoint,
-.osi-connections {
+.decapsulation-endpoint {
+
   display: grid;
-  grid-template-rows: 42px repeat(7, minmax(112px, auto));
+
+  grid-template-rows:
+    42px
+    repeat(7, minmax(112px, auto));
+
   gap: 9px;
+
   min-width: 0;
+
+  padding: 12px;
+
+  background: #f4f6f9;
+
+  border: 1px solid #dce2ea;
+
+  border-radius: 12px;
+
+  align-content: stretch;
+
+  position: relative;
+
 }
+
+
+/* Endpoint headings */
 
 .encapsulation-endpoint h3,
-.osi-connections h3 {
+.decapsulation-endpoint h3 {
+
   margin: 0;
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
+
   text-align: center;
+
   font-size: 15px;
+
   color: #253247;
+
 }
 
-/* CLICKABLE LAYERS */
+
+/* =========================================================
+   CLICKABLE LAYERS
+   ========================================================= */
 
 .encapsulation-step {
+
   appearance: none;
+
   width: 100%;
+
   min-width: 0;
+
+  min-height: 112px;
+
   display: flex;
+
   flex-direction: column;
+
   justify-content: center;
+
   align-items: flex-start;
+
   text-align: left;
+
   gap: 7px;
+
   padding: 12px;
+
   border: 2px solid transparent;
+
   border-radius: 9px;
+
   cursor: pointer;
+
   font: inherit;
+
   color: #253247;
+
+  position: relative;
+
   transition:
     border-color 0.2s ease,
     background 0.2s ease,
     transform 0.2s ease,
     box-shadow 0.2s ease;
+
 }
 
+
+/* Sender appears visually above its matching receiver layer */
+
+.encapsulation-endpoint .encapsulation-step {
+  z-index: 2;
+}
+
+.decapsulation-endpoint .encapsulation-step {
+  z-index: 1;
+}
+
+
 .encapsulation-step:hover {
+
   transform: translateY(-2px);
+
   box-shadow: 0 4px 12px rgba(0,0,0,0.09);
+
 }
 
 .encapsulation-step:focus-visible {
+
   outline: 3px solid #e6a23c;
+
   outline-offset: 3px;
+
 }
 
-/* UPPER LAYERS 7-5 */
+
+/* =========================================================
+   UPPER LAYERS 7–5
+   ========================================================= */
 
 .upper-layer {
+
   background: #edf3ff;
+
   border-color: #c9d9fa;
+
 }
 
 .upper-layer .step-label {
+
   color: #2456a6;
+
 }
 
-/* LOWER LAYERS 4-1 */
+
+/* =========================================================
+   LOWER LAYERS 4–1
+   ========================================================= */
 
 .lower-layer {
+
   background: #eaf6f1;
+
   border-color: #c2e5d6;
+
 }
 
 .lower-layer .step-label {
+
   color: #147455;
+
 }
+
+
+/* Layer labels */
 
 .step-label {
+
   font-size: 14px;
+
   font-weight: 800;
+
 }
+
+
+/* Data encapsulation */
 
 .encapsulation-step code {
+
   display: block;
+
   max-width: 100%;
+
   overflow-wrap: anywhere;
+
   white-space: normal;
+
   font-size: 12px;
+
   font-weight: 700;
+
   color: #27364a;
+
   background: rgba(255,255,255,0.75);
+
   padding: 5px 7px;
+
   border-radius: 4px;
+
 }
+
+
+/* Descriptions */
 
 .encapsulation-step small {
+
   font-size: 11px;
+
   line-height: 1.45;
+
   color: #536174;
+
 }
 
-/* PHYSICAL LAYER */
+
+/* Physical layer */
 
 .physical-step {
+
   border-style: dashed;
+
 }
 
-/* CENTER CONNECTIONS */
+
+/* =========================================================
+   CENTER CONNECTIONS
+   ========================================================= */
 
 .osi-connections {
+
+  display: grid;
+
+  grid-template-rows:
+    42px
+    repeat(7, minmax(112px, auto));
+
+  gap: 9px;
+
   min-width: 0;
+
+  align-items: stretch;
+
 }
+
+
+.osi-connections h3 {
+
+  margin: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  font-size: 15px;
+
+  color: #253247;
+
+}
+
 
 .layer-connection {
+
   display: flex;
+
   flex-direction: column;
+
   align-items: center;
+
   justify-content: center;
+
   gap: 7px;
+
   padding: 5px;
+
   border-radius: 8px;
+
   transition: background 0.2s ease;
+
 }
 
+
 .connection-line {
+
   position: relative;
+
   display: block;
+
   width: 100%;
+
   height: 2px;
+
   background: #9aa8b8;
+
   transition: background 0.2s ease;
+
 }
+
 
 .connection-line::before,
 .connection-line::after {
+
   content: "";
+
   position: absolute;
+
   top: -4px;
+
   width: 9px;
+
   height: 9px;
+
   border-top: 2px solid #9aa8b8;
+
   transition: border-color 0.2s ease;
+
 }
+
 
 .connection-line::before {
+
   left: 0;
+
   border-left: 2px solid #9aa8b8;
+
   transform: rotate(-45deg);
+
 }
+
 
 .connection-line::after {
+
   right: 0;
+
   border-right: 2px solid #9aa8b8;
+
   transform: rotate(45deg);
+
 }
+
 
 .connection-label {
+
   text-align: center;
+
   font-size: 11px;
+
   font-weight: 700;
+
   line-height: 1.35;
+
   color: #59677a;
+
 }
 
-/* SELECTED LAYER AND ITS CONNECTION */
+
+/* =========================================================
+   ACTIVE LAYER
+   ========================================================= */
 
 .encapsulation-step.is-active {
+
   border-color: #e09b29;
+
   background: #fff4d9;
+
   box-shadow: 0 0 0 3px rgba(224,155,41,0.16);
+
   transform: translateY(-2px);
+
+  z-index: 5;
+
 }
+
 
 .layer-connection.is-active {
+
   background: #fff4d9;
+
 }
 
+
 .layer-connection.is-active .connection-line {
+
   background: #e09b29;
+
   height: 3px;
+
 }
+
 
 .layer-connection.is-active .connection-line::before,
 .layer-connection.is-active .connection-line::after {
+
   border-color: #e09b29;
+
 }
+
 
 .layer-connection.is-active .connection-label {
+
   color: #9a6110;
+
 }
 
-/* INFORMATION PANEL */
+
+/* =========================================================
+   INFORMATION PANEL
+   ========================================================= */
 
 .osi-info {
+
   margin-top: 20px;
+
   padding: 18px;
+
   background: #f4f6f9;
+
   border: 1px solid #dce2ea;
+
   border-radius: 9px;
+
 }
+
 
 .osi-info h3 {
+
   margin: 0 0 8px;
+
   font-size: 16px;
+
 }
+
 
 .osi-info p {
+
   margin: 0;
+
   color: #536174;
+
   font-size: 14px;
+
   line-height: 1.6;
+
 }
+
+
+/* =========================================================
+   NOTE
+   ========================================================= */
 
 .osi-note {
+
   margin-top: 15px;
+
   padding: 12px;
+
   background: #f8f9fb;
+
   border-left: 4px solid #8094ac;
+
   font-size: 12px;
+
   line-height: 1.6;
+
   color: #536174;
+
 }
 
-/* RESPONSIVE */
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
 
 @media (max-width: 700px) {
+
   .osi-intro h2 {
     font-size: 19px;
   }
+
 }
