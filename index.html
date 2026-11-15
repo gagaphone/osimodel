@@ -116,65 +116,115 @@
 
         <!-- LEFT SIDE: CLICKABLE OSI LAYER CARDS -->
 
-        <nav class="layer-grid" aria-label="Select an OSI layer">
 
-          <button class="layer-card active" type="button" data-layer="7" aria-pressed="true">
-            <span class="troubleshooting-tabs__number">07</span>
-            <span>Application</span>
-            <span class="layer-card-description">
-              Network services for applications
-            </span>
-          </button>
+<nav class="layer-grid" aria-label="Select an OSI layer">
 
-          <button class="layer-card" type="button" data-layer="6" aria-pressed="false">
-            <span class="troubleshooting-tabs__number">06</span>
-            <span>Presentation</span>
-            <span class="layer-card-description">
-              Data translation and encryption
-            </span>
-          </button>
+  <button class="layer-card active"
+          type="button"
+          data-layer="7"
+          aria-pressed="true">
 
-          <button class="layer-card" type="button" data-layer="5" aria-pressed="false">
-            <span class="troubleshooting-tabs__number">05</span>
-            <span>Session</span>
-            <span class="layer-card-description">
-              Session establishment and management
-            </span>
-          </button>
+    <span class="layer-card-heading">
+      <span class="layer-card-number">07</span>
+      <span class="layer-card-title">Application</span>
+    </span>
 
-          <button class="layer-card" type="button" data-layer="4" aria-pressed="false">
-            <span class="troubleshooting-tabs__number">04</span>
-            <span>Transport</span>
-            <span class="layer-card-description">
-              End-to-end data delivery
-            </span>
-          </button>
+    <span class="layer-card-description">
+      Network services for applications
+    </span>
+  </button>
 
-          <button class="layer-card" type="button" data-layer="3" aria-pressed="false">
-            <span class="troubleshooting-tabs__number">03</span>
-            <span>Network</span>
-            <span class="layer-card-description">
-              Logical addressing and routing
-            </span>
-          </button>
+  <button class="layer-card"
+          type="button"
+          data-layer="6"
+          aria-pressed="false">
 
-          <button class="layer-card" type="button" data-layer="2" aria-pressed="false">
-            <span class="troubleshooting-tabs__number">02</span>
-            <span>Data Link</span>
-            <span class="layer-card-description">
-              Frames and MAC addressing
-            </span>
-          </button>
+    <span class="layer-card-heading">
+      <span class="layer-card-number">06</span>
+      <span class="layer-card-title">Presentation</span>
+    </span>
 
-          <button class="layer-card" type="button" data-layer="1" aria-pressed="false">
-            <span class="troubleshooting-tabs__number">01</span>
-            <span>Physical</span>
-            <span class="layer-card-description">
-              Signals and physical media
-            </span>
-          </button>
+    <span class="layer-card-description">
+      Data translation and encryption
+    </span>
+  </button>
 
-        </nav>
+  <button class="layer-card"
+          type="button"
+          data-layer="5"
+          aria-pressed="false">
+
+    <span class="layer-card-heading">
+      <span class="layer-card-number">05</span>
+      <span class="layer-card-title">Session</span>
+    </span>
+
+    <span class="layer-card-description">
+      Session establishment and management
+    </span>
+  </button>
+
+  <button class="layer-card"
+          type="button"
+          data-layer="4"
+          aria-pressed="false">
+
+    <span class="layer-card-heading">
+      <span class="layer-card-number">04</span>
+      <span class="layer-card-title">Transport</span>
+    </span>
+
+    <span class="layer-card-description">
+      End-to-end data delivery
+    </span>
+  </button>
+
+  <button class="layer-card"
+          type="button"
+          data-layer="3"
+          aria-pressed="false">
+
+    <span class="layer-card-heading">
+      <span class="layer-card-number">03</span>
+      <span class="layer-card-title">Network</span>
+    </span>
+
+    <span class="layer-card-description">
+      Logical addressing and routing
+    </span>
+  </button>
+
+  <button class="layer-card"
+          type="button"
+          data-layer="2"
+          aria-pressed="false">
+
+    <span class="layer-card-heading">
+      <span class="layer-card-number">02</span>
+      <span class="layer-card-title">Data Link</span>
+    </span>
+
+    <span class="layer-card-description">
+      Frames and MAC addressing
+    </span>
+  </button>
+
+  <button class="layer-card"
+          type="button"
+          data-layer="1"
+          aria-pressed="false">
+
+    <span class="layer-card-heading">
+      <span class="layer-card-number">01</span>
+      <span class="layer-card-title">Physical</span>
+    </span>
+
+    <span class="layer-card-description">
+      Signals and physical media
+    </span>
+  </button>
+
+</nav>
 
 
         <!-- RIGHT SIDE: DYNAMIC LAYER CONTENT -->
@@ -312,34 +362,62 @@
     at the sender and decapsulated at the receiver.
   </p>
 
+
 <div class="osi-visualization">
 
+  <!-- INTRODUCTION -->
+
   <div class="osi-intro">
-    <h2>OSI Model: Encapsulation & Decapsulation</h2>
+    <h2>OSI Model: Encapsulation &amp; Decapsulation</h2>
+
     <p>
       Select any layer on either endpoint to see how the
       corresponding layer communicates and what information
       is exchanged.
     </p>
-    <div class="osi-legend">
-      <span class="legend-item upper">Upper layers · 7–5</span>
-      <span class="legend-item lower">Lower layers · 4–1</span>
+
+    <div class="osi-legend" aria-label="OSI layer categories">
+      <span class="legend-item upper">
+        Upper layers · 7–5
+      </span>
+
+      <span class="legend-item lower">
+        Lower layers · 4–1
+      </span>
     </div>
   </div>
 
+
+  <!-- MAIN VISUALIZATION -->
+
   <div class="osi-scroll">
+
     <div class="encapsulation-layout">
 
-      <!-- SENDER -->
-      <article class="encapsulation-endpoint">
+      <!-- SENDER: ENCAPSULATION -->
 
-        <h3>Sender: Encapsulation ↓</h3>
+      <article class="encapsulation-endpoint"
+               aria-labelledby="sender-heading">
+
+        <h3 id="sender-heading">
+          Sender: Encapsulation ↓
+        </h3>
+
+
+        <!-- LAYER 7 -->
 
         <button class="encapsulation-step upper-layer"
-                data-layer="7" aria-pressed="false">
-                 <span class="troubleshooting-tabs__number">07</span>
-            <h3>Application</h3>
+                type="button"
+                data-layer="7"
+                aria-pressed="false">
+
+          <span class="encapsulation-step-heading">
+            <span class="encapsulation-step-number">07</span>
+            <span class="encapsulation-step-title">Application</span>
+          </span>
+
           <code>HTTP request / application data</code>
+
           <small>
             Creates application data. Examples include HTTP,
             DNS, SMTP and FTP. Identifies the service and
@@ -347,12 +425,21 @@
           </small>
         </button>
 
+
+        <!-- LAYER 6 -->
+
         <button class="encapsulation-step upper-layer"
-                data-layer="6" aria-pressed="false">
-                <span class="troubleshooting-tabs__number">06</span>
-            <h3>Presentation</h3>
+                type="button"
+                data-layer="6"
+                aria-pressed="false">
+
+          <span class="encapsulation-step-heading">
+            <span class="encapsulation-step-number">06</span>
+            <span class="encapsulation-step-title">Presentation</span>
+          </span>
 
           <code>Encoded / encrypted data</code>
+
           <small>
             Defines data representation, character encoding,
             serialization, compression and encryption.
@@ -362,12 +449,21 @@
           </small>
         </button>
 
+
+        <!-- LAYER 5 -->
+
         <button class="encapsulation-step upper-layer"
-                data-layer="5" aria-pressed="false">
-                 <span class="troubleshooting-tabs__number">05</span>
-            <h3>Session</h3>
+                type="button"
+                data-layer="5"
+                aria-pressed="false">
+
+          <span class="encapsulation-step-heading">
+            <span class="encapsulation-step-number">05</span>
+            <span class="encapsulation-step-title">Session</span>
+          </span>
 
           <code>Session information</code>
+
           <small>
             Manages logical communication sessions, including
             session establishment, synchronization and
@@ -376,12 +472,21 @@
           </small>
         </button>
 
+
+        <!-- LAYER 4 -->
+
         <button class="encapsulation-step lower-layer"
-                data-layer="4" aria-pressed="false">
-                <span class="troubleshooting-tabs__number">04</span>
-            <h3>Transport</h3>
+                type="button"
+                data-layer="4"
+                aria-pressed="false">
+
+          <span class="encapsulation-step-heading">
+            <span class="encapsulation-step-number">04</span>
+            <span class="encapsulation-step-title">Transport</span>
+          </span>
 
           <code>TCP header | Application data</code>
+
           <small>
             Adds source and destination port numbers,
             sequence and acknowledgement numbers, and
@@ -390,12 +495,21 @@
           </small>
         </button>
 
+
+        <!-- LAYER 3 -->
+
         <button class="encapsulation-step lower-layer"
-                data-layer="3" aria-pressed="false">
-                    <span class="troubleshooting-tabs__number">03</span>
-            <h3>Network</h3>
+                type="button"
+                data-layer="3"
+                aria-pressed="false">
+
+          <span class="encapsulation-step-heading">
+            <span class="encapsulation-step-number">03</span>
+            <span class="encapsulation-step-title">Network</span>
+          </span>
 
           <code>IP header | TCP segment</code>
+
           <small>
             Adds source and destination IP addresses.
             Determines logical addressing and supports
@@ -404,12 +518,21 @@
           </small>
         </button>
 
+
+        <!-- LAYER 2 -->
+
         <button class="encapsulation-step lower-layer"
-                data-layer="2" aria-pressed="false">
-                       <span class="troubleshooting-tabs__number">02</span>
-            <h3>Data Link</h3>
+                type="button"
+                data-layer="2"
+                aria-pressed="false">
+
+          <span class="encapsulation-step-heading">
+            <span class="encapsulation-step-number">02</span>
+            <span class="encapsulation-step-title">Data Link</span>
+          </span>
 
           <code>Ethernet header | IP packet | FCS</code>
+
           <small>
             Adds source and destination MAC addresses,
             frame control information and, where applicable,
@@ -418,12 +541,21 @@
           </small>
         </button>
 
+
+        <!-- LAYER 1 -->
+
         <button class="encapsulation-step lower-layer physical-step"
-                data-layer="1" aria-pressed="false">
-                       <span class="troubleshooting-tabs__number">01</span>
-            <h3>Physical</h3>
+                type="button"
+                data-layer="1"
+                aria-pressed="false">
+
+          <span class="encapsulation-step-heading">
+            <span class="encapsulation-step-number">01</span>
+            <span class="encapsulation-step-title">Physical</span>
+          </span>
 
           <code>Bits: 10101001 01101101 ...</code>
+
           <small>
             Converts bits into electrical, optical or radio
             signals suitable for transmission over the
@@ -433,59 +565,101 @@
 
       </article>
 
-      <!-- CONNECTIONS BETWEEN PEER LAYERS -->
-      <div class="osi-connections" aria-label="Logical peer-layer communication">
 
-        <h3>Peer communication</h3>
+      <!-- PEER-LAYER CONNECTIONS -->
 
-        <div class="layer-connection" data-layer="7">
+      <div class="osi-connections"
+           role="group"
+           aria-labelledby="connections-heading">
+
+        <h3 id="connections-heading">
+          Peer communication
+        </h3>
+
+
+        <div class="layer-connection upper-layer"
+             data-layer="7">
           <span class="connection-line"></span>
-          <span class="connection-label">Application data</span>
+          <span class="connection-label">
+            Application data
+          </span>
         </div>
 
-        <div class="layer-connection" data-layer="6">
+        <div class="layer-connection upper-layer"
+             data-layer="6">
           <span class="connection-line"></span>
-          <span class="connection-label">Data format / encryption</span>
+          <span class="connection-label">
+            Data format / encryption
+          </span>
         </div>
 
-        <div class="layer-connection" data-layer="5">
+        <div class="layer-connection upper-layer"
+             data-layer="5">
           <span class="connection-line"></span>
-          <span class="connection-label">Session control</span>
+          <span class="connection-label">
+            Session control
+          </span>
         </div>
 
-        <div class="layer-connection" data-layer="4">
+        <div class="layer-connection lower-layer"
+             data-layer="4">
           <span class="connection-line"></span>
-          <span class="connection-label">Ports / TCP segment</span>
+          <span class="connection-label">
+            Ports / TCP segment
+          </span>
         </div>
 
-        <div class="layer-connection" data-layer="3">
+        <div class="layer-connection lower-layer"
+             data-layer="3">
           <span class="connection-line"></span>
-          <span class="connection-label">IP addressing / packet</span>
+          <span class="connection-label">
+            IP addressing / packet
+          </span>
         </div>
 
-        <div class="layer-connection" data-layer="2">
+        <div class="layer-connection lower-layer"
+             data-layer="2">
           <span class="connection-line"></span>
-          <span class="connection-label">MAC addressing / frame</span>
+          <span class="connection-label">
+            MAC addressing / frame
+          </span>
         </div>
 
-        <div class="layer-connection" data-layer="1">
+        <div class="layer-connection lower-layer"
+             data-layer="1">
           <span class="connection-line"></span>
-          <span class="connection-label">Physical signals / bits</span>
+          <span class="connection-label">
+            Physical signals / bits
+          </span>
         </div>
 
       </div>
 
-      <!-- RECEIVER -->
-      <article class="decapsulation-endpoint">
 
-        <h3>Receiver: Decapsulation ↑</h3>
+      <!-- RECEIVER: DECAPSULATION -->
+
+      <article class="decapsulation-endpoint"
+               aria-labelledby="receiver-heading">
+
+        <h3 id="receiver-heading">
+          Receiver: Decapsulation ↑
+        </h3>
+
+
+        <!-- LAYER 7 -->
 
         <button class="encapsulation-step upper-layer"
-                data-layer="7" aria-pressed="false">
-                       <span class="troubleshooting-tabs__number">07</span>
-            <h3>Application</h3>
+                type="button"
+                data-layer="7"
+                aria-pressed="false">
+
+          <span class="encapsulation-step-heading">
+            <span class="encapsulation-step-number">07</span>
+            <span class="encapsulation-step-title">Application</span>
+          </span>
 
           <code>HTTP request delivered</code>
+
           <small>
             Delivers the recovered application data to the
             appropriate application or service, such as
@@ -493,24 +667,42 @@
           </small>
         </button>
 
+
+        <!-- LAYER 6 -->
+
         <button class="encapsulation-step upper-layer"
-                data-layer="6" aria-pressed="false">
-                <span class="troubleshooting-tabs__number">06</span>
-            <h3>Presentation</h3>
+                type="button"
+                data-layer="6"
+                aria-pressed="false">
+
+          <span class="encapsulation-step-heading">
+            <span class="encapsulation-step-number">06</span>
+            <span class="encapsulation-step-title">Presentation</span>
+          </span>
 
           <code>Decoded / decrypted data</code>
+
           <small>
             Interprets the data representation and performs
             any required decryption, decompression or decoding.
           </small>
         </button>
 
+
+        <!-- LAYER 5 -->
+
         <button class="encapsulation-step upper-layer"
-                data-layer="5" aria-pressed="false">
-                <span class="troubleshooting-tabs__number">05</span>
-            <h3>Session</h3>
+                type="button"
+                data-layer="5"
+                aria-pressed="false">
+
+          <span class="encapsulation-step-heading">
+            <span class="encapsulation-step-number">05</span>
+            <span class="encapsulation-step-title">Session</span>
+          </span>
 
           <code>Session information processed</code>
+
           <small>
             Handles session-related functions, such as
             maintaining communication context and
@@ -518,11 +710,21 @@
           </small>
         </button>
 
+
+        <!-- LAYER 4 -->
+
         <button class="encapsulation-step lower-layer"
-                data-layer="4" aria-pressed="false">
-                <span class="troubleshooting-tabs__number">04</span>
-            <h3>Transport</h3>
+                type="button"
+                data-layer="4"
+                aria-pressed="false">
+
+          <span class="encapsulation-step-heading">
+            <span class="encapsulation-step-number">04</span>
+            <span class="encapsulation-step-title">Transport</span>
+          </span>
+
           <code>TCP segment → Application data</code>
+
           <small>
             Processes transport information, checks ports,
             handles TCP sequencing and acknowledgements,
@@ -531,11 +733,21 @@
           </small>
         </button>
 
+
+        <!-- LAYER 3 -->
+
         <button class="encapsulation-step lower-layer"
-                data-layer="3" aria-pressed="false">
-                <span class="troubleshooting-tabs__number">03</span>
-            <h3>Network</h3>
+                type="button"
+                data-layer="3"
+                aria-pressed="false">
+
+          <span class="encapsulation-step-heading">
+            <span class="encapsulation-step-number">03</span>
+            <span class="encapsulation-step-title">Network</span>
+          </span>
+
           <code>IP packet → TCP segment</code>
+
           <small>
             Examines the destination IP address, processes
             the packet and passes its payload to the
@@ -543,11 +755,21 @@
           </small>
         </button>
 
+
+        <!-- LAYER 2 -->
+
         <button class="encapsulation-step lower-layer"
-                data-layer="2" aria-pressed="false">
-                <span class="troubleshooting-tabs__number">02</span>
-            <h3>Data Link</h3>
+                type="button"
+                data-layer="2"
+                aria-pressed="false">
+
+          <span class="encapsulation-step-heading">
+            <span class="encapsulation-step-number">02</span>
+            <span class="encapsulation-step-title">Data Link</span>
+          </span>
+
           <code>Ethernet frame → IP packet</code>
+
           <small>
             Processes the received frame, checks its
             destination MAC address, verifies the FCS
@@ -556,11 +778,21 @@
           </small>
         </button>
 
+
+        <!-- LAYER 1 -->
+
         <button class="encapsulation-step lower-layer physical-step"
-                data-layer="1" aria-pressed="false">
-                <span class="troubleshooting-tabs__number">01</span>
-            <h3>Physical</h3>
+                type="button"
+                data-layer="1"
+                aria-pressed="false">
+
+          <span class="encapsulation-step-heading">
+            <span class="encapsulation-step-number">01</span>
+            <span class="encapsulation-step-title">Physical</span>
+          </span>
+
           <code>Signals → Bits</code>
+
           <small>
             Receives electrical, optical or radio signals
             and reconstructs the transmitted bit stream.
@@ -572,14 +804,8 @@
     </div>
   </div>
 
-  <!-- INTERACTIVE INFORMATION PANEL -->
-  <section class="osi-info" aria-live="polite">
-    <h3 id="osi-info-title">Explore the OSI layers</h3>
-    <p id="osi-info-text">
-      Click any layer in the sender or receiver to highlight
-      both corresponding layers and their logical connection.
-    </p>
-  </section>
+
+  <!-- EXPLANATORY NOTE -->
 
   <p class="osi-note">
     <strong>Important:</strong>
@@ -592,6 +818,7 @@
   </p>
 
 </div>
+
 
 
   <!-- DATA UNIT EXPLANATION -->
@@ -808,43 +1035,43 @@
           <button class="troubleshooting-tabs__tab is-active" id="troubleshooting-tab-1" type="button" role="tab"
             aria-selected="true" aria-controls="troubleshooting-panel-1" tabindex="0">
             <span class="troubleshooting-tabs__number">01</span>
-            <h3>Physical</h3>
+            <span>Physical</span>
           </button>
 
           <button class="troubleshooting-tabs__tab" id="troubleshooting-tab-2" type="button" role="tab"
             aria-selected="false" aria-controls="troubleshooting-panel-2" tabindex="-1">
             <span class="troubleshooting-tabs__number">02</span>
-            <h3>Data Link</h3>
+            <span>Data Link</span>
           </button>
 
           <button class="troubleshooting-tabs__tab" id="troubleshooting-tab-3" type="button" role="tab"
             aria-selected="false" aria-controls="troubleshooting-panel-3" tabindex="-1">
             <span class="troubleshooting-tabs__number">03</span>
-            <h3>Network</h3>
+            <span>Network</span>
           </button>
 
           <button class="troubleshooting-tabs__tab" id="troubleshooting-tab-4" type="button" role="tab"
             aria-selected="false" aria-controls="troubleshooting-panel-4" tabindex="-1">
             <span class="troubleshooting-tabs__number">04</span>
-            <h3>Transport</h3>
+            <span>Transport</span>
           </button>
 
           <button class="troubleshooting-tabs__tab" id="troubleshooting-tab-5" type="button" role="tab"
             aria-selected="false" aria-controls="troubleshooting-panel-5" tabindex="-1">
             <span class="troubleshooting-tabs__number">05</span>
-            <h3>Session</h3>
+            <span>Session</span>
           </button>
 
           <button class="troubleshooting-tabs__tab" id="troubleshooting-tab-6" type="button" role="tab"
             aria-selected="false" aria-controls="troubleshooting-panel-6" tabindex="-1">
             <span class="troubleshooting-tabs__number">06</span>
-            <h3>Presentation</h3>
+            <span>Presentation</span>
           </button>
 
           <button class="troubleshooting-tabs__tab" id="troubleshooting-tab-7" type="button" role="tab"
             aria-selected="false" aria-controls="troubleshooting-panel-7" tabindex="-1">
             <span class="troubleshooting-tabs__number">07</span>
-            <h3>Application</h3>
+            <span>Application</span>
           </button>
         </div>
 
