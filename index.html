@@ -281,8 +281,6 @@
 
     </section>
 
-
-    <!-- ENCAPSULATION -->
    
 <!-- ENCAPSULATION -->
 <section id="encapsulation" class="content-section">
@@ -300,61 +298,10 @@
   <p>
     <strong>Encapsulation</strong> is the process of adding protocol
     information, such as headers and trailers, to data as it moves
-    down the sender's stack. <strong>Decapsulation</strong> is the
+    down the sender's stack. </br><strong>Decapsulation</strong> is the
     reverse process: the receiver examines and removes the relevant
     protocol information as data moves up its stack.
   </p>
-
-  <!-- OSI LAYER OVERVIEW -->
-  <div class="info-callout">
-    <h3>The seven layers of the OSI model</h3>
-    <p>
-      Each layer has a specific responsibility in network communication.
-      Understanding these responsibilities helps explain how data is
-      prepared, transmitted, received, and delivered to an application.
-    </p>
-
-    <ol>
-      <li>
-        <strong>Layer 7 – Application:</strong>
-        Provides network services to applications. Examples include
-        HTTP, FTP, SMTP, and DNS.
-      </li>
-      <li>
-        <strong>Layer 6 – Presentation:</strong>
-        Handles data representation, formatting, encryption, and
-        compression. Examples include character encoding and data
-        formats such as JPEG and ASCII.
-      </li>
-      <li>
-        <strong>Layer 5 – Session:</strong>
-        Establishes, manages, and terminates communication sessions
-        between applications. Examples include session-related
-        functions provided by RPC.
-      </li>
-      <li>
-        <strong>Layer 4 – Transport:</strong>
-        Provides end-to-end data transport, segmentation, reassembly,
-        and port-based communication. Examples include TCP and UDP.
-      </li>
-      <li>
-        <strong>Layer 3 – Network:</strong>
-        Provides logical addressing and routing between networks.
-        IP and routers operate at this layer.
-      </li>
-      <li>
-        <strong>Layer 2 – Data Link:</strong>
-        Handles local network delivery, framing, MAC addressing,
-        and error detection. Ethernet and switches are associated
-        with this layer.
-      </li>
-      <li>
-        <strong>Layer 1 – Physical:</strong>
-        Transmits raw bits through physical media using electrical,
-        optical, or radio signals.
-      </li>
-    </ol>
-  </div>
 
   <!-- ENCAPSULATION DIAGRAM -->
   <h3>How encapsulation and decapsulation work</h3>
@@ -439,73 +386,75 @@
       <small>Electrical, optical, or radio signals</small>
     </div>
 
-    <!-- RECEIVER -->
-    <article class="encapsulation-endpoint">
-      <h3>Receiver: Decapsulation ↑</h3>
+<!-- RECEIVER -->
+<article class="encapsulation-endpoint">
+  <h3>Receiver: Decapsulation ↑</h3>
 
-      <div class="encapsulation-step physical-step">
-        <span class="step-label">Layer 1 · Physical</span>
-        <code>Signals become bits</code>
-        <small>
-          Receives signals and reconstructs the transmitted bits.
-        </small>
-      </div>
+  <div class="encapsulation-step">
+    <span class="step-label">Layer 7 · Application</span>
+    <code>HTTP data delivered</code>
+    <small>
+      Delivers the received application data to the
+      appropriate network application or service.
+    </small>
+  </div>
 
-      <div class="encapsulation-step">
-        <span class="step-label">Layer 2 · Data Link</span>
-        <code>Frame → Packet</code>
-        <small>
-          Checks the frame, examines its destination MAC address,
-          verifies the FCS where applicable, and removes the
-          Data Link header and trailer.
-        </small>
-      </div>
+  <div class="encapsulation-step">
+    <span class="step-label">Layer 6 · Presentation</span>
+    <code>Decoded / decrypted data</code>
+    <small>
+      Performs any required data decoding, decompression,
+      or decryption.
+    </small>
+  </div>
 
-      <div class="encapsulation-step">
-        <span class="step-label">Layer 3 · Network</span>
-        <code>Packet → Segment</code>
-        <small>
-          Examines the destination IP address and processes
-          the packet before removing its IP header.
-        </small>
-      </div>
+  <div class="encapsulation-step">
+    <span class="step-label">Layer 5 · Session</span>
+    <code>Session-managed data</code>
+    <small>
+      Handles session-related communication functions.
+    </small>
+  </div>
 
-      <div class="encapsulation-step">
-        <span class="step-label">Layer 4 · Transport</span>
-        <code>Segment → Data</code>
-        <small>
-          Processes transport ports and protocol information.
-          TCP reassembles data when necessary and delivers
-          it to the appropriate application endpoint.
-        </small>
-      </div>
+  <div class="encapsulation-step">
+    <span class="step-label">Layer 4 · Transport</span>
+    <code>Segment → Data</code>
+    <small>
+      Processes transport ports and protocol information.
+      TCP reassembles data when necessary and delivers
+      it to the appropriate application endpoint.
+    </small>
+  </div>
 
-      <div class="encapsulation-step">
-        <span class="step-label">Layer 5 · Session</span>
-        <code>Session-managed data</code>
-        <small>
-          Handles session-related communication functions.
-        </small>
-      </div>
+  <div class="encapsulation-step">
+    <span class="step-label">Layer 3 · Network</span>
+    <code>Packet → Segment</code>
+    <small>
+      Examines the destination IP address and processes
+      the packet before removing its IP header.
+    </small>
+  </div>
 
-      <div class="encapsulation-step">
-        <span class="step-label">Layer 6 · Presentation</span>
-        <code>Decoded / decrypted data</code>
-        <small>
-          Performs any required data decoding, decompression,
-          or decryption.
-        </small>
-      </div>
+  <div class="encapsulation-step">
+    <span class="step-label">Layer 2 · Data Link</span>
+    <code>Frame → Packet</code>
+    <small>
+      Checks the frame, examines its destination MAC address,
+      verifies the FCS where applicable, and removes the
+      Data Link header and trailer.
+    </small>
+  </div>
 
-      <div class="encapsulation-step">
-        <span class="step-label">Layer 7 · Application</span>
-        <code>HTTP data delivered</code>
-        <small>
-          Delivers the received application data to the
-          appropriate network application or service.
-        </small>
-      </div>
-    </article>
+  <div class="encapsulation-step physical-step">
+    <span class="step-label">Layer 1 · Physical</span>
+    <code>Signals become bits</code>
+    <small>
+      Receives signals from the physical medium and
+      reconstructs the transmitted bits.
+    </small>
+  </div>
+</article>
+
 
   </div>
 
