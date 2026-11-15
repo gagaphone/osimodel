@@ -119,56 +119,56 @@
         <nav class="layer-grid" aria-label="Select an OSI layer">
 
           <button class="layer-card active" type="button" data-layer="7" aria-pressed="true">
-            <span class="layer-badge">07</span>
-            <h3>Application</h3>
+            <span class="troubleshooting-tabs__number">07</span>
+            <span>Application</span>
             <span class="layer-card-description">
               Network services for applications
             </span>
           </button>
 
           <button class="layer-card" type="button" data-layer="6" aria-pressed="false">
-            <span class="layer-badge">06</span>
-            <h3>Presentation</h3>
+            <span class="troubleshooting-tabs__number">06</span>
+            <span>Presentation</span>
             <span class="layer-card-description">
               Data translation and encryption
             </span>
           </button>
 
           <button class="layer-card" type="button" data-layer="5" aria-pressed="false">
-            <span class="layer-badge">05</span>
-            <h3>Session</h3>
+            <span class="troubleshooting-tabs__number">05</span>
+            <span>Session</span>
             <span class="layer-card-description">
               Session establishment and management
             </span>
           </button>
 
           <button class="layer-card" type="button" data-layer="4" aria-pressed="false">
-            <span class="layer-badge">04</span>
-            <h3>Transport</h3>
+            <span class="troubleshooting-tabs__number">04</span>
+            <span>Transport</span>
             <span class="layer-card-description">
               End-to-end data delivery
             </span>
           </button>
 
           <button class="layer-card" type="button" data-layer="3" aria-pressed="false">
-            <span class="layer-badge">03</span>
-            <h3>Network</h3>
+            <span class="troubleshooting-tabs__number">03</span>
+            <span>Network</span>
             <span class="layer-card-description">
               Logical addressing and routing
             </span>
           </button>
 
           <button class="layer-card" type="button" data-layer="2" aria-pressed="false">
-            <span class="layer-badge">02</span>
-            <h3>Data Link</h3>
+            <span class="troubleshooting-tabs__number">02</span>
+            <span>Data Link</span>
             <span class="layer-card-description">
               Frames and MAC addressing
             </span>
           </button>
 
           <button class="layer-card" type="button" data-layer="1" aria-pressed="false">
-            <span class="layer-badge">01</span>
-            <h3>Physical</h3>
+            <span class="troubleshooting-tabs__number">01</span>
+            <span>Physical</span>
             <span class="layer-card-description">
               Signals and physical media
             </span>
@@ -337,7 +337,8 @@
 
         <button class="encapsulation-step upper-layer"
                 data-layer="7" aria-pressed="false">
-          <span class="step-label">Layer 7 · Application</span>
+                 <span class="troubleshooting-tabs__number">07</span>
+            <span>Application</span>
           <code>HTTP request / application data</code>
           <small>
             Creates application data. Examples include HTTP,
@@ -348,7 +349,9 @@
 
         <button class="encapsulation-step upper-layer"
                 data-layer="6" aria-pressed="false">
-          <span class="step-label">Layer 6 · Presentation</span>
+                <span class="troubleshooting-tabs__number">06</span>
+            <span>Presentation</span>
+
           <code>Encoded / encrypted data</code>
           <small>
             Defines data representation, character encoding,
@@ -361,7 +364,9 @@
 
         <button class="encapsulation-step upper-layer"
                 data-layer="5" aria-pressed="false">
-          <span class="step-label">Layer 5 · Session</span>
+                 <span class="troubleshooting-tabs__number">05</span>
+            <span>Session</span>
+
           <code>Session information</code>
           <small>
             Manages logical communication sessions, including
@@ -373,7 +378,9 @@
 
         <button class="encapsulation-step lower-layer"
                 data-layer="4" aria-pressed="false">
-          <span class="step-label">Layer 4 · Transport</span>
+                <span class="troubleshooting-tabs__number">04</span>
+            <span>Transport</span>
+
           <code>TCP header | Application data</code>
           <small>
             Adds source and destination port numbers,
@@ -385,7 +392,9 @@
 
         <button class="encapsulation-step lower-layer"
                 data-layer="3" aria-pressed="false">
-          <span class="step-label">Layer 3 · Network</span>
+                    <span class="troubleshooting-tabs__number">03</span>
+            <span>Network</span>
+
           <code>IP header | TCP segment</code>
           <small>
             Adds source and destination IP addresses.
@@ -397,7 +406,9 @@
 
         <button class="encapsulation-step lower-layer"
                 data-layer="2" aria-pressed="false">
-          <span class="step-label">Layer 2 · Data Link</span>
+                       <span class="troubleshooting-tabs__number">02</span>
+            <span>Data Link</span>
+
           <code>Ethernet header | IP packet | FCS</code>
           <small>
             Adds source and destination MAC addresses,
@@ -409,7 +420,9 @@
 
         <button class="encapsulation-step lower-layer physical-step"
                 data-layer="1" aria-pressed="false">
-          <span class="step-label">Layer 1 · Physical</span>
+                       <span class="troubleshooting-tabs__number">01</span>
+            <span>Physical</span>
+
           <code>Bits: 10101001 01101101 ...</code>
           <small>
             Converts bits into electrical, optical or radio
@@ -469,7 +482,9 @@
 
         <button class="encapsulation-step upper-layer"
                 data-layer="7" aria-pressed="false">
-          <span class="step-label">Layer 7 · Application</span>
+                       <span class="troubleshooting-tabs__number">07</span>
+            <span>Application</span>
+
           <code>HTTP request delivered</code>
           <small>
             Delivers the recovered application data to the
@@ -480,7 +495,9 @@
 
         <button class="encapsulation-step upper-layer"
                 data-layer="6" aria-pressed="false">
-          <span class="step-label">Layer 6 · Presentation</span>
+                <span class="troubleshooting-tabs__number">06</span>
+            <span>Presentation</span>
+
           <code>Decoded / decrypted data</code>
           <small>
             Interprets the data representation and performs
@@ -490,7 +507,9 @@
 
         <button class="encapsulation-step upper-layer"
                 data-layer="5" aria-pressed="false">
-          <span class="step-label">Layer 5 · Session</span>
+                <span class="troubleshooting-tabs__number">05</span>
+            <span>Session</span>
+
           <code>Session information processed</code>
           <small>
             Handles session-related functions, such as
@@ -501,7 +520,8 @@
 
         <button class="encapsulation-step lower-layer"
                 data-layer="4" aria-pressed="false">
-          <span class="step-label">Layer 4 · Transport</span>
+                <span class="troubleshooting-tabs__number">04</span>
+            <span>Transport</span>
           <code>TCP segment → Application data</code>
           <small>
             Processes transport information, checks ports,
@@ -513,7 +533,8 @@
 
         <button class="encapsulation-step lower-layer"
                 data-layer="3" aria-pressed="false">
-          <span class="step-label">Layer 3 · Network</span>
+                <span class="troubleshooting-tabs__number">03</span>
+            <span>Network</span>
           <code>IP packet → TCP segment</code>
           <small>
             Examines the destination IP address, processes
@@ -524,7 +545,8 @@
 
         <button class="encapsulation-step lower-layer"
                 data-layer="2" aria-pressed="false">
-          <span class="step-label">Layer 2 · Data Link</span>
+                <span class="troubleshooting-tabs__number">02</span>
+            <span>Data Link</span>
           <code>Ethernet frame → IP packet</code>
           <small>
             Processes the received frame, checks its
@@ -536,7 +558,8 @@
 
         <button class="encapsulation-step lower-layer physical-step"
                 data-layer="1" aria-pressed="false">
-          <span class="step-label">Layer 1 · Physical</span>
+                <span class="troubleshooting-tabs__number">01</span>
+            <span>Physical</span>
           <code>Signals → Bits</code>
           <small>
             Receives electrical, optical or radio signals
