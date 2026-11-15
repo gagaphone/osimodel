@@ -658,144 +658,146 @@ const layerData = {
    interactive OSI MODEL — LAYER SELECTION
      ======================================================= */
 
-document.addEventListener("DOMContentLoaded", function () {
 
-  const steps = document.querySelectorAll(
-    ".encapsulation-step"
-  );
+/* =========================================================
+   ENCAPSULATION / DECAPSULATION INTERACTION
+   ========================================================= */
 
-  const connections = document.querySelectorAll(
-    ".layer-connection"
-  );
+function initializeEncapsulation() {
 
-  const infoTitle = document.getElementById(
-    "osi-info-title"
-  );
-
-  const infoText = document.getElementById(
-    "osi-info-text"
+  const visualizations = document.querySelectorAll(
+    ".osi-visualization"
   );
 
   const layerInformation = {
-
     7: {
       title: "Layer 7 – Application",
-      text:
-        "The Application layer provides network services " +
-        "to applications. Example: an HTTP request containing " +
-        "a URL, headers and possibly a request body. The " +
-        "receiving application processes the corresponding " +
-        "application data."
+      text: "Provides network services to applications. Examples include HTTP requests, DNS queries, email and file-transfer data. The receiving application consumes the recovered application data."
     },
-
     6: {
       title: "Layer 6 – Presentation",
-      text:
-        "The Presentation layer concerns data representation. " +
-        "Information may be encoded, serialized, compressed " +
-        "or encrypted before transmission. The receiving side " +
-        "performs the corresponding decoding or decryption " +
-        "when required."
+      text: "Handles data representation, encoding, serialization, compression and encryption. The receiver performs the required decoding, decompression or decryption. TLS is conceptually associated with this layer, although real implementations do not map perfectly to OSI."
     },
-
     5: {
       title: "Layer 5 – Session",
-      text:
-        "The Session layer manages logical communication " +
-        "sessions, including establishment, synchronization " +
-        "and termination. In modern networks, these functions " +
-        "are frequently handled by application protocols " +
-        "rather than a distinct OSI layer."
+      text: "Conceptually manages communication sessions, dialogue control, synchronization and session termination. Modern TCP/IP applications commonly implement these functions themselves."
     },
-
     4: {
       title: "Layer 4 – Transport",
-      text:
-        "The Transport layer provides process-to-process " +
-        "communication using port numbers. TCP adds sequence " +
-        "numbers, acknowledgement information and control " +
-        "flags. It creates segments and provides reliable, " +
-        "ordered byte-stream delivery. UDP provides datagrams."
+      text: "Provides process-to-process delivery using port numbers. TCP uses sequencing, acknowledgements, retransmission and flow control. UDP provides connectionless datagrams. TCP produces segments; UDP produces datagrams."
     },
-
     3: {
       title: "Layer 3 – Network",
-      text:
-        "The Network layer provides logical addressing and " +
-        "routing. The IP header contains source and destination " +
-        "IP addresses. Routers examine this information to " +
-        "forward packets towards their destination."
+      text: "Provides logical addressing and routing between networks. IP packets contain source and destination IP addresses. Routers examine destination addresses to forward packets toward their next hop."
     },
-
     2: {
       title: "Layer 2 – Data Link",
-      text:
-        "The Data Link layer delivers frames across an " +
-        "individual network link. Ethernet frames contain " +
-        "source and destination MAC addresses and an FCS " +
-        "trailer for error detection. Switches use MAC " +
-        "addresses to forward Ethernet frames."
+      text: "Transfers data across an individual link using frames. Ethernet frames contain source and destination MAC addresses and an FCS for error detection. Routers remove the incoming frame and create a new frame for the next link."
     },
-
     1: {
       title: "Layer 1 – Physical",
-      text:
-        "The Physical layer transmits raw bits as electrical, " +
-        "optical or radio signals. The sender converts bits " +
-        "into signals and the receiver reconstructs the " +
-        "bit stream. This is the actual physical transmission."
+      text: "Transmits bits as electrical, optical or radio signals. The sender encodes bits into signals and the receiver reconstructs the bit stream."
     }
-
   };
 
-  function selectLayer(layer) {
+  visualizations.forEach(function (visualization) {
 
-    // Remove previous selection
-    steps.forEach(function (step) {
-      step.classList.remove("is-active");
-      step.setAttribute("aria-pressed", "false");
-    });
-
-    connections.forEach(function (connection) {
-      connection.classList.remove("is-active");
-    });
-
-    // Highlight both matching endpoint layers
-    steps.forEach(function (step) {
-
-      if (step.dataset.layer === layer) {
-        step.classList.add("is-active");
-        step.setAttribute("aria-pressed", "true");
-      }
-
-    });
-
-    // Highlight the matching peer connection
-    connections.forEach(function (connection) {
-
-      if (connection.dataset.layer === layer) {
-        connection.classList.add("is-active");
-      }
-
-    });
-
-    // Update explanatory information
-    const information = layerInformation[layer];
-
-    if (information) {
-      infoTitle.textContent = information.title;
-      infoText.textContent = information.text;
+    // Avoid initializing the same component twice.
+    if (
+      visualization.dataset.encapsulationInitialized === "true"
+    ) {
+      return;
     }
 
-  }
+    const steps = Array.from(
+      visualization.querySelectorAll(
+        ".encapsulation-endpoint .encapsulation-step[data-layer], " +
+        ".decapsulation-endpoint .encapsulation-step[data-layer]"
+      )
+    );
 
-  // Add click and keyboard interaction
-  steps.forEach(function (step) {
+    const connections = Array.from(
+      visualization.querySelectorAll(
+        ".layer-connection[data-layer]"
+      )
+    );
 
-    step.addEventListener("click", function () {
-      selectLayer(step.dataset.layer);
+    const infoTitle = visualization.querySelector(
+      "#osi-info-title"
+    );
+
+    const infoText = visualization.querySelector(
+      "#osi-info-text"
+    );
+
+    if (!steps.length) return;
+
+    function selectLayer(layerValue) {
+
+      const layer = String(Number(layerValue));
+
+      if (!layerInformation[layer]) return;
+
+      // Clear previous selections and update both endpoints.
+      steps.forEach(function (step) {
+
+        const active = step.dataset.layer === layer;
+
+        step.classList.toggle("is-active", active);
+
+        step.setAttribute(
+          "aria-pressed",
+          String(active)
+        );
+
+      });
+
+      // Highlight the matching peer-layer connection.
+      connections.forEach(function (connection) {
+
+        connection.classList.toggle(
+          "is-active",
+          connection.dataset.layer === layer
+        );
+
+      });
+
+      // Update the information panel.
+      if (infoTitle) {
+        infoTitle.textContent =
+          layerInformation[layer].title;
+      }
+
+      if (infoText) {
+        infoText.textContent =
+          layerInformation[layer].text;
+      }
+
+    }
+
+    // Native buttons support mouse, Enter and Space.
+    steps.forEach(function (step) {
+
+      step.addEventListener("click", function () {
+        selectLayer(step.dataset.layer);
+      });
+
     });
+
+    // Initial selection: Layer 7.
+    const initialStep =
+      steps.find(function (step) {
+        return step.getAttribute("aria-pressed") === "true";
+      }) ||
+      steps.find(function (step) {
+        return step.dataset.layer === "7";
+      }) ||
+      steps[0];
+
+    selectLayer(initialStep.dataset.layer);
+
+    visualization.dataset.encapsulationInitialized = "true";
 
   });
 
-});
+}
