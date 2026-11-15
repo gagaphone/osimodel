@@ -556,7 +556,7 @@ main>section:first-child {
 /* Individual clickable card */
 
 .layer-card {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 0.65rem;
@@ -2865,7 +2865,7 @@ code {
    ========================================================= */
 
 .encapsulation-step {
-
+  display: inline-flex;
   appearance: none;
 
   width: 100%;
