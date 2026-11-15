@@ -560,7 +560,16 @@ main>section:first-child {
   flex-direction: column;
   align-items: flex-start;
   gap: 0.65rem;
-}
+
+  padding: 0.7rem;
+
+  border-color: #e0e7f1;
+  background: #fff;
+
+  line-height: 1.6;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  }
 
 /* Number and title on the same line */
 .layer-card-heading {
@@ -2601,18 +2610,7 @@ code {
     overflow: visible;
   }
 
-  .layer-card {
-    display: block;
-
-  padding: 0.7rem;
-
-  border-color: #e0e7f1;
-  background: #fff;
-
-  line-height: 1.6;
-  white-space: normal;
-  overflow-wrap: anywhere;
-  }
+ 
 
 
   /* Print dynamic content */
