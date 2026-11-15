@@ -600,6 +600,25 @@ main>section:first-child {
   line-height: 1.5;
 }
 
+.layer-card-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  min-width: 34px;
+  height: 30px;
+  padding: 0 9px;
+
+  border-radius: 6px;
+
+  background: #526b91;
+  color: #fff;
+
+  font-size: 0.8rem;
+  font-weight: 700;
+}
 
 /* Hover */
 
@@ -2583,13 +2602,16 @@ code {
   }
 
   .layer-card {
-    min-width: 0;
-    min-height: 0;
+    display: block;
 
-    break-inside: avoid;
+  padding: 0.7rem;
 
-    box-shadow: none;
-    transform: none;
+  border-color: #e0e7f1;
+  background: #fff;
+
+  line-height: 1.6;
+  white-space: normal;
+  overflow-wrap: anywhere;
   }
 
 
